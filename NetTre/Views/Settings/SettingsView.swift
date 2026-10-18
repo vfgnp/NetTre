@@ -1,9 +1,9 @@
 import SwiftUI
 
-/// 外部へのリンク。URL は提出前に決める（要件定義 U-06）。nil の間は「準備中」と出す
+/// 外部へのリンク（要件定義 U-06。GitHub Pages の gh-pages ブランチで公開）。nil の行は「準備中」と出す
 enum AppLinks {
-    static let privacyPolicy: URL? = nil
-    static let support: URL? = nil
+    static let privacyPolicy = URL(string: "https://vfgnp.github.io/NetTre/privacy.html")
+    static let support = URL(string: "https://vfgnp.github.io/NetTre/")
 }
 
 /// S-06 設定

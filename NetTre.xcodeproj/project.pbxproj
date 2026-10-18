@@ -1,0 +1,825 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		000DD5686F12768C230AD924 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BA257450E5021D419FE8DBFF /* Assets.xcassets */; };
+		05839AF6063A95765AF621B5 /* SessionBuilderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2589CC0069ACA6A7547B66DB /* SessionBuilderTests.swift */; };
+		06B2F3F485B76EF1111225B8 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD77043AE7FB113532470749 /* HomeView.swift */; };
+		09AEE9DE02CD4F48D928B0A6 /* NetTreApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA6A0B794263601FE2550E17 /* NetTreApp.swift */; };
+		0E61DB5E570C88598873264E /* AppModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F035F54C730642A90C63338 /* AppModel.swift */; };
+		0F48CE4A87ECF285411F0B29 /* CalculationSteps.swift in Sources */ = {isa = PBXBuildFile; fileRef = 784F41802E4494A5E664990C /* CalculationSteps.swift */; };
+		15E09435BE06FB08D29042BE /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 943741B83546274E4E061C76 /* PrivacyInfo.xcprivacy */; };
+		172277019473DFF231CE0939 /* summary_fixtures.json in Resources */ = {isa = PBXBuildFile; fileRef = E268A3AF367E4390BB432250 /* summary_fixtures.json */; };
+		2025095E20D6BA218F214E8D /* blocks_fixtures.json in Resources */ = {isa = PBXBuildFile; fileRef = 2FD00175F1ED6E200C46B0B7 /* blocks_fixtures.json */; };
+		26576450044FE89F5865AEBF /* CIDRCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64A7E1F4670CB061B3AD0B14 /* CIDRCalculator.swift */; };
+		27A283A39AC3A73078D69018 /* cidr_fixtures.json in Resources */ = {isa = PBXBuildFile; fileRef = 0CB0B73CE43C6273D308C38E /* cidr_fixtures.json */; };
+		428884F68AD8AA07417F229C /* QuizView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99EE9C95C116D443BADD0013 /* QuizView.swift */; };
+		42D0C1B9FA7771103D2BE27E /* CalculatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA0527A6F23DA9FEB0CFDB59 /* CalculatorTests.swift */; };
+		44641FF021ACC3C03FFA420E /* QuizSessionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E45A53D98D7FE20BE22B45E9 /* QuizSessionViewModel.swift */; };
+		497CC65D523A7CCDDC483A1B /* CIDRBlocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF57EF613A8FAC987CED1FC /* CIDRBlocks.swift */; };
+		5957BAD4ED43DD9115421505 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47E12017852B5EB2F98DF0EE /* SettingsView.swift */; };
+		655E0FD5921D9C855D2F2706 /* PersistentModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CA2CE5738663B51FE743FF1 /* PersistentModels.swift */; };
+		6FC80A95E0861654227D8346 /* ViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147A2372E420A7A8DB97DC6C /* ViewModelTests.swift */; };
+		794B14C7D55AF5C27D64E68B /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BD48E85F0341DECF31EA084 /* Constants.swift */; };
+		7B9CC8E625640B892A781BBE /* IPv4InputParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = B829E8F083A22505B8F83A48 /* IPv4InputParser.swift */; };
+		84C36183A4C0CB2B134E90F3 /* SessionBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9162A8FFC8D7FCC155A0518C /* SessionBuilder.swift */; };
+		8B1D9670F9392725434EC7F1 /* ScreenshotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC57F5FADD03A03847C5D52 /* ScreenshotTests.swift */; };
+		9CDEE83DABF725AE2D80091F /* ReviewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = F07D5BCE3F6598D4D6D1E102 /* ReviewState.swift */; };
+		A643F5DAAAE60001992C6330 /* StatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76FCAC720B2ADDD868246CE6 /* StatsView.swift */; };
+		A6F63A2FE8E5DAB9A59A606A /* RadixConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADB94C66DFB077F28C438A7 /* RadixConverter.swift */; };
+		AC55800193F3DA288C60E061 /* NetTreUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4A8752664F6BCD5AFD73D90 /* NetTreUITests.swift */; };
+		B531A4D446714A56CCE4FB13 /* questions_uitest.json in Resources */ = {isa = PBXBuildFile; fileRef = 8BAB191F794499FF50D85B9B /* questions_uitest.json */; };
+		B6921D9653DEDC08626B5564 /* TestSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8ED2000C4EEB1C9696B5BF2 /* TestSupport.swift */; };
+		B7C28A07AE63FB2B48BA80CB /* VLSMPlanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23922D0C3341372963B0D8B /* VLSMPlanner.swift */; };
+		BC7777AA7496D21A71A09EE7 /* ReviewStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8714B352440103BEE784190F /* ReviewStore.swift */; };
+		BC900D4E41BD84FDC8B80ED5 /* SubnetQuestionGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDC566B430AC87AEB01AEFBE /* SubnetQuestionGenerator.swift */; };
+		BD9788C9A77FE68CFDEAD0F3 /* Question.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7CC592F240CC5A68ACC2BE5 /* Question.swift */; };
+		C23D7827D972F0F65D94CE14 /* questions.json in Resources */ = {isa = PBXBuildFile; fileRef = D60271FC41F2C537AB837441 /* questions.json */; };
+		C27E1ACD230CF9097AFC2C56 /* ModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBB9B8E48B9957DDF2EFCA82 /* ModelTests.swift */; };
+		C5FB8E65794415D776AC2329 /* AnswerNormalizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A3C02AB57D5524DADBB4514 /* AnswerNormalizer.swift */; };
+		C5FCAF34B97CE506ACDECDCE /* SubnetSplitter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B1D7525F9B7E285F90D1A60 /* SubnetSplitter.swift */; };
+		C6ADFF766158B6AE0717FAFF /* AppEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB281BF0731125437DD1FE9B /* AppEnvironment.swift */; };
+		CC7A0F5040AFE3E2A7C48958 /* IPv4.swift in Sources */ = {isa = PBXBuildFile; fileRef = A307B01F5BAC19575A0DF2DA /* IPv4.swift */; };
+		CECD4B7780BAD87D9A4AA591 /* CalculatorViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC80326EE24832BF8F7D7F1 /* CalculatorViews.swift */; };
+		D6D90552D2A176E5C3505F96 /* Components.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83DEB7E4312138735D1AB23D /* Components.swift */; };
+		D6E082366DA9748F81B519EF /* questions_test.json in Resources */ = {isa = PBXBuildFile; fileRef = 50A8C9A9654C0BC4E3FA8CF3 /* questions_test.json */; };
+		D8215A92A37B81BD0813176F /* IntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3CC04707768752C742D95F4 /* IntegrationTests.swift */; };
+		DA0CA0B73564143EBECF0292 /* RouteSummarizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4487DD3034AB1DB57E8EDE /* RouteSummarizer.swift */; };
+		EE9412598B10F05EF1D93605 /* QuestionRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43F22FD82D01AF0DF29AB856 /* QuestionRepository.swift */; };
+		F72CE13B533B31531BFC09F8 /* GeneratorRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58EB527B4BFC873C4BB77F80 /* GeneratorRepositoryTests.swift */; };
+		F8B9485A97E62EBA18E068B8 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE59A6509FCAA3DBCB56F9AA /* HomeViewModel.swift */; };
+		F8EB65532FB9E1DED8EB1C52 /* ReviewStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984EE5D7CA042C5F0A4F8FFD /* ReviewStoreTests.swift */; };
+		FD247D8BE68FC9A28C2414FF /* CalculatorViewModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A0A6F2F6C1A2064C7B7FCE5 /* CalculatorViewModels.swift */; };
+		FD2790402A5C153143E770EA /* RootTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD5E0D28DA6FDC0ADA805800 /* RootTabView.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		201590009C8641FC250C9763 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F3EF46369DE88D11EDE0B033 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 5A5EDD760CE9EAA0E75DD7AA;
+			remoteInfo = NetTre;
+		};
+		886A091C8496CE8D2CCF9917 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F3EF46369DE88D11EDE0B033 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 5A5EDD760CE9EAA0E75DD7AA;
+			remoteInfo = NetTre;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		077F5C8A35910CC1CD767118 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		0CB0B73CE43C6273D308C38E /* cidr_fixtures.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = cidr_fixtures.json; sourceTree = "<group>"; };
+		0CF0326671E006DF683C185C /* NetTreUITests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = NetTreUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		147A2372E420A7A8DB97DC6C /* ViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelTests.swift; sourceTree = "<group>"; };
+		1B1D7525F9B7E285F90D1A60 /* SubnetSplitter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubnetSplitter.swift; sourceTree = "<group>"; };
+		2589CC0069ACA6A7547B66DB /* SessionBuilderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionBuilderTests.swift; sourceTree = "<group>"; };
+		2FD00175F1ED6E200C46B0B7 /* blocks_fixtures.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = blocks_fixtures.json; sourceTree = "<group>"; };
+		43F22FD82D01AF0DF29AB856 /* QuestionRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionRepository.swift; sourceTree = "<group>"; };
+		47E12017852B5EB2F98DF0EE /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		509A3DD221610875559EDE68 /* NetTreTests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = NetTreTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		50A8C9A9654C0BC4E3FA8CF3 /* questions_test.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = questions_test.json; sourceTree = "<group>"; };
+		58EB527B4BFC873C4BB77F80 /* GeneratorRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneratorRepositoryTests.swift; sourceTree = "<group>"; };
+		5BF57EF613A8FAC987CED1FC /* CIDRBlocks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CIDRBlocks.swift; sourceTree = "<group>"; };
+		64A7E1F4670CB061B3AD0B14 /* CIDRCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CIDRCalculator.swift; sourceTree = "<group>"; };
+		6F035F54C730642A90C63338 /* AppModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppModel.swift; sourceTree = "<group>"; };
+		76FCAC720B2ADDD868246CE6 /* StatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsView.swift; sourceTree = "<group>"; };
+		784F41802E4494A5E664990C /* CalculationSteps.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculationSteps.swift; sourceTree = "<group>"; };
+		7A3C02AB57D5524DADBB4514 /* AnswerNormalizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswerNormalizer.swift; sourceTree = "<group>"; };
+		7BD48E85F0341DECF31EA084 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		83DEB7E4312138735D1AB23D /* Components.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Components.swift; sourceTree = "<group>"; };
+		8714B352440103BEE784190F /* ReviewStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewStore.swift; sourceTree = "<group>"; };
+		8A0A6F2F6C1A2064C7B7FCE5 /* CalculatorViewModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorViewModels.swift; sourceTree = "<group>"; };
+		8B4487DD3034AB1DB57E8EDE /* RouteSummarizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteSummarizer.swift; sourceTree = "<group>"; };
+		8BAB191F794499FF50D85B9B /* questions_uitest.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = questions_uitest.json; sourceTree = "<group>"; };
+		9162A8FFC8D7FCC155A0518C /* SessionBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionBuilder.swift; sourceTree = "<group>"; };
+		943741B83546274E4E061C76 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		984EE5D7CA042C5F0A4F8FFD /* ReviewStoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewStoreTests.swift; sourceTree = "<group>"; };
+		99EE9C95C116D443BADD0013 /* QuizView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizView.swift; sourceTree = "<group>"; };
+		9AC57F5FADD03A03847C5D52 /* ScreenshotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenshotTests.swift; sourceTree = "<group>"; };
+		9CA2CE5738663B51FE743FF1 /* PersistentModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistentModels.swift; sourceTree = "<group>"; };
+		A307B01F5BAC19575A0DF2DA /* IPv4.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IPv4.swift; sourceTree = "<group>"; };
+		A3CC04707768752C742D95F4 /* IntegrationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntegrationTests.swift; sourceTree = "<group>"; };
+		AADB94C66DFB077F28C438A7 /* RadixConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadixConverter.swift; sourceTree = "<group>"; };
+		AFC80326EE24832BF8F7D7F1 /* CalculatorViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorViews.swift; sourceTree = "<group>"; };
+		B829E8F083A22505B8F83A48 /* IPv4InputParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IPv4InputParser.swift; sourceTree = "<group>"; };
+		BA0527A6F23DA9FEB0CFDB59 /* CalculatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorTests.swift; sourceTree = "<group>"; };
+		BA257450E5021D419FE8DBFF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		C23922D0C3341372963B0D8B /* VLSMPlanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VLSMPlanner.swift; sourceTree = "<group>"; };
+		CCDF132FB4D32DA104090BB5 /* NetTre.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = NetTre.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		CD5E0D28DA6FDC0ADA805800 /* RootTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootTabView.swift; sourceTree = "<group>"; };
+		CDC566B430AC87AEB01AEFBE /* SubnetQuestionGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubnetQuestionGenerator.swift; sourceTree = "<group>"; };
+		CE59A6509FCAA3DBCB56F9AA /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		D60271FC41F2C537AB837441 /* questions.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = questions.json; sourceTree = "<group>"; };
+		D8ED2000C4EEB1C9696B5BF2 /* TestSupport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestSupport.swift; sourceTree = "<group>"; };
+		DB281BF0731125437DD1FE9B /* AppEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppEnvironment.swift; sourceTree = "<group>"; };
+		DD77043AE7FB113532470749 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		E268A3AF367E4390BB432250 /* summary_fixtures.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = summary_fixtures.json; sourceTree = "<group>"; };
+		E45A53D98D7FE20BE22B45E9 /* QuizSessionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizSessionViewModel.swift; sourceTree = "<group>"; };
+		EA6A0B794263601FE2550E17 /* NetTreApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetTreApp.swift; sourceTree = "<group>"; };
+		F07D5BCE3F6598D4D6D1E102 /* ReviewState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewState.swift; sourceTree = "<group>"; };
+		F4A8752664F6BCD5AFD73D90 /* NetTreUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetTreUITests.swift; sourceTree = "<group>"; };
+		F7CC592F240CC5A68ACC2BE5 /* Question.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Question.swift; sourceTree = "<group>"; };
+		FBB9B8E48B9957DDF2EFCA82 /* ModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelTests.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		1D6502BECFED403521381792 /* NetTreTests */ = {
+			isa = PBXGroup;
+			children = (
+				BA0527A6F23DA9FEB0CFDB59 /* CalculatorTests.swift */,
+				58EB527B4BFC873C4BB77F80 /* GeneratorRepositoryTests.swift */,
+				A3CC04707768752C742D95F4 /* IntegrationTests.swift */,
+				FBB9B8E48B9957DDF2EFCA82 /* ModelTests.swift */,
+				984EE5D7CA042C5F0A4F8FFD /* ReviewStoreTests.swift */,
+				2589CC0069ACA6A7547B66DB /* SessionBuilderTests.swift */,
+				D8ED2000C4EEB1C9696B5BF2 /* TestSupport.swift */,
+				147A2372E420A7A8DB97DC6C /* ViewModelTests.swift */,
+				94368F3FFFBDDAE0D2F09DA3 /* Fixtures */,
+			);
+			path = NetTreTests;
+			sourceTree = "<group>";
+		};
+		3194E51AB765A99078FC0995 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				DB281BF0731125437DD1FE9B /* AppEnvironment.swift */,
+				6F035F54C730642A90C63338 /* AppModel.swift */,
+				7BD48E85F0341DECF31EA084 /* Constants.swift */,
+				EA6A0B794263601FE2550E17 /* NetTreApp.swift */,
+				CD5E0D28DA6FDC0ADA805800 /* RootTabView.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		570EDAC37D50AE648FE0ACCA /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				9CA2CE5738663B51FE743FF1 /* PersistentModels.swift */,
+				F7CC592F240CC5A68ACC2BE5 /* Question.swift */,
+				F07D5BCE3F6598D4D6D1E102 /* ReviewState.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		5A2D0EBCB58999D2025AB50E /* Generators */ = {
+			isa = PBXGroup;
+			children = (
+				CDC566B430AC87AEB01AEFBE /* SubnetQuestionGenerator.swift */,
+			);
+			path = Generators;
+			sourceTree = "<group>";
+		};
+		5CB665D85EAB9F2BA3C1C8C4 /* Calculators */ = {
+			isa = PBXGroup;
+			children = (
+				8A0A6F2F6C1A2064C7B7FCE5 /* CalculatorViewModels.swift */,
+			);
+			path = Calculators;
+			sourceTree = "<group>";
+		};
+		60B73D9E55D292A73EEC1854 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				CCDF132FB4D32DA104090BB5 /* NetTre.app */,
+				509A3DD221610875559EDE68 /* NetTreTests.xctest */,
+				0CF0326671E006DF683C185C /* NetTreUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		6F560FFEAEAB8F8969623330 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				47E12017852B5EB2F98DF0EE /* SettingsView.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		72453F994D39BD190BF07C6B /* Calculators */ = {
+			isa = PBXGroup;
+			children = (
+				784F41802E4494A5E664990C /* CalculationSteps.swift */,
+				5BF57EF613A8FAC987CED1FC /* CIDRBlocks.swift */,
+				64A7E1F4670CB061B3AD0B14 /* CIDRCalculator.swift */,
+				A307B01F5BAC19575A0DF2DA /* IPv4.swift */,
+				B829E8F083A22505B8F83A48 /* IPv4InputParser.swift */,
+				AADB94C66DFB077F28C438A7 /* RadixConverter.swift */,
+				8B4487DD3034AB1DB57E8EDE /* RouteSummarizer.swift */,
+				1B1D7525F9B7E285F90D1A60 /* SubnetSplitter.swift */,
+				C23922D0C3341372963B0D8B /* VLSMPlanner.swift */,
+			);
+			path = Calculators;
+			sourceTree = "<group>";
+		};
+		8F05DCF7CCFC52BD5683F422 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				BA257450E5021D419FE8DBFF /* Assets.xcassets */,
+				943741B83546274E4E061C76 /* PrivacyInfo.xcprivacy */,
+				8BAB191F794499FF50D85B9B /* questions_uitest.json */,
+				D60271FC41F2C537AB837441 /* questions.json */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		94368F3FFFBDDAE0D2F09DA3 /* Fixtures */ = {
+			isa = PBXGroup;
+			children = (
+				2FD00175F1ED6E200C46B0B7 /* blocks_fixtures.json */,
+				0CB0B73CE43C6273D308C38E /* cidr_fixtures.json */,
+				50A8C9A9654C0BC4E3FA8CF3 /* questions_test.json */,
+				E268A3AF367E4390BB432250 /* summary_fixtures.json */,
+			);
+			path = Fixtures;
+			sourceTree = "<group>";
+		};
+		A63F39BE4FAB3BEC7C97D36A /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				B022646754392772E358E466 /* Calculators */,
+				EB76D2326263350730779A75 /* Components */,
+				BF52FE14B1B90377107FE117 /* Learn */,
+				6F560FFEAEAB8F8969623330 /* Settings */,
+				E351AEF785E5A08B1FC193EA /* Stats */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		B022646754392772E358E466 /* Calculators */ = {
+			isa = PBXGroup;
+			children = (
+				AFC80326EE24832BF8F7D7F1 /* CalculatorViews.swift */,
+			);
+			path = Calculators;
+			sourceTree = "<group>";
+		};
+		B2E0C8C0A59BBE6E39308C90 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				7A3C02AB57D5524DADBB4514 /* AnswerNormalizer.swift */,
+				43F22FD82D01AF0DF29AB856 /* QuestionRepository.swift */,
+				8714B352440103BEE784190F /* ReviewStore.swift */,
+				9162A8FFC8D7FCC155A0518C /* SessionBuilder.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		B2E3D24FEC01C0B3A0585BF9 = {
+			isa = PBXGroup;
+			children = (
+				D1427A6D62EA6E0DFE9DFF2A /* NetTre */,
+				1D6502BECFED403521381792 /* NetTreTests */,
+				BD2487819E9BB98F1A5BDE28 /* NetTreUITests */,
+				60B73D9E55D292A73EEC1854 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		BD2487819E9BB98F1A5BDE28 /* NetTreUITests */ = {
+			isa = PBXGroup;
+			children = (
+				F4A8752664F6BCD5AFD73D90 /* NetTreUITests.swift */,
+				9AC57F5FADD03A03847C5D52 /* ScreenshotTests.swift */,
+			);
+			path = NetTreUITests;
+			sourceTree = "<group>";
+		};
+		BF52FE14B1B90377107FE117 /* Learn */ = {
+			isa = PBXGroup;
+			children = (
+				DD77043AE7FB113532470749 /* HomeView.swift */,
+				99EE9C95C116D443BADD0013 /* QuizView.swift */,
+			);
+			path = Learn;
+			sourceTree = "<group>";
+		};
+		D1427A6D62EA6E0DFE9DFF2A /* NetTre */ = {
+			isa = PBXGroup;
+			children = (
+				077F5C8A35910CC1CD767118 /* Info.plist */,
+				3194E51AB765A99078FC0995 /* App */,
+				72453F994D39BD190BF07C6B /* Calculators */,
+				5A2D0EBCB58999D2025AB50E /* Generators */,
+				570EDAC37D50AE648FE0ACCA /* Models */,
+				8F05DCF7CCFC52BD5683F422 /* Resources */,
+				B2E0C8C0A59BBE6E39308C90 /* Services */,
+				E2D85B186D4D648B1CD52295 /* ViewModels */,
+				A63F39BE4FAB3BEC7C97D36A /* Views */,
+			);
+			path = NetTre;
+			sourceTree = "<group>";
+		};
+		E2D85B186D4D648B1CD52295 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				CE59A6509FCAA3DBCB56F9AA /* HomeViewModel.swift */,
+				E45A53D98D7FE20BE22B45E9 /* QuizSessionViewModel.swift */,
+				5CB665D85EAB9F2BA3C1C8C4 /* Calculators */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		E351AEF785E5A08B1FC193EA /* Stats */ = {
+			isa = PBXGroup;
+			children = (
+				76FCAC720B2ADDD868246CE6 /* StatsView.swift */,
+			);
+			path = Stats;
+			sourceTree = "<group>";
+		};
+		EB76D2326263350730779A75 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				83DEB7E4312138735D1AB23D /* Components.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		1C4BB9586B9B2C2D05D927CF /* NetTreUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BB61616EA291A212C7EE8EBD /* Build configuration list for PBXNativeTarget "NetTreUITests" */;
+			buildPhases = (
+				4D08D69815106639344F4D71 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				7D77954436821B55EC51599A /* PBXTargetDependency */,
+			);
+			name = NetTreUITests;
+			packageProductDependencies = (
+			);
+			productName = NetTreUITests;
+			productReference = 0CF0326671E006DF683C185C /* NetTreUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+		23DCAC670B06DC7805D6E9D5 /* NetTreTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1DDAD2DD3691F34750399745 /* Build configuration list for PBXNativeTarget "NetTreTests" */;
+			buildPhases = (
+				4D2E3BE184135EEB72CA72BA /* Sources */,
+				B910FFC25CAFC47B7C1CCBBF /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				6AF81518C8E8C8F69D049BD7 /* PBXTargetDependency */,
+			);
+			name = NetTreTests;
+			packageProductDependencies = (
+			);
+			productName = NetTreTests;
+			productReference = 509A3DD221610875559EDE68 /* NetTreTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		5A5EDD760CE9EAA0E75DD7AA /* NetTre */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0DBE5180E247FB800F367916 /* Build configuration list for PBXNativeTarget "NetTre" */;
+			buildPhases = (
+				87B9D943DB5C1C3A964EA536 /* Sources */,
+				83B8E9FA6F125F874BDA4E38 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = NetTre;
+			packageProductDependencies = (
+			);
+			productName = NetTre;
+			productReference = CCDF132FB4D32DA104090BB5 /* NetTre.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		F3EF46369DE88D11EDE0B033 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+					1C4BB9586B9B2C2D05D927CF = {
+						DevelopmentTeam = 7N355XPFBB;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 5A5EDD760CE9EAA0E75DD7AA;
+					};
+					23DCAC670B06DC7805D6E9D5 = {
+						DevelopmentTeam = 7N355XPFBB;
+						ProvisioningStyle = Automatic;
+					};
+					5A5EDD760CE9EAA0E75DD7AA = {
+						DevelopmentTeam = 7N355XPFBB;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 38D4964BCB912D6F2E3971FF /* Build configuration list for PBXProject "NetTre" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = B2E3D24FEC01C0B3A0585BF9;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 60B73D9E55D292A73EEC1854 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				5A5EDD760CE9EAA0E75DD7AA /* NetTre */,
+				23DCAC670B06DC7805D6E9D5 /* NetTreTests */,
+				1C4BB9586B9B2C2D05D927CF /* NetTreUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		83B8E9FA6F125F874BDA4E38 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				000DD5686F12768C230AD924 /* Assets.xcassets in Resources */,
+				15E09435BE06FB08D29042BE /* PrivacyInfo.xcprivacy in Resources */,
+				C23D7827D972F0F65D94CE14 /* questions.json in Resources */,
+				B531A4D446714A56CCE4FB13 /* questions_uitest.json in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B910FFC25CAFC47B7C1CCBBF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2025095E20D6BA218F214E8D /* blocks_fixtures.json in Resources */,
+				27A283A39AC3A73078D69018 /* cidr_fixtures.json in Resources */,
+				D6E082366DA9748F81B519EF /* questions_test.json in Resources */,
+				172277019473DFF231CE0939 /* summary_fixtures.json in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		4D08D69815106639344F4D71 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AC55800193F3DA288C60E061 /* NetTreUITests.swift in Sources */,
+				8B1D9670F9392725434EC7F1 /* ScreenshotTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4D2E3BE184135EEB72CA72BA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				42D0C1B9FA7771103D2BE27E /* CalculatorTests.swift in Sources */,
+				F72CE13B533B31531BFC09F8 /* GeneratorRepositoryTests.swift in Sources */,
+				D8215A92A37B81BD0813176F /* IntegrationTests.swift in Sources */,
+				C27E1ACD230CF9097AFC2C56 /* ModelTests.swift in Sources */,
+				F8EB65532FB9E1DED8EB1C52 /* ReviewStoreTests.swift in Sources */,
+				05839AF6063A95765AF621B5 /* SessionBuilderTests.swift in Sources */,
+				B6921D9653DEDC08626B5564 /* TestSupport.swift in Sources */,
+				6FC80A95E0861654227D8346 /* ViewModelTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		87B9D943DB5C1C3A964EA536 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C5FB8E65794415D776AC2329 /* AnswerNormalizer.swift in Sources */,
+				C6ADFF766158B6AE0717FAFF /* AppEnvironment.swift in Sources */,
+				0E61DB5E570C88598873264E /* AppModel.swift in Sources */,
+				497CC65D523A7CCDDC483A1B /* CIDRBlocks.swift in Sources */,
+				26576450044FE89F5865AEBF /* CIDRCalculator.swift in Sources */,
+				0F48CE4A87ECF285411F0B29 /* CalculationSteps.swift in Sources */,
+				FD247D8BE68FC9A28C2414FF /* CalculatorViewModels.swift in Sources */,
+				CECD4B7780BAD87D9A4AA591 /* CalculatorViews.swift in Sources */,
+				D6D90552D2A176E5C3505F96 /* Components.swift in Sources */,
+				794B14C7D55AF5C27D64E68B /* Constants.swift in Sources */,
+				06B2F3F485B76EF1111225B8 /* HomeView.swift in Sources */,
+				F8B9485A97E62EBA18E068B8 /* HomeViewModel.swift in Sources */,
+				CC7A0F5040AFE3E2A7C48958 /* IPv4.swift in Sources */,
+				7B9CC8E625640B892A781BBE /* IPv4InputParser.swift in Sources */,
+				09AEE9DE02CD4F48D928B0A6 /* NetTreApp.swift in Sources */,
+				655E0FD5921D9C855D2F2706 /* PersistentModels.swift in Sources */,
+				BD9788C9A77FE68CFDEAD0F3 /* Question.swift in Sources */,
+				EE9412598B10F05EF1D93605 /* QuestionRepository.swift in Sources */,
+				44641FF021ACC3C03FFA420E /* QuizSessionViewModel.swift in Sources */,
+				428884F68AD8AA07417F229C /* QuizView.swift in Sources */,
+				A6F63A2FE8E5DAB9A59A606A /* RadixConverter.swift in Sources */,
+				9CDEE83DABF725AE2D80091F /* ReviewState.swift in Sources */,
+				BC7777AA7496D21A71A09EE7 /* ReviewStore.swift in Sources */,
+				FD2790402A5C153143E770EA /* RootTabView.swift in Sources */,
+				DA0CA0B73564143EBECF0292 /* RouteSummarizer.swift in Sources */,
+				84C36183A4C0CB2B134E90F3 /* SessionBuilder.swift in Sources */,
+				5957BAD4ED43DD9115421505 /* SettingsView.swift in Sources */,
+				A643F5DAAAE60001992C6330 /* StatsView.swift in Sources */,
+				BC900D4E41BD84FDC8B80ED5 /* SubnetQuestionGenerator.swift in Sources */,
+				C5FCAF34B97CE506ACDECDCE /* SubnetSplitter.swift in Sources */,
+				B7C28A07AE63FB2B48BA80CB /* VLSMPlanner.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		6AF81518C8E8C8F69D049BD7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 5A5EDD760CE9EAA0E75DD7AA /* NetTre */;
+			targetProxy = 201590009C8641FC250C9763 /* PBXContainerItemProxy */;
+		};
+		7D77954436821B55EC51599A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 5A5EDD760CE9EAA0E75DD7AA /* NetTre */;
+			targetProxy = 886A091C8496CE8D2CCF9917 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		3741504188A6C0D37A73AB57 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_FILE = NetTre/Info.plist;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = jp.nettre.app;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		3EE517A5D2EF7DE05E76AFCD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = jp.nettre.app.uitests;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = NetTre;
+			};
+			name = Release;
+		};
+		538F966003D75534FD3299DF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				EXCLUDED_SOURCE_FILE_NAMES = questions_uitest.json;
+				INFOPLIST_FILE = NetTre/Info.plist;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = jp.nettre.app;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+		5E1CBECDAB8E57B50694E067 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 7N355XPFBB;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		77EA01695AA5FB5CDE431CA2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = jp.nettre.app.tests;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/NetTre.app/NetTre";
+			};
+			name = Release;
+		};
+		92A558213A08C65DCC1DC8F3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 7N355XPFBB;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		C93BFB328A8596D258BEFB1D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = jp.nettre.app.uitests;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = NetTre;
+			};
+			name = Debug;
+		};
+		DAAC423C60D3F7A33639A202 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = jp.nettre.app.tests;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/NetTre.app/NetTre";
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		0DBE5180E247FB800F367916 /* Build configuration list for PBXNativeTarget "NetTre" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3741504188A6C0D37A73AB57 /* Debug */,
+				538F966003D75534FD3299DF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		1DDAD2DD3691F34750399745 /* Build configuration list for PBXNativeTarget "NetTreTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DAAC423C60D3F7A33639A202 /* Debug */,
+				77EA01695AA5FB5CDE431CA2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		38D4964BCB912D6F2E3971FF /* Build configuration list for PBXProject "NetTre" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				92A558213A08C65DCC1DC8F3 /* Debug */,
+				5E1CBECDAB8E57B50694E067 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		BB61616EA291A212C7EE8EBD /* Build configuration list for PBXNativeTarget "NetTreUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C93BFB328A8596D258BEFB1D /* Debug */,
+				3EE517A5D2EF7DE05E76AFCD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = F3EF46369DE88D11EDE0B033 /* Project object */;
+}
