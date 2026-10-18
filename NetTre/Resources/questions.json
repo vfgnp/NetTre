@@ -1,0 +1,32 @@
+[
+  {
+    "id": "net-fund-0001",
+    "domain": "network-fundamentals",
+    "tags": ["osi", "layer"],
+    "difficulty": 1,
+    "stem": "L2 スイッチが転送先の判断に使う MAC アドレスは、OSI 参照モデルの第何層のアドレスか。数字で答えよ。",
+    "answer": "2",
+    "explanation": "L2 スイッチはフレームの宛先 **MAC アドレス** を見て転送先のポートを決める。MAC アドレスは **第 2 層（データリンク層）** のアドレス。IP アドレスで判断するのはルーター（第 3 層）。",
+    "version": 1
+  },
+  {
+    "id": "net-access-0001",
+    "domain": "network-access",
+    "tags": ["vlan", "trunk", "802.1q"],
+    "difficulty": 2,
+    "stem": "IEEE 802.1Q トランクでフレームに挿入される VLAN タグの長さは何バイトか。数字で答えよ。",
+    "answer": "4",
+    "explanation": "802.1Q は送信元 MAC アドレスの後ろに **4 バイト** のタグ（TPID 2 バイト＋TCI 2 バイト）を挿入する。TCI の中に 12 ビットの VLAN ID が入る。ネイティブ VLAN のフレームにはタグを付けない。",
+    "version": 1
+  },
+  {
+    "id": "ip-conn-0001",
+    "domain": "ip-connectivity",
+    "tags": ["routing", "administrative-distance"],
+    "difficulty": 2,
+    "stem": "Cisco IOS における OSPF のデフォルトのアドミニストレーティブディスタンス（AD）の値を答えよ。",
+    "answer": "110",
+    "explanation": "主なデフォルトの AD：直接接続 0、スタティック 1、eBGP 20、EIGRP（内部）90、**OSPF 110**、RIP 120。値が小さいほど優先される。",
+    "version": 1
+  }
+]
