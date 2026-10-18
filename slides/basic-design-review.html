@@ -1,0 +1,621 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title>ネトレ 基本設計レビュー</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Source+Code+Pro:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#ffffff; --surface:#f6f8fd; --ink:#0f172a; --sub:#64748b; --dim:#7c8ba1; --line:#e2e8f0;
+  --accent:#3d5dc6; --accent-deep:#2e47a6; --accent-tint:#eef2fb;
+  --ink-surface:#324c9e; --on-dark:#ffffff; --accent-on-dark:#aec2f2; --line-on-dark:#5570b8;
+  --radius:4px;
+  --ff:"Noto Sans JP","Hiragino Sans","Yu Gothic","Meiryo",sans-serif;
+  --ff-en:"Source Code Pro","SFMono-Regular",Menlo,monospace;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;background:var(--bg);overflow:hidden}
+.s{
+  position:absolute;top:50%;left:50%;width:960px;height:540px;
+  transform:translate(-50%,-50%) scale(var(--k,1));transform-origin:center center;
+  background:var(--bg);color:var(--ink);font-family:var(--ff);
+  visibility:hidden;opacity:0;display:flex;flex-direction:column;
+  padding:44px 56px 38px;
+}
+.s.active{visibility:visible;opacity:1}
+h1{font-size:56px;font-weight:700;line-height:1.22;letter-spacing:-.015em;margin:0}
+h2{font-size:28px;font-weight:700;line-height:1.35;letter-spacing:-.01em;margin:0}
+p{margin:0}
+code,.mono{font-family:var(--ff-en)}
+.ki{font-family:var(--ff-en);font-size:11px;font-weight:600;letter-spacing:.18em;color:var(--dim);margin-bottom:10px}
+.hr{height:1px;background:var(--line);margin:13px 0 18px}
+.pn{position:absolute;bottom:16px;right:20px;font-family:var(--ff-en);font-size:10px;color:var(--dim);letter-spacing:.08em}
+.body{flex:1;display:flex;flex-direction:column;gap:16px;min-height:0}
+.lead{font-size:15px;line-height:1.8;color:var(--sub)}
+.note{font-size:12px;line-height:1.7;color:var(--dim);padding-left:1.1em;text-indent:-1.1em}
+.pill{background:var(--accent-tint);color:var(--ink);padding:10px 16px;border-radius:var(--radius);font-weight:700;font-size:14.5px;white-space:nowrap;text-align:center}
+.arw{color:var(--accent-deep);font-size:18px;font-weight:700;line-height:1}
+.id{font-family:var(--ff-en);font-weight:600;font-size:12.5px;color:var(--accent-deep);letter-spacing:.02em;white-space:nowrap}
+.tag{display:inline-block;font-family:var(--ff-en);font-size:12px;font-weight:700;color:#fff;background:var(--accent-deep);border-radius:var(--radius);padding:0 6px;line-height:1.7;white-space:nowrap}
+.ok{display:inline-block;font-size:12px;font-weight:700;color:var(--accent-deep);border:1px solid var(--accent-deep);border-radius:var(--radius);padding:0 6px;line-height:1.6;white-space:nowrap}
+.new{display:inline-block;font-family:var(--ff-en);font-size:11px;font-weight:700;color:#fff;background:var(--accent-deep);border-radius:var(--radius);padding:0 5px;line-height:1.6;margin-left:6px;vertical-align:1px}
+.tbl{width:100%;border-collapse:collapse;font-size:13.5px}
+.tbl th{text-align:left;font-size:11px;font-family:var(--ff-en);letter-spacing:.14em;color:var(--dim);font-weight:600;padding:0 0 7px;border-bottom:1px solid var(--line)}
+.tbl td{padding:6px 12px 6px 0;border-bottom:1px solid var(--line);vertical-align:top;line-height:1.55}
+.tbl tr:last-child td{border-bottom:none}
+.tbl.tight td{padding:5px 12px 5px 0}
+.tbl td.b{font-weight:700;white-space:nowrap}
+.colh{font-size:15px;font-weight:700;margin-bottom:6px}
+.box{border:1px solid var(--accent-deep);border-radius:var(--radius);padding:12px 16px}
+.box .bh{font-size:14.5px;font-weight:700;color:var(--accent-deep);margin-bottom:4px;display:flex;gap:8px;align-items:center}
+.box p{font-size:13.5px;line-height:1.65}
+.dots{display:flex;justify-content:space-between}
+.dt{width:10px;height:10px;border-radius:50%;background:var(--accent-deep)}
+.layer{border:1px solid var(--line);border-radius:var(--radius);padding:7px 14px;display:flex;gap:14px;align-items:baseline}
+.layer .ln{width:78px;flex:none;font-family:var(--ff-en);font-weight:700;font-size:14px;color:var(--accent-deep)}
+.layer .lt{font-size:13.5px;line-height:1.5}
+.layer .ty{font-family:var(--ff-en);font-size:12px;color:var(--sub);margin-top:2px;line-height:1.5}
+.down{text-align:center;color:var(--accent-deep);font-size:14px;line-height:1;padding:2px 0}
+.tree{font-family:var(--ff-en);font-size:13px;line-height:1.8;white-space:pre;color:var(--ink)}
+.tree span{color:var(--sub);font-family:var(--ff)}
+.flow{display:flex;align-items:center;gap:10px}
+.cap{font-size:12.5px;color:var(--sub);line-height:1.5;margin-top:6px;text-align:center}
+.er{display:flex;align-items:stretch;gap:0;border-bottom:1px solid var(--line);padding:8px 0}
+.er:last-child{border-bottom:none}
+.er .q{width:330px;flex:none;font-size:14px;font-weight:700;line-height:1.55;padding-right:12px}
+.er .a{flex:1;font-size:13.5px;line-height:1.6}
+.er .arw{padding:2px 16px 0}
+.rl{font-size:13.5px;line-height:1.65;padding:6px 0;border-bottom:1px solid var(--line)}
+.rl:last-child{border-bottom:none}
+</style>
+</head>
+<body>
+<!-- kit:slide-zukai-kit v1.1 theme:A use:internal style:standard viz:mid -->
+
+<!-- 1 表紙（型 H） -->
+<div class="s active" style="padding:0">
+  <div class="dots" style="position:absolute;top:56px;left:56px;right:56px"><span class="dt"></span><span class="dt"></span><span class="dt"></span><span class="dt"></span><span class="dt"></span><span class="dt"></span><span class="dt"></span><span class="dt"></span><span class="dt"></span><span class="dt"></span><span class="dt"></span><span class="dt"></span><span class="dt" style="opacity:0.45"></span><span class="dt" style="opacity:0.45"></span><span class="dt" style="opacity:0.45"></span><span class="dt" style="opacity:0.45"></span><span class="dt" style="opacity:0.45"></span><span class="dt" style="opacity:0.45"></span><span class="dt" style="opacity:0.45"></span><span class="dt" style="opacity:0.45"></span><span class="dt" style="opacity:0.45"></span><span class="dt" style="opacity:0.45"></span><span class="dt" style="opacity:0.45"></span><span class="dt" style="opacity:0.45"></span><span class="dt" style="opacity:0.18"></span><span class="dt" style="opacity:0.18"></span><span class="dt" style="opacity:0.18"></span><span class="dt" style="opacity:0.18"></span><span class="dt" style="opacity:0.18"></span><span class="dt" style="opacity:0.18"></span><span class="dt" style="opacity:0.18"></span><span class="dt" style="opacity:0.18"></span><span class="dt" style="opacity:0.18"></span><span class="dt" style="opacity:0.18"></span><span class="dt" style="opacity:0.18"></span><span class="dt" style="opacity:0.18"></span></div>
+  <div style="flex:1;display:flex;flex-direction:column;justify-content:center;padding:0 56px">
+    <div class="ki" style="margin-bottom:18px">INTERNAL / BASIC DESIGN</div>
+    <h1>ネトレ<br>基本設計</h1>
+    <p style="font-size:18px;line-height:1.7;color:var(--sub);margin-top:20px">数字で解く演習と計算機を、iPhone の中だけで完結させる</p>
+    <div style="display:flex;gap:12px;align-items:center;margin-top:26px">
+      <span class="pill" style="font-size:13px;padding:6px 14px">基本設計書 v1.2</span>
+      <span style="font-size:13.5px;color:var(--sub)">記載内容の確認用 ・ 要件定義書 v1.2 にもとづく</span>
+    </div>
+    <div style="font-family:var(--ff-en);font-size:13px;color:var(--sub);letter-spacing:.04em;margin-top:34px">2026-10-18</div>
+  </div>
+  <div class="dots" style="position:absolute;bottom:56px;left:56px;right:56px"><span class="dt" style="opacity:0.18"></span><span class="dt" style="opacity:0.18"></span><span class="dt" style="opacity:0.18"></span><span class="dt" style="opacity:0.18"></span><span class="dt" style="opacity:0.18"></span><span class="dt" style="opacity:0.18"></span><span class="dt" style="opacity:0.18"></span><span class="dt" style="opacity:0.18"></span><span class="dt" style="opacity:0.18"></span><span class="dt" style="opacity:0.18"></span><span class="dt" style="opacity:0.18"></span><span class="dt" style="opacity:0.18"></span><span class="dt" style="opacity:0.45"></span><span class="dt" style="opacity:0.45"></span><span class="dt" style="opacity:0.45"></span><span class="dt" style="opacity:0.45"></span><span class="dt" style="opacity:0.45"></span><span class="dt" style="opacity:0.45"></span><span class="dt" style="opacity:0.45"></span><span class="dt" style="opacity:0.45"></span><span class="dt" style="opacity:0.45"></span><span class="dt" style="opacity:0.45"></span><span class="dt" style="opacity:0.45"></span><span class="dt" style="opacity:0.45"></span><span class="dt"></span><span class="dt"></span><span class="dt"></span><span class="dt"></span><span class="dt"></span><span class="dt"></span><span class="dt"></span><span class="dt"></span><span class="dt"></span><span class="dt"></span><span class="dt"></span><span class="dt"></span></div>
+  <div class="pn">01 / 20</div>
+</div>
+
+<!-- 2 結論 -->
+<div class="s">
+  <div class="ki">CONCLUSION</div>
+  <h2>結論 — v1.0 の作り方</h2>
+  <div class="hr"></div>
+  <div class="body" style="gap:22px">
+    <div style="background:var(--ink-surface);color:var(--on-dark);border-radius:var(--radius);padding:28px 34px">
+      <div class="ki" style="color:var(--accent-on-dark);margin-bottom:12px">ONE LINE</div>
+      <div style="font-size:23px;font-weight:700;line-height:1.6">SwiftUI と SwiftData で、iPhone の中だけで完結させる<br>計算機は、入力から結果を返すだけの関数で作る</div>
+      <p style="font-size:14px;line-height:1.8;margin-top:12px">サーバー・解析 SDK・広告 SDK・外部ライブラリは使わない。端末に保存するのは学習履歴だけ</p>
+    </div>
+    <div style="display:flex;align-items:stretch">
+      <div style="flex:1;padding:4px 24px 4px 0;border-right:1px solid var(--line)">
+        <div class="ki" style="margin-bottom:8px">LAYERS</div>
+        <div><span class="id" style="font-size:40px;font-weight:700">4</span><span style="font-size:14px;margin-left:6px">層</span></div>
+        <p style="font-size:13.5px;color:var(--sub);margin-top:4px">View・ViewModel・<br>Domain・Data</p>
+      </div>
+      <div style="flex:1;padding:4px 24px;border-right:1px solid var(--line)">
+        <div class="ki" style="margin-bottom:8px">SCREENS</div>
+        <div><span class="id" style="font-size:40px;font-weight:700">12</span><span style="font-size:14px;margin-left:6px">画面</span></div>
+        <p style="font-size:13.5px;color:var(--sub);margin-top:4px">タブは学習・計算・<br>成績・設定の 4 つ</p>
+      </div>
+      <div style="flex:1;padding:4px 24px;border-right:1px solid var(--line)">
+        <div class="ki" style="margin-bottom:8px">CALCULATORS</div>
+        <div><span class="id" style="font-size:40px;font-weight:700">5</span><span style="font-size:14px;margin-left:6px">種</span></div>
+        <p style="font-size:13.5px;color:var(--sub);margin-top:4px">保存するデータはない</p>
+      </div>
+      <div style="flex:1;padding:4px 0 4px 24px">
+        <div class="ki" style="margin-bottom:8px">PROPOSALS</div>
+        <div><span class="id" style="font-size:40px;font-weight:700">5</span><span style="font-size:14px;margin-left:6px">件</span></div>
+        <p style="font-size:13.5px;color:var(--sub);margin-top:4px">新しい設計提案<br>D6〜D10</p>
+      </div>
+    </div>
+  </div>
+  <div class="pn">02 / 20</div>
+</div>
+
+<!-- 3 変更点 -->
+<div class="s">
+  <div class="ki">CHANGES</div>
+  <h2>v1.1・v1.2 での変更点</h2>
+  <div class="hr"></div>
+  <div class="body">
+    <p class="lead">要件定義の 2 回の改訂に合わせて設計を直した。D1〜D5 は前回の承認で採用済み</p>
+    <div style="display:flex;gap:0;align-items:stretch;flex:1">
+      <div style="flex:1;border:1px solid var(--line);border-right:none;border-radius:var(--radius) 0 0 var(--radius);padding:18px 24px;display:flex;flex-direction:column;gap:8px">
+        <div class="ki" style="margin-bottom:0">V1.1</div>
+        <div style="font-size:18px;font-weight:700;line-height:1.5">回答を入力式だけにする</div>
+        <div class="rl">選択式の型と誤答づくりを取り除く</div>
+        <div class="rl">キーボードは正解の文字で選ぶ（数字のみ／「.」付き）</div>
+        <div class="rl">数字キーボードには改行キーがないので<br>「回答する」をキーボードのすぐ上に置く</div>
+        <p style="font-size:13px;color:var(--sub);margin-top:auto">§5.1・§6.3・§6.4・§8</p>
+      </div>
+      <div style="flex:1;border:1px solid var(--line);border-radius:0 var(--radius) var(--radius) 0;background:var(--surface);padding:18px 24px;display:flex;flex-direction:column;gap:8px">
+        <div class="ki" style="margin-bottom:0">V1.2</div>
+        <div style="font-size:18px;font-weight:700;line-height:1.5">計算機を加える</div>
+        <div class="rl">計算ロジックを <code>Calculators/</code> にまとめる</div>
+        <div class="rl">タブ「計算」と、6 つの画面（S-07〜S-12）</div>
+        <div class="rl">計算のきまり（§6.5）と照合テスト<br>新しい設計提案 D6〜D10</div>
+        <p style="font-size:13px;color:var(--sub);margin-top:auto">§2・§3・§4・§6.5・§7・§8</p>
+      </div>
+    </div>
+  </div>
+  <div class="pn">03 / 20</div>
+</div>
+
+<!-- 4 システム構成と採用技術 -->
+<div class="s">
+  <div class="ki">SYSTEM</div>
+  <h2>システム構成と採用技術</h2>
+  <div class="hr"></div>
+  <div class="body">
+    <div style="display:flex;gap:28px;align-items:flex-start">
+      <div style="width:262px;flex:none">
+        <div style="border:1px solid var(--ink);border-radius:var(--radius);padding:14px 16px">
+          <div style="font-size:12.5px;color:var(--sub)">iPhone（iOS 17+）</div>
+          <div class="mono" style="font-size:15px;font-weight:700;margin:2px 0 10px">NetTre.app</div>
+          <div style="display:flex;flex-direction:column;gap:7px">
+            <div style="background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:7px 12px"><div style="font-size:13.5px;font-weight:700">同梱データ</div><div style="font-size:12.5px;color:var(--sub)">questions.json（手書き問題）</div></div>
+            <div style="background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:7px 12px"><div style="font-size:13.5px;font-weight:700">問題の自動生成・計算機</div><div style="font-size:12.5px;color:var(--sub)">その場で計算する</div></div>
+            <div style="background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:7px 12px"><div style="font-size:13.5px;font-weight:700">学習履歴</div><div style="font-size:12.5px;color:var(--sub)">SwiftData（端末内のファイル）</div></div>
+          </div>
+        </div>
+        <p style="font-size:13px;line-height:1.6;color:var(--sub);margin-top:10px;text-align:center">外部との通信なし<br>サーバー・解析 SDK・広告 SDK なし</p>
+      </div>
+      <table class="tbl" style="flex:1">
+        <tr><th style="width:96px">項目</th><th style="width:128px">採用</th><th>理由</th></tr>
+        <tr><td class="b">UI</td><td>SwiftUI</td><td>要件（iOS 17+）<br>片手向けのレイアウトを組みやすい</td></tr>
+        <tr><td class="b">状態管理</td><td>Observation<br><span class="mono" style="font-size:12.5px">@Observable</span></td><td>iOS 17 の標準</td></tr>
+        <tr><td class="b">永続化</td><td>SwiftData</td><td>iOS 17 の標準。成績の集計をクエリで書ける<br>JSON 保存案より、件数が増えても扱いやすい</td></tr>
+        <tr><td class="b">テスト</td><td>Swift Testing</td><td>引き継ぎ時からの方針</td></tr>
+        <tr><td class="b">プロジェクト</td><td>XcodeGen<br><span class="mono" style="font-size:12.5px">project.yml</span></td><td>.xcodeproj を Git で管理せずに済み<br>差分が読みやすい</td></tr>
+        <tr><td class="b">外部ライブラリ</td><td>使わない</td><td>オフライン・プライバシーの要件<br>（NFR-04, 05）と保守の手間</td></tr>
+      </table>
+    </div>
+  </div>
+  <div class="pn">04 / 20</div>
+</div>
+
+<!-- 5 アーキテクチャ -->
+<div class="s">
+  <div class="ki">ARCHITECTURE</div>
+  <h2>アーキテクチャ</h2>
+  <div class="hr"></div>
+  <div class="body">
+    <div style="display:flex;gap:28px;align-items:flex-start">
+      <div style="flex:1">
+        <div class="colh">4 つの層　<span style="font-weight:400;font-size:13.5px;color:var(--sub)">上の層から下の層だけを使う</span></div>
+        <div class="layer"><div class="ln">View</div><div><div class="lt">表示と操作の受け付けだけ。判定や計算はしない</div><div class="ty">HomeView, QuizView, StatsView, SettingsView ほか<br>CalculatorMenuView と各計算機の View<span class="new">V1.2</span></div></div></div>
+        <div class="down">↓</div>
+        <div class="layer"><div class="ln">ViewModel</div><div><div class="lt">画面の状態（回答前／回答後、入力と結果）を持ち、Domain を呼ぶ</div><div class="ty">QuizSessionViewModel ほか、計算機ごとの ViewModel</div></div></div>
+        <div class="down">↓</div>
+        <div class="layer" style="background:var(--accent-tint);border-color:var(--accent-tint)"><div class="ln">Domain</div><div><div class="lt">業務ロジック。テストの中心。SwiftUI に依存しない</div><div class="ty">Question, ReviewState, SubnetQuestionGenerator,<br>AnswerNormalizer, SessionBuilder<br>計算機：IPv4・Subnet（拡張）, IPv4InputParser ほか<span class="new">V1.2</span></div></div></div>
+        <div class="down">↓</div>
+        <div class="layer"><div class="ln">Data</div><div><div class="lt">同梱 JSON の読み込み、自動生成問題の再生成、SwiftData への保存</div><div class="ty">QuestionRepository, ReviewStore</div></div></div>
+      </div>
+      <div style="width:250px;flex:none">
+        <div class="colh">フォルダ構成</div>
+<div class="tree">NetTre/
+├ App/         <span>入口・TabView</span>
+├ Views/
+├ ViewModels/
+├ Models/      <span>Question ほか</span>
+├ Generators/  <span>既存の生成器</span>
+├ Calculators/ <span>計算機</span>
+├ Services/    <span>Repository 等</span>
+└ Resources/   <span>questions.json</span>
+NetTreTests/   <span>Swift Testing</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="pn">05 / 20</div>
+</div>
+
+<!-- 6 対応（学習） -->
+<div class="s">
+  <div class="ki">TRACEABILITY 1 / 2</div>
+  <h2>要件と構成要素の対応（学習）</h2>
+  <div class="hr"></div>
+  <div class="body">
+    <table class="tbl" style="font-size:14px">
+      <tr><th style="width:170px">要件 ID</th><th>担当する構成要素</th></tr>
+      <tr><td><span class="id">FR-01, 02, 04</span></td><td><code>QuizView</code>、<code>QuizSessionViewModel</code></td></tr>
+      <tr><td><span class="id">FR-03</span></td><td><code>Question.isCorrect</code>（既存）、<code>AnswerNormalizer</code></td></tr>
+      <tr><td><span class="id">FR-05, 06, 07</span></td><td><code>SubnetQuestionGenerator</code>（既存）、<code>QuestionRepository</code></td></tr>
+      <tr><td><span class="id">FR-08</span></td><td><code>QuestionRepository</code></td></tr>
+      <tr><td><span class="id">FR-09, 15</span></td><td><code>ReviewStore</code>（回答のたびにすぐ保存する）</td></tr>
+      <tr><td><span class="id">FR-10</span></td><td><code>ReviewState.record</code>（既存）</td></tr>
+      <tr><td><span class="id">FR-11, 12</span></td><td><code>SessionBuilder</code></td></tr>
+      <tr><td><span class="id">FR-13</span></td><td><code>StatsView</code>、<code>StatsViewModel</code>、<code>ReviewStore</code> の集計</td></tr>
+      <tr><td><span class="id">FR-14</span></td><td><code>SettingsView</code>、<code>ReviewStore.deleteAll</code></td></tr>
+    </table>
+  </div>
+  <div class="pn">06 / 20</div>
+</div>
+
+<!-- 7 対応（計算機） -->
+<div class="s">
+  <div class="ki">TRACEABILITY 2 / 2</div>
+  <h2>要件と構成要素の対応（計算機）<span class="new" style="font-size:12px;vertical-align:6px">V1.2</span></h2>
+  <div class="hr"></div>
+  <div class="body">
+    <table class="tbl tight" style="font-size:13.5px">
+      <tr><th style="width:130px">要件 ID</th><th>担当する構成要素</th></tr>
+      <tr><td><span class="id">FR-16</span></td><td><code>CalculatorMenuView</code>（タブ「計算」）</td></tr>
+      <tr><td><span class="id">FR-17</span></td><td><code>CIDRCalculator</code>、<code>CIDRCalculatorView</code>・ViewModel</td></tr>
+      <tr><td><span class="id">FR-18</span></td><td><code>SubnetSplitter</code>、<code>SubnetSplitView</code>・ViewModel</td></tr>
+      <tr><td><span class="id">FR-19</span></td><td><code>VLSMPlanner</code>、<code>VLSMPlanView</code>・ViewModel</td></tr>
+      <tr><td><span class="id">FR-20</span></td><td><code>RouteSummarizer</code>、<code>RouteSummaryView</code>・ViewModel</td></tr>
+      <tr><td><span class="id">FR-21</span></td><td><code>RadixConverter</code>、<code>RadixConvertView</code>・ViewModel</td></tr>
+      <tr><td><span class="id">FR-22</span></td><td><code>CalculationSteps</code>（各計算機の結果から解き方の文を作る）</td></tr>
+      <tr><td><span class="id">FR-23</span></td><td><code>QuizView</code> の解説から <code>CIDRCalculatorView</code> をシートで開く（問題の値を渡す）</td></tr>
+      <tr><td><span class="id">FR-24</span></td><td>各計算機の View（値の長押し・コピーボタンでクリップボードに書く）</td></tr>
+      <tr><td><span class="id">NFR-13</span></td><td><code>IPv4InputParser</code>（入力を整えて読み、誤りの場所を返す）</td></tr>
+    </table>
+  </div>
+  <div class="pn">07 / 20</div>
+</div>
+
+<!-- 8 画面一覧と遷移 -->
+<div class="s">
+  <div class="ki">SCREENS</div>
+  <h2>画面一覧と遷移</h2>
+  <div class="hr"></div>
+  <div class="body" style="gap:14px">
+    <div>
+      <div class="colh">タブ「学習」</div>
+      <div class="flow" style="align-items:flex-start">
+        <div style="flex:1"><div class="pill">S-01 ホーム</div><div class="cap">「学習を始める」で<br>そのまま S-03 へ</div></div>
+        <div class="arw" style="padding-top:11px">→</div>
+        <div style="flex:1"><div class="pill" style="background:var(--bg);border:1px solid var(--line)">S-02 分野選択</div><div class="cap">「分野を選ぶ」のとき<br>だけ通る</div></div>
+        <div class="arw" style="padding-top:11px">→</div>
+        <div style="flex:1.2"><div class="pill">S-03 出題 ⇄ 次の問題</div><div class="cap">回答前と回答後の 2 状態<br>タブバーを隠した全画面</div></div>
+        <div class="arw" style="padding-top:11px">→</div>
+        <div style="flex:1"><div class="pill">S-04 学習の結果</div><div class="cap">最後の問題、または中断で<br>終わったら S-01 に戻る</div></div>
+      </div>
+    </div>
+    <div style="border-top:1px solid var(--line);padding-top:12px">
+      <div class="colh">タブ「計算」<span class="new">V1.2</span></div>
+      <div style="display:flex;gap:10px;align-items:center">
+        <div class="pill">S-07 計算機メニュー</div>
+        <div class="arw">→</div>
+        <div style="flex:1;display:flex;gap:6px">
+          <span class="pill" style="flex:1;padding:10px 4px;font-size:13px">S-08 CIDR</span>
+          <span class="pill" style="flex:1;padding:10px 4px;font-size:13px">S-09 分割</span>
+          <span class="pill" style="flex:1;padding:10px 4px;font-size:13px">S-10 VLSM</span>
+          <span class="pill" style="flex:1;padding:10px 4px;font-size:13px">S-11 集約</span>
+          <span class="pill" style="flex:1;padding:10px 4px;font-size:13px">S-12 進数</span>
+        </div>
+      </div>
+      <p style="font-size:13px;color:var(--sub);margin-top:8px">S-03 回答後の解説から、S-08 CIDR 計算をシートで開ける（D10）</p>
+    </div>
+    <div style="display:flex;gap:28px;border-top:1px solid var(--line);padding-top:12px;margin-right:100px">
+      <div style="flex:1;display:flex;gap:12px;align-items:center"><span style="font-size:14px;font-weight:700">タブ「成績」</span><span class="pill">S-05 成績</span></div>
+      <div style="flex:1;display:flex;gap:12px;align-items:center"><span style="font-size:14px;font-weight:700">タブ「設定」</span><span class="pill">S-06 設定</span></div>
+    </div>
+  </div>
+  <div class="pn">08 / 20</div>
+</div>
+
+<!-- 9 問題データと問題ID -->
+<div class="s">
+  <div class="ki">DATA 1 / 2</div>
+  <h2>問題データと問題 ID</h2>
+  <div class="hr"></div>
+  <div class="body" style="gap:14px">
+    <div style="display:flex;gap:0;border:1px solid var(--line);border-radius:var(--radius)">
+      <div style="flex:1;padding:10px 16px;border-right:1px solid var(--line)"><div style="font-size:14px;font-weight:700">手書き問題</div><p style="font-size:13.5px;line-height:1.6;color:var(--sub)"><code>questions.json</code> に<br><code>Question</code> の配列で持つ<br>読み取り専用</p></div>
+      <div style="flex:1;padding:10px 16px;border-right:1px solid var(--line)"><div style="font-size:14px;font-weight:700">自動生成問題</div><p style="font-size:13.5px;line-height:1.6;color:var(--sub)">保存しない<br>ID から毎回作り直す</p></div>
+      <div style="flex:1.2;padding:10px 16px"><div style="font-size:14px;font-weight:700">回答の形<span class="new">V1.1</span></div><p style="font-size:13.5px;line-height:1.6;color:var(--sub)">入力式だけ。<code>answer</code> は正解の文字列 1 つ<br>例：<code>"192.168.10.64"</code>、<code>"62"</code></p></div>
+    </div>
+    <table class="tbl">
+      <tr><th style="width:110px">種類</th><th style="width:330px">ID の形式</th><th>例</th></tr>
+      <tr><td class="b">手書き</td><td><code>&lt;分野の略称&gt;-&lt;4桁の連番&gt;</code></td><td><code>net-fund-0001</code></td></tr>
+      <tr><td class="b">自動生成</td><td><code>gen-subnet-&lt;type&gt;-&lt;difficulty&gt;-&lt;seed&gt;</code></td><td><code>gen-subnet-hostCount-2-918273</code></td></tr>
+    </table>
+    <p style="font-size:13px;color:var(--sub)">分野の略称　<code>net-fund</code> ／ <code>net-access</code> ／ <code>ip-conn</code> ／ <code>ip-svc</code> ／ <code>sec-fund</code> ／ <code>auto-prog</code></p>
+    <p style="font-size:13.5px;line-height:1.7"><span class="ok">D1 採用</span>　自動生成問題の ID に難易度（1〜3）を入れた。ID だけで問題を再生成できる（FR-06）</p>
+  </div>
+  <div class="pn">09 / 20</div>
+</div>
+
+<!-- 10 学習履歴のデータ -->
+<div class="s">
+  <div class="ki">DATA 2 / 2</div>
+  <h2>学習履歴のデータ（SwiftData）</h2>
+  <div class="hr"></div>
+  <div class="body" style="gap:12px">
+    <div style="display:flex;gap:28px;align-items:flex-start">
+      <div style="flex:1.15">
+        <div class="colh"><code>ReviewRecord</code>　<span style="font-weight:400;font-size:13px;color:var(--sub)">問題ごとに 1 件</span></div>
+        <table class="tbl" style="font-size:13px">
+          <tr><td><code>questionId</code></td><td style="color:var(--sub)">String</td><td>問題 ID（一意）</td></tr>
+          <tr><td><code>questionVersion</code></td><td style="color:var(--sub)">Int</td><td>最後に回答したときの version</td></tr>
+          <tr><td><code>domain</code></td><td style="color:var(--sub)">String</td><td>集計用に分野を持つ</td></tr>
+          <tr><td><code>interval</code></td><td style="color:var(--sub)">Int</td><td>次の出題までの日数</td></tr>
+          <tr><td><code>ease</code></td><td style="color:var(--sub)">Double</td><td>易しさ係数（初期 2.5、1.3〜3.0）</td></tr>
+          <tr><td><code>streak</code></td><td style="color:var(--sub)">Int</td><td>連続正解数</td></tr>
+          <tr><td><code>dueDate</code></td><td style="color:var(--sub)">Date</td><td>次に出す日（その日の 0:00）</td></tr>
+        </table>
+      </div>
+      <div style="flex:1">
+        <div class="colh"><code>AnswerLog</code>　<span style="font-weight:400;font-size:13px;color:var(--sub)">回答ごとに 1 件</span></div>
+        <table class="tbl" style="font-size:13px">
+          <tr><td><code>questionId</code></td><td style="color:var(--sub)">String</td><td>問題 ID</td></tr>
+          <tr><td><code>domain</code></td><td style="color:var(--sub)">String</td><td>分野</td></tr>
+          <tr><td><code>isCorrect</code></td><td style="color:var(--sub)">Bool</td><td>正解したか</td></tr>
+          <tr><td><code>answeredAt</code></td><td style="color:var(--sub)">Date</td><td>回答した日時</td></tr>
+        </table>
+        <p style="font-size:13px;line-height:1.65;color:var(--sub);margin-top:12px">成績画面（FR-13）は <code>AnswerLog</code> を集計する<br>計算機は何も保存しない（U-09）</p>
+      </div>
+    </div>
+    <p class="note">※ 間隔の計算は既存の <code>ReviewState.record</code> に任せ、結果を <code>ReviewRecord</code> に書き戻す</p>
+  </div>
+  <div class="pn">10 / 20</div>
+</div>
+
+<!-- 11 学習の組み立て -->
+<div class="s">
+  <div class="ki">SESSION BUILDER</div>
+  <h2>学習の組み立て</h2>
+  <div class="hr"></div>
+  <div class="body">
+    <div style="display:flex;gap:28px;align-items:flex-start">
+      <div style="width:330px;flex:none">
+        <div class="colh">1 回 10 問を、この順で集める</div>
+        <div class="layer" style="background:var(--accent-tint);border-color:var(--accent-tint)"><div class="ln" style="width:24px">1</div><div><div class="lt" style="font-weight:700">復習</div><div class="lt" style="color:var(--sub)">出題範囲の中で、次に出す日が今日以前の問題を古い順に（最大 10 問）</div></div></div>
+        <div class="down">↓</div>
+        <div class="layer"><div class="ln" style="width:24px">2</div><div><div class="lt" style="font-weight:700">新しい問題で埋める</div><div class="lt" style="color:var(--sub)">手書き：未回答のものを並び順で<br>自動生成：新しい seed で<br>種類はランダム</div></div></div>
+      </div>
+      <div style="flex:1">
+        <div class="colh">出題範囲ごとの集め方</div>
+        <table class="tbl">
+          <tr><th style="width:130px">出題範囲</th><th>集める問題</th></tr>
+          <tr><td class="b">おまかせ</td><td>すべての分野の手書き問題＋自動生成問題（新しい問題の半分程度を自動生成にする）</td></tr>
+          <tr><td class="b">各分野</td><td>その分野の手書き問題のみ</td></tr>
+          <tr><td class="b">サブネット<br>計算ドリル</td><td>自動生成問題のみ。難易度を選べる</td></tr>
+        </table>
+        <p class="note" style="margin-top:10px">※ 手書き問題が足りず 10 問に届かないときは、届いた数だけ出す。0 問なら「この分野の問題はまだありません」</p>
+      </div>
+    </div>
+  </div>
+  <div class="pn">11 / 20</div>
+</div>
+
+<!-- 12 間隔反復 -->
+<div class="s">
+  <div class="ki">SPACED REPETITION</div>
+  <h2>間隔反復</h2>
+  <div class="hr"></div>
+  <div class="body" style="gap:14px">
+    <div style="display:flex;gap:14px;align-items:center">
+      <span style="width:64px;flex:none;font-size:14px;font-weight:700">正解</span>
+      <span class="pill">1 回目　1 日後</span><span class="arw">→</span>
+      <span class="pill">2 回目　3 日後</span><span class="arw">→</span>
+      <span class="pill">3 回目から　前回 × 易しさ係数</span>
+      <span style="font-size:13px;color:var(--sub)">係数 +0.1（最大 3.0）</span>
+    </div>
+    <div style="display:flex;gap:14px;align-items:center">
+      <span style="width:64px;flex:none;font-size:14px;font-weight:700">不正解</span>
+      <span class="pill" style="background:var(--bg);border:1px solid var(--line)">連続正解を 0 に戻して　1 日後</span>
+      <span style="font-size:13px;color:var(--sub)">係数 −0.2（最小 1.3）</span>
+    </div>
+    <p class="note">※ 計算は既存の <code>ReviewState.record</code>（SM-2 の簡略版）をそのまま使う</p>
+    <div style="display:flex;gap:0;border-top:1px solid var(--line)">
+      <div style="flex:1;padding:14px 22px 0 0;border-right:1px solid var(--line)">
+        <p style="font-size:14px;font-weight:700;margin-bottom:6px"><span class="ok">D2 採用</span>　次に出す日を日付単位で決める</p>
+        <p style="font-size:13.5px;line-height:1.7;color:var(--sub)">「今日の 0:00 ＋ interval 日」を次に出す日にする<br>朝に解いた問題が、翌朝の通勤時に出る</p>
+      </div>
+      <div style="flex:1;padding:14px 0 0 22px">
+        <p style="font-size:14px;font-weight:700;margin-bottom:6px"><span class="ok">D3 採用</span>　正解した自動生成問題は復習に入れない</p>
+        <p style="font-size:13.5px;line-height:1.7;color:var(--sub)">間違えたものだけ記録し、復習で 2 回続けて<br>正解したら記録を消す（回答ログには残す）</p>
+      </div>
+    </div>
+  </div>
+  <div class="pn">12 / 20</div>
+</div>
+
+<!-- 13 回答の判定と問題の修正 -->
+<div class="s">
+  <div class="ki">JUDGING AND VERSIONS</div>
+  <h2>回答の判定と問題の修正</h2>
+  <div class="hr"></div>
+  <div class="body">
+    <div style="display:flex;gap:28px;align-items:stretch">
+      <div style="flex:1.25;display:flex;flex-direction:column;gap:12px">
+        <div class="colh" style="margin-bottom:0">回答の判定<span class="new">V1.1</span></div>
+        <p style="font-size:14px;line-height:1.7">回答はすべて入力式。整えてから正解の文字列と比べる<span class="ok" style="margin-left:8px">D5 採用</span></p>
+        <div style="display:flex;gap:8px;align-items:center">
+          <span class="pill" style="font-size:13.5px;padding:8px 10px">全角を半角に</span><span class="arw">→</span>
+          <span class="pill" style="font-size:13.5px;padding:8px 10px">空白を除く</span><span class="arw">→</span>
+          <span class="pill" style="font-size:13.5px;padding:8px 10px">大文字小文字を区別しない</span>
+        </div>
+        <div style="border-top:1px solid var(--line);padding-top:10px">
+          <p style="font-size:14px;font-weight:700;margin-bottom:4px">キーボードの種類</p>
+          <p style="font-size:13.5px;line-height:1.7">正解が数字だけ → 数字のキーボード（<code>.numberPad</code>）<br>数字と「.」だけ → 「.」付き（<code>.decimalPad</code>）</p>
+        </div>
+      </div>
+      <div style="width:1px;background:var(--line)"></div>
+      <div style="flex:1;display:flex;flex-direction:column;gap:12px">
+        <div class="colh" style="margin-bottom:0">問題を修正したとき</div>
+        <p style="font-size:14px;line-height:1.7">問題を直したら <code>version</code> を上げる</p>
+        <p style="font-size:14px;line-height:1.7"><span class="ok">D4 採用</span>　学習履歴はそのまま引き継ぎ<br><code>questionVersion</code> だけ更新する</p>
+        <p style="font-size:13.5px;line-height:1.7;color:var(--sub)">修正の多くは誤字や解説の補足で<br>進み具合をやり直すほどではないため</p>
+      </div>
+    </div>
+  </div>
+  <div class="pn">13 / 20</div>
+</div>
+
+<!-- 14 計算機：入力とCIDR -->
+<div class="s">
+  <div class="ki">CALCULATORS 1 / 3</div>
+  <h2>計算機 — 入力の読み取りと CIDR 計算</h2>
+  <div class="hr"></div>
+  <div class="body">
+    <p class="lead">IPv4 のみ。計算はすべて <code>UInt32</code> の整数演算で行う。入力は画面ごとに、アプリを閉じるまで残す</p>
+    <div style="display:flex;gap:28px;align-items:flex-start">
+      <div style="flex:1">
+        <div class="colh">入力の読み取り（IPv4InputParser）</div>
+        <div class="rl">全角を半角にし、前後の空白を除く</div>
+        <div class="rl">書き方は 3 通り<br><code>192.168.10.77/26</code>　<code>192.168.10.77 255.255.255.192</code><br><code>192.168.10.77</code> ＋ 別の欄にプレフィックス長</div>
+        <div class="rl">誤りは場所と理由を返す<br><span style="color:var(--sub)">「第3オクテットが 256 です（0〜255）」<br>「マスクの 1 が連続していません」</span></div>
+        <div class="rl">入力が変わるたびに計算し直す</div>
+      </div>
+      <div style="flex:1">
+        <div class="colh">CIDR 計算（CIDRCalculator）</div>
+        <div class="rl">既存の <code>Subnet</code> を /0〜/32 に広げる<br><span style="color:var(--sub)">自動生成問題は今までどおり /8〜/30</span></div>
+        <div class="rl">使えるホスト数<br>/0〜/30：2^(32−p) − 2 ／ /31：2（RFC 3021）／ /32：1</div>
+        <div class="rl">アドレスの種別<br><span style="color:var(--sub)">プライベート・ループバック・リンクローカル<br>共有アドレス・マルチキャスト・予約<br>それ以外はグローバル</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="pn">14 / 20</div>
+</div>
+
+<!-- 15 計算機：ほかの4つ -->
+<div class="s">
+  <div class="ki">CALCULATORS 2 / 3</div>
+  <h2>計算機 — 分割・VLSM・集約・進数変換</h2>
+  <div class="hr"></div>
+  <div class="body">
+    <table class="tbl" style="font-size:13.5px">
+      <tr><th style="width:120px">計算機</th><th>計算のきまり</th><th style="width:220px">設計提案</th></tr>
+      <tr><td class="b">サブネット分割</td><td>分割数 n：プレフィックス長 ＋ ⌈log2 n⌉（5 分割 → 8 分割と示す）<br>必要ホスト数 h：h ＋ 2 以上の最小の 2 の累乗のブロック</td><td><span class="tag">D6</span> 一覧は先頭 256 件まで<br>超えたら総数を示す</td></tr>
+      <tr><td class="b">VLSM 設計</td><td>必要ホスト数の多い順に、親ネットワークの先頭から割り当てる<br>足りないときは割り当てず「◯ アドレス足りません」</td><td><span class="tag">D7</span> 用途は 50 件まで</td></tr>
+      <tr><td class="b">経路集約</td><td>入力はホスト部を 0 にそろえる<br>最小のアドレスと最大のブロードキャストの共通の先頭ビット長を使う</td><td><span class="tag">D8</span> ネットワークは<br>32 件まで</td></tr>
+      <tr><td class="b">進数変換</td><td>出力はオクテットごとに区切る（2 進は 8 けた、16 進は 2 けた）</td><td><span class="tag">D9</span> 入力の進数を自動で<br>見分ける（次の順）</td></tr>
+    </table>
+    <div style="background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:10px 16px;font-size:13.5px;line-height:1.7">
+      <b>D9 の見分け方</b>　① <code>0x</code> で始まる・a〜f を含む → 16 進　② 0 と 1 だけで 8 けた × 4（または 32 けた）→ 2 進　③ それ以外 → 10 進
+    </div>
+  </div>
+  <div class="pn">15 / 20</div>
+</div>
+
+<!-- 16 解き方・移動・照合 -->
+<div class="s">
+  <div class="ki">CALCULATORS 3 / 3</div>
+  <h2>解き方・計算機への移動・照合テスト</h2>
+  <div class="hr"></div>
+  <div class="body">
+    <div style="display:flex;gap:28px;align-items:flex-start">
+      <div style="flex:1;display:flex;flex-direction:column;gap:10px">
+        <div class="colh" style="margin-bottom:0">解き方（FR-22）</div>
+        <p style="font-size:13.5px;line-height:1.7">CIDR 計算は、区切りが入るオクテット<br>→ ブロックサイズ → 何番目の倍数か、の順に文で示す</p>
+        <div style="background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:10px 14px;font-size:13.5px;line-height:1.75">
+          <span style="color:var(--sub)">例：192.168.10.77/26</span><br>区切りは第 4 オクテット。ブロックサイズは 64<br>77 は 64 の 1 倍〜2 倍の間 → ネットワークは .64
+        </div>
+        <p style="font-size:13px;line-height:1.7;color:var(--sub)">自動生成問題の解説（<code>blockSizeHint</code>）と同じ考え方にそろえる</p>
+      </div>
+      <div style="flex:1;display:flex;flex-direction:column;gap:12px">
+        <div class="box">
+          <div class="bh"><span class="tag">D10</span>解説から CIDR 計算をシートで開く</div>
+          <p>S-03 回答後に「計算機で確かめる」を置き<br>問題の値を渡して S-08 を<b>シート</b>で開く<br>閉じると解説に戻り、学習が途切れない（FR-23）</p>
+        </div>
+        <p style="font-size:13.5px;line-height:1.7"><b>コピー（FR-24）</b>　クリップボードへの書き込みだけ行う<br>読み取りはしないので OS の確認は出ない</p>
+        <p style="font-size:13.5px;line-height:1.7"><b>照合テスト（NFR-10）</b>　Python の <code>ipaddress</code> で作った<br>数万件の照合用データで、計算機の結果を突き合わせる</p>
+      </div>
+    </div>
+  </div>
+  <div class="pn">16 / 20</div>
+</div>
+
+<!-- 17 自動生成問題の品質 -->
+<div class="s">
+  <div class="ki">GENERATOR QUALITY</div>
+  <h2>自動生成問題の品質</h2>
+  <div class="hr"></div>
+  <div class="body">
+    <p class="lead">NFR-10（正確性）を満たすため、引き継ぎ時の既知の問題を実装工程で直す</p>
+    <table class="tbl" style="font-size:14px">
+      <tr><th style="width:80px">No</th><th style="width:330px">引き継ぎ時の問題</th><th>方針</th></tr>
+      <tr><td><span class="id">T-1〜T-3</span></td><td>誤答づくり（<code>makeDistractors</code>）の不具合と<br>正解の選択肢を探す強制アンラップ</td><td>回答を入力式にしたため不要<br>誤答づくりと選択肢の組み立てごと取り除く<span class="new">V1.1</span></td></tr>
+      <tr><td><span class="id">T-4</span></td><td>テストがない</td><td>計算式と、生成した問題の正解が計算結果と<br>一致すること・同じ seed で同じ問題になることをテストする</td></tr>
+    </table>
+  </div>
+  <div class="pn">17 / 20</div>
+</div>
+
+<!-- 18 エラー処理 -->
+<div class="s">
+  <div class="ki">ERROR HANDLING</div>
+  <h2>エラー処理</h2>
+  <div class="hr"></div>
+  <div class="body" style="gap:0">
+    <div class="er"><div class="q">同梱の問題データが読めない</div><div class="arw">→</div><div class="a">手書き問題なしで続ける（自動生成問題は出せる）<br>デバッグビルドではログに出す。リリース前のテストで必ず見つける</div></div>
+    <div class="er"><div class="q">学習履歴に保存できない</div><div class="arw">→</div><div class="a">学習は続ける<br>画面の下に「学習記録を保存できませんでした」と短く表示する</div></div>
+    <div class="er"><div class="q">学習履歴のデータベースが開けない</div><div class="arw">→</div><div class="a">履歴なしで起動する。設定画面から履歴を消して作り直せるようにする</div></div>
+    <div class="er"><div class="q">履歴の問題 ID に対応する問題がない</div><div class="arw">→</div><div class="a">その履歴は出題に使わず、無視する</div></div>
+    <div class="er"><div class="q">計算機の入力が誤っている・途中まで<span class="new">V1.2</span></div><div class="arw">→</div><div class="a">結果欄を空にし、入力欄の下に誤りの場所と理由を出す<br>アプリは止めない</div></div>
+    <div class="er"><div class="q">計算の結果が大きすぎる<span class="new">V1.2</span></div><div class="arw">→</div><div class="a">件数の上限で打ち切り、総数を示す（D6〜D8）</div></div>
+  </div>
+  <div class="pn">18 / 20</div>
+</div>
+
+<!-- 19 非機能要件への対応 -->
+<div class="s">
+  <div class="ki">NON-FUNCTIONAL</div>
+  <h2>非機能要件への対応</h2>
+  <div class="hr"></div>
+  <div class="body">
+    <table class="tbl">
+      <tr><th style="width:130px">要件 ID</th><th>設計での対応</th></tr>
+      <tr><td><span class="id">NFR-01, 02</span></td><td>入力欄・「回答する」・「次へ」を画面下半分（キーボードのすぐ上）に置く。ボタンは 56pt 以上</td></tr>
+      <tr><td><span class="id">NFR-03</span></td><td>問題データの読み込みは起動時に 1 回だけ。自動生成と計算機はその場で計算する</td></tr>
+      <tr><td><span class="id">NFR-04, 05, 06</span></td><td>通信するコードと外部 SDK を入れない。権限の利用目的（<code>NS*UsageDescription</code>）を書かない</td></tr>
+      <tr><td><span class="id">NFR-07</span></td><td>iPhone 専用（縦向きのみ）。iPad 互換モードでの動作確認を、要件定義テストの項目にする</td></tr>
+      <tr><td><span class="id">NFR-08</span></td><td>標準の文字スタイルとシステムカラーを使う。入力欄に VoiceOver 用のラベル（「回答」）を付ける</td></tr>
+      <tr><td><span class="id">NFR-09</span></td><td>回答のたびにすぐ保存する（学習の最後にまとめて保存しない）</td></tr>
+      <tr><td><span class="id">NFR-10</span></td><td>計算機の結果を、<code>ipaddress</code> で作った照合用データ（数万件）とテストで突き合わせる</td></tr>
+      <tr><td><span class="id">NFR-11</span></td><td>手書き問題は JSON の追加だけで増やせる。<code>id</code> の重複はテストで見つける</td></tr>
+      <tr><td><span class="id">NFR-13</span></td><td><code>IPv4InputParser</code> に入力の整え方と誤りの伝え方をまとめる</td></tr>
+    </table>
+  </div>
+  <div class="pn">19 / 20</div>
+</div>
+
+<!-- 20 決めていただきたいこと -->
+<div class="s">
+  <div class="ki">DECISIONS</div>
+  <h2>決めていただきたいこと</h2>
+  <div class="hr"></div>
+  <div class="body" style="gap:14px">
+    <div style="background:var(--ink-surface);color:var(--on-dark);border-radius:var(--radius);padding:16px 26px">
+      <div style="font-size:15px;font-weight:700;margin-bottom:4px">計算機の設計提案 5 件を、このレビューで採るかどうか</div>
+      <div style="display:flex;gap:16px;align-items:baseline;padding:7px 0;border-bottom:1px solid var(--line-on-dark)"><span class="mono" style="font-size:12.5px;font-weight:700;width:34px;flex:none">D6</span><span style="flex:1;font-size:14.5px">サブネット分割の一覧は先頭 256 件まで</span><span style="font-size:13px;color:var(--accent-on-dark);width:250px;flex:none">/8→/30 は約 400 万件になるため</span></div>
+      <div style="display:flex;gap:16px;align-items:baseline;padding:7px 0;border-bottom:1px solid var(--line-on-dark)"><span class="mono" style="font-size:12.5px;font-weight:700;width:34px;flex:none">D7</span><span style="flex:1;font-size:14.5px">VLSM 設計の用途は 50 件まで</span><span style="font-size:13px;color:var(--accent-on-dark);width:250px;flex:none">画面と計算を軽く保つため</span></div>
+      <div style="display:flex;gap:16px;align-items:baseline;padding:7px 0;border-bottom:1px solid var(--line-on-dark)"><span class="mono" style="font-size:12.5px;font-weight:700;width:34px;flex:none">D8</span><span style="flex:1;font-size:14.5px">経路集約のネットワークは 32 件まで</span><span style="font-size:13px;color:var(--accent-on-dark);width:250px;flex:none">同上</span></div>
+      <div style="display:flex;gap:16px;align-items:baseline;padding:7px 0;border-bottom:1px solid var(--line-on-dark)"><span class="mono" style="font-size:12.5px;font-weight:700;width:34px;flex:none">D9</span><span style="flex:1;font-size:14.5px">進数変換は入力の進数を自動で見分ける</span><span style="font-size:13px;color:var(--accent-on-dark);width:250px;flex:none">進数を選ぶ手間をなくすため</span></div>
+      <div style="display:flex;gap:16px;align-items:baseline;padding:7px 0"><span class="mono" style="font-size:12.5px;font-weight:700;width:34px;flex:none">D10</span><span style="flex:1;font-size:14.5px">解説から CIDR 計算をシートで開く</span><span style="font-size:13px;color:var(--accent-on-dark);width:250px;flex:none">学習の流れを途切れさせないため</span></div>
+    </div>
+    <p style="font-size:14px;line-height:1.75">あわせて、v1.1 の変更（入力式のみ）と、全体の記載に誤りや抜けがないかをご確認ください</p>
+    <p class="note" style="margin-right:100px">※ 採否が決まったら基本設計書を確定し、画面仕様書とデザインに計算機の画面（S-07〜S-12）を加えます</p>
+  </div>
+  <div class="pn">20 / 20</div>
+</div>
+
+<script>
+function fit(){document.documentElement.style.setProperty('--k',Math.min(innerWidth/960,innerHeight/540))}
+addEventListener('resize',fit);fit();
+let i=0;const slides=document.querySelectorAll('.s');
+function show(n){i=Math.max(0,Math.min(slides.length-1,n));slides.forEach((el,j)=>el.classList.toggle('active',j===i))}
+addEventListener('keydown',e=>{if(e.key==='ArrowRight'||e.key===' ')show(i+1);if(e.key==='ArrowLeft')show(i-1)});
+show(0);
+</script>
+</body>
+</html>

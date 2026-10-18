@@ -1,0 +1,727 @@
+<!doctype html>
+<html lang="ja"><head><meta charset="utf-8"><title>ネトレ 画面デザイン</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+JP:wght@400;500;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#D9DCE1;font-family:'IBM Plex Sans JP','Hiragino Sans',sans-serif;color:#111827;padding:32px}
+h1{margin:0 0 8px;font-size:28px} h2{margin:40px 0 16px;font-size:20px}
+.row{display:flex;gap:48px;flex-wrap:wrap}
+figure{margin:0} figcaption{font-size:14px;font-weight:700;margin-bottom:10px;color:#374151}
+.ph{width:390px;height:844px;border-radius:44px;overflow:hidden;background:#F4F5F7;outline:10px solid #111827}
+button,input{font-family:inherit}
+</style></head><body>
+<h1>ネトレ 画面デザイン</h1>
+<p style="margin:0;color:#4B5563;font-size:14px">iPhone 390×844 ・ 画面仕様書 v0.3 にもとづく見本（回答は数字の入力・計算機 S-07〜S-12・数値はサンプル）</p>
+<h2>学習の流れ</h2><div class="row"><figure><figcaption>S-01 ホーム</figcaption><div class="ph">
+
+<div style="width: 390px; height: 844px; box-sizing: border-box; background: #F4F5F7; color: #111827; font-family: 'IBM Plex Sans JP', 'Hiragino Sans', sans-serif; display: flex; flex-direction: column; padding-top: 62px">
+  <header style="padding: 0 20px; display: flex; flex-direction: column; gap: 2px">
+    <span style="font-size: 13px; font-weight: 500; color: #5B6472; letter-spacing: 0.04em">CCNA 200-301 対策</span>
+    <h1 style="margin: 0; font-size: 32px; font-weight: 700; letter-spacing: -0.01em">ネトレ</h1>
+  </header>
+  <section aria-label="今日の学習" style="margin: 24px 20px 0; background: #FFFFFF; border: 1px solid #E3E6EB; border-radius: 16px; padding: 20px; display: flex; flex-direction: column; gap: 14px">
+    <div style="display: flex; flex-direction: column; gap: 4px">
+      <span style="font-size: 14px; font-weight: 500; color: #5B6472">今日の復習</span>
+      <div style="display: flex; align-items: baseline; gap: 6px">
+        <span style="font-size: 52px; font-weight: 700; line-height: 1; color: #2742A8; font-family: 'IBM Plex Mono', monospace">12</span>
+        <span style="font-size: 18px; font-weight: 700">問</span>
+      </div>
+    </div>
+    <div style="height: 1px; background: #E3E6EB"></div>
+    <div style="display: flex; justify-content: space-between; align-items: center; font-size: 15px">
+      <span style="color: #5B6472">今日解いた問題</span>
+      <span style="font-weight: 700">8 問</span>
+    </div>
+  </section>
+  <div style="flex-grow: 1"></div>
+  <div style="padding: 0 20px 20px; display: flex; flex-direction: column; gap: 12px">
+    <button type="button" style="height: 56px; border-radius: 14px; border: 1px solid #E3E6EB; background: #FFFFFF; color: #111827; font-size: 17px; font-weight: 500; display: flex; align-items: center; justify-content: space-between; padding: 0 18px; cursor: pointer">
+      <span>分野を選ぶ</span>
+      <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#5B6472" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"></path></svg>
+    </button>
+    <button type="button" style="height: 64px; border-radius: 14px; border: none; background: #2742A8; color: #FFFFFF; font-size: 18px; font-weight: 700; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; cursor: pointer">
+      <span>学習を始める</span>
+      <span style="font-size: 12.5px; font-weight: 500; opacity: 0.9">復習 12 問から・全 10 問</span>
+    </button>
+  </div>
+  <nav aria-label="タブ" style="background: #FFFFFF; border-top: 1px solid #E3E6EB; display: flex; padding: 6px 8px 30px">
+    <button type="button" aria-current="page" style="flex: 1; min-height: 50px; border: none; background: none; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; color: #2742A8; font-size: 11px; font-weight: 700; cursor: pointer">
+      <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
+      <span>学習</span>
+    </button>
+    <button type="button" style="flex: 1; min-height: 50px; border: none; background: none; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; color: #5B6472; font-size: 11px; font-weight: 500; cursor: pointer">
+      <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="16" height="20" x="4" y="2" rx="2"></rect><path d="M8 6h8"></path><path d="M16 14v4"></path><path d="M16 10h.01"></path><path d="M12 10h.01"></path><path d="M8 10h.01"></path><path d="M12 14h.01"></path><path d="M8 14h.01"></path><path d="M12 18h.01"></path><path d="M8 18h.01"></path></svg>
+      <span>計算</span>
+    </button>
+    <button type="button" style="flex: 1; min-height: 50px; border: none; background: none; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; color: #5B6472; font-size: 11px; font-weight: 500; cursor: pointer">
+      <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"></path><path d="M18 17V9"></path><path d="M13 17V5"></path><path d="M8 17v-3"></path></svg>
+      <span>成績</span>
+    </button>
+    <button type="button" style="flex: 1; min-height: 50px; border: none; background: none; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; color: #5B6472; font-size: 11px; font-weight: 500; cursor: pointer">
+      <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21v-7"></path><path d="M4 10V3"></path><path d="M12 21v-9"></path><path d="M12 8V3"></path><path d="M20 21v-5"></path><path d="M20 12V3"></path><path d="M1 14h6"></path><path d="M9 8h6"></path><path d="M17 16h6"></path></svg>
+      <span>設定</span>
+    </button>
+  </nav>
+</div>
+</div></figure><figure><figcaption>S-02 分野選択</figcaption><div class="ph">
+
+<div style="width: 390px; height: 844px; box-sizing: border-box; background: #F4F5F7; color: #111827; font-family: 'IBM Plex Sans JP', 'Hiragino Sans', sans-serif; display: flex; flex-direction: column; padding-top: 54px">
+  <header style="height: 48px; padding: 0 8px; display: flex; align-items: center; position: relative">
+    <button type="button" aria-label="ホームに戻る" style="min-width: 44px; height: 44px; border: none; background: none; color: #2742A8; display: flex; align-items: center; gap: 2px; font-size: 17px; cursor: pointer">
+      <svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"></path></svg>
+      <span>ホーム</span>
+    </button>
+    <h1 style="position: absolute; left: 0; right: 0; text-align: center; margin: 0; font-size: 17px; font-weight: 700; pointer-events: none">分野を選ぶ</h1>
+  </header>
+  <div style="flex-grow: 1; overflow: hidden; padding: 12px 20px 0; display: flex; flex-direction: column; gap: 10px">
+    <h2 style="margin: 0; font-size: 13px; font-weight: 500; color: #5B6472">サブネット計算ドリル</h2>
+    <section style="background: #FFFFFF; border: 1px solid #E3E6EB; border-radius: 16px; padding: 14px; display: flex; flex-direction: column; gap: 12px">
+      <div role="radiogroup" aria-label="難易度" style="display: flex; background: #EEF0F3; border-radius: 10px; padding: 3px; gap: 3px">
+        <button type="button" role="radio" aria-checked="false" style="flex: 1; height: 38px; border: none; border-radius: 8px; background: transparent; color: #374151; font-size: 15px; font-weight: 500; cursor: pointer">基礎</button>
+        <button type="button" role="radio" aria-checked="true" style="flex: 1; height: 38px; border: none; border-radius: 8px; background: #FFFFFF; color: #111827; font-size: 15px; font-weight: 700; box-shadow: 0 1px 2px rgba(17,24,39,0.12); cursor: pointer">標準</button>
+        <button type="button" role="radio" aria-checked="false" style="flex: 1; height: 38px; border: none; border-radius: 8px; background: transparent; color: #374151; font-size: 15px; font-weight: 500; cursor: pointer">応用</button>
+      </div>
+      <button type="button" style="height: 52px; border: none; border-radius: 12px; background: #2742A8; color: #FFFFFF; font-size: 16px; font-weight: 700; cursor: pointer">始める</button>
+    </section>
+    <h2 style="margin: 14px 0 0; font-size: 13px; font-weight: 500; color: #5B6472">分野</h2>
+    <section style="background: #FFFFFF; border: 1px solid #E3E6EB; border-radius: 16px; display: flex; flex-direction: column">
+      <button type="button" style="min-height: 64px; border: none; border-bottom: 1px solid #E3E6EB; background: none; padding: 10px 14px; display: flex; align-items: center; gap: 10px; text-align: left; cursor: pointer; color: #111827">
+        <span style="flex-grow: 1; display: flex; flex-direction: column; gap: 2px"><span style="font-size: 16px; font-weight: 700">ネットワークの基礎</span><span style="font-size: 13px; color: #5B6472">30 問 ・ 復習 3 問</span></span>
+        <span style="font-family: 'IBM Plex Mono', monospace; font-size: 16px; font-weight: 600">82%</span>
+        <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8A93A0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"></path></svg>
+      </button>
+      <button type="button" style="min-height: 64px; border: none; border-bottom: 1px solid #E3E6EB; background: none; padding: 10px 14px; display: flex; align-items: center; gap: 10px; text-align: left; cursor: pointer; color: #111827">
+        <span style="flex-grow: 1; display: flex; flex-direction: column; gap: 2px"><span style="font-size: 16px; font-weight: 700">ネットワークアクセス</span><span style="font-size: 13px; color: #5B6472">12 問 ・ 復習 0 問</span></span>
+        <span style="font-family: 'IBM Plex Mono', monospace; font-size: 16px; font-weight: 600">60%</span>
+        <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8A93A0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"></path></svg>
+      </button>
+      <button type="button" style="min-height: 64px; border: none; border-bottom: 1px solid #E3E6EB; background: none; padding: 10px 14px; display: flex; align-items: center; gap: 10px; text-align: left; cursor: pointer; color: #111827">
+        <span style="flex-grow: 1; display: flex; flex-direction: column; gap: 2px"><span style="font-size: 16px; font-weight: 700">IP 接続</span><span style="font-size: 13px; color: #5B6472">8 問 ・ 復習 0 問</span></span>
+        <span style="font-family: 'IBM Plex Mono', monospace; font-size: 16px; font-weight: 600; color: #5B6472">―</span>
+        <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8A93A0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"></path></svg>
+      </button>
+      <button type="button" disabled style="min-height: 52px; border: none; border-bottom: 1px solid #E3E6EB; background: none; padding: 10px 14px; display: flex; align-items: center; text-align: left; color: #6B7280">
+        <span style="flex-grow: 1; font-size: 16px">IP サービス</span><span style="font-size: 13px">準備中</span>
+      </button>
+      <button type="button" disabled style="min-height: 52px; border: none; border-bottom: 1px solid #E3E6EB; background: none; padding: 10px 14px; display: flex; align-items: center; text-align: left; color: #6B7280">
+        <span style="flex-grow: 1; font-size: 16px">セキュリティの基礎</span><span style="font-size: 13px">準備中</span>
+      </button>
+      <button type="button" disabled style="min-height: 52px; border: none; background: none; padding: 10px 14px; display: flex; align-items: center; text-align: left; color: #6B7280">
+        <span style="flex-grow: 1; font-size: 16px">自動化とプログラマビリティ</span><span style="font-size: 13px">準備中</span>
+      </button>
+    </section>
+  </div>
+  <nav aria-label="タブ" style="background: #FFFFFF; border-top: 1px solid #E3E6EB; display: flex; padding: 6px 8px 30px">
+    <button type="button" aria-current="page" style="flex: 1; min-height: 50px; border: none; background: none; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; color: #2742A8; font-size: 11px; font-weight: 700; cursor: pointer">
+      <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
+      <span>学習</span>
+    </button>
+    <button type="button" style="flex: 1; min-height: 50px; border: none; background: none; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; color: #5B6472; font-size: 11px; font-weight: 500; cursor: pointer">
+      <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="16" height="20" x="4" y="2" rx="2"></rect><path d="M8 6h8"></path><path d="M16 14v4"></path><path d="M16 10h.01"></path><path d="M12 10h.01"></path><path d="M8 10h.01"></path><path d="M12 14h.01"></path><path d="M8 14h.01"></path><path d="M12 18h.01"></path><path d="M8 18h.01"></path></svg>
+      <span>計算</span>
+    </button>
+    <button type="button" style="flex: 1; min-height: 50px; border: none; background: none; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; color: #5B6472; font-size: 11px; font-weight: 500; cursor: pointer">
+      <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"></path><path d="M18 17V9"></path><path d="M13 17V5"></path><path d="M8 17v-3"></path></svg>
+      <span>成績</span>
+    </button>
+    <button type="button" style="flex: 1; min-height: 50px; border: none; background: none; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; color: #5B6472; font-size: 11px; font-weight: 500; cursor: pointer">
+      <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21v-7"></path><path d="M4 10V3"></path><path d="M12 21v-9"></path><path d="M12 8V3"></path><path d="M20 21v-5"></path><path d="M20 12V3"></path><path d="M1 14h6"></path><path d="M9 8h6"></path><path d="M17 16h6"></path></svg>
+      <span>設定</span>
+    </button>
+  </nav>
+</div>
+</div></figure><figure><figcaption>S-03 出題（回答前・IP アドレス）</figcaption><div class="ph">
+
+<div style="width: 390px; height: 844px; box-sizing: border-box; background: #F4F5F7; color: #111827; font-family: 'IBM Plex Sans JP', 'Hiragino Sans', sans-serif; display: flex; flex-direction: column; padding-top: 54px">
+  <header style="padding: 0 12px; display: flex; flex-direction: column; gap: 8px">
+    <div style="height: 44px; display: flex; align-items: center; position: relative">
+      <button type="button" aria-label="学習を中断する" style="width: 44px; height: 44px; border: none; background: none; color: #5B6472; display: flex; align-items: center; justify-content: center; cursor: pointer">
+        <svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg>
+      </button>
+      <span style="position: absolute; left: 0; right: 0; text-align: center; font-family: 'IBM Plex Mono', monospace; font-size: 15px; font-weight: 600; pointer-events: none">3 / 10</span>
+    </div>
+    <div role="progressbar" aria-label="進み具合" aria-valuemin="0" aria-valuemax="10" aria-valuenow="3" style="margin: 0 8px; height: 6px; background: #E3E6EB; border-radius: 3px; overflow: hidden">
+      <div style="width: 30%; height: 6px; background: #2742A8; border-radius: 3px"></div>
+    </div>
+  </header>
+  <main style="flex-grow: 1; padding: 22px 20px 0; display: flex; flex-direction: column; gap: 14px">
+    <div style="display: flex; gap: 8px; align-items: center; font-size: 13px">
+      <span style="color: #5B6472">ネットワークの基礎 ・ 標準</span>
+      <span style="background: #E9EEFB; color: #1C3285; font-weight: 700; padding: 2px 8px; border-radius: 6px">復習</span>
+    </div>
+    <p style="margin: 0; font-size: 20px; font-weight: 500; line-height: 1.65"><span style="font-family: 'IBM Plex Mono', monospace; font-weight: 600">192.168.10.77/26</span> が所属するネットワークアドレスを答えよ。</p>
+    <div style="flex-grow: 1"></div>
+    <div style="display: flex; flex-direction: column; gap: 6px">
+      <label for="answer" style="font-size: 13px; font-weight: 500; color: #5B6472">回答</label>
+      <input id="answer" type="text" inputmode="decimal" value="192.168.10.64" style="height: 56px; box-sizing: border-box; border-radius: 14px; border: 2px solid #2742A8; background: #FFFFFF; padding: 0 16px; font-family: 'IBM Plex Mono', monospace; font-size: 22px; font-weight: 600; color: #111827">
+    </div>
+    <button type="button" style="height: 56px; border-radius: 14px; border: none; background: #2742A8; color: #FFFFFF; font-size: 17px; font-weight: 700; cursor: pointer; margin-bottom: 12px">回答する</button>
+  </main>
+  <div aria-hidden="true" style="height: 291px; background: #D9DCE1; display: flex; align-items: center; justify-content: center; color: #4B5563; font-size: 13px">「.」付きの数字キーボード（OS が表示）</div>
+</div>
+</div></figure><figure><figcaption>S-03 出題（回答前・数字）</figcaption><div class="ph">
+
+<div style="width: 390px; height: 844px; box-sizing: border-box; background: #F4F5F7; color: #111827; font-family: 'IBM Plex Sans JP', 'Hiragino Sans', sans-serif; display: flex; flex-direction: column; padding-top: 54px">
+  <header style="padding: 0 12px; display: flex; flex-direction: column; gap: 8px">
+    <div style="height: 44px; display: flex; align-items: center; position: relative">
+      <button type="button" aria-label="学習を中断する" style="width: 44px; height: 44px; border: none; background: none; color: #5B6472; display: flex; align-items: center; justify-content: center; cursor: pointer">
+        <svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg>
+      </button>
+      <span style="position: absolute; left: 0; right: 0; text-align: center; font-family: 'IBM Plex Mono', monospace; font-size: 15px; font-weight: 600; pointer-events: none">6 / 10</span>
+    </div>
+    <div role="progressbar" aria-label="進み具合" aria-valuemin="0" aria-valuemax="10" aria-valuenow="6" style="margin: 0 8px; height: 6px; background: #E3E6EB; border-radius: 3px; overflow: hidden">
+      <div style="width: 60%; height: 6px; background: #2742A8; border-radius: 3px"></div>
+    </div>
+  </header>
+  <main style="flex-grow: 1; padding: 22px 20px 0; display: flex; flex-direction: column; gap: 14px">
+    <span style="font-size: 13px; color: #5B6472">IP 接続 ・ 標準</span>
+    <p style="margin: 0; font-size: 18px; font-weight: 500; line-height: 1.65">Cisco IOS における OSPF のデフォルトのアドミニストレーティブディスタンス（AD）の値を数字で答えよ。</p>
+    <div style="flex-grow: 1"></div>
+    <div style="display: flex; flex-direction: column; gap: 6px">
+      <label for="answer" style="font-size: 13px; font-weight: 500; color: #5B6472">回答</label>
+      <input id="answer" type="text" inputmode="numeric" value="110" style="height: 56px; box-sizing: border-box; border-radius: 14px; border: 2px solid #2742A8; background: #FFFFFF; padding: 0 16px; font-family: 'IBM Plex Mono', monospace; font-size: 22px; font-weight: 600; color: #111827">
+    </div>
+    <button type="button" style="height: 56px; border-radius: 14px; border: none; background: #2742A8; color: #FFFFFF; font-size: 17px; font-weight: 700; cursor: pointer; margin-bottom: 12px">回答する</button>
+  </main>
+  <div aria-hidden="true" style="height: 291px; background: #D9DCE1; display: flex; align-items: center; justify-content: center; color: #4B5563; font-size: 13px">数字キーボード（OS が表示）</div>
+</div>
+</div></figure><figure><figcaption>S-03 出題（回答後）</figcaption><div class="ph">
+
+<div style="width: 390px; height: 844px; box-sizing: border-box; background: #F4F5F7; color: #111827; font-family: 'IBM Plex Sans JP', 'Hiragino Sans', sans-serif; display: flex; flex-direction: column; padding-top: 54px">
+  <header style="padding: 0 12px; display: flex; flex-direction: column; gap: 8px">
+    <div style="height: 44px; display: flex; align-items: center; position: relative">
+      <button type="button" aria-label="学習を中断する" style="width: 44px; height: 44px; border: none; background: none; color: #5B6472; display: flex; align-items: center; justify-content: center; cursor: pointer">
+        <svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg>
+      </button>
+      <span style="position: absolute; left: 0; right: 0; text-align: center; font-family: 'IBM Plex Mono', monospace; font-size: 15px; font-weight: 600; pointer-events: none">3 / 10</span>
+    </div>
+    <div role="progressbar" aria-label="進み具合" aria-valuemin="0" aria-valuemax="10" aria-valuenow="3" style="margin: 0 8px; height: 6px; background: #E3E6EB; border-radius: 3px; overflow: hidden">
+      <div style="width: 30%; height: 6px; background: #2742A8; border-radius: 3px"></div>
+    </div>
+  </header>
+  <main style="flex-grow: 1; padding: 18px 20px 0; display: flex; flex-direction: column; gap: 12px; overflow: hidden">
+    <p style="margin: 0; font-size: 15px; line-height: 1.6; color: #374151"><span style="font-family: 'IBM Plex Mono', monospace; font-weight: 600">192.168.10.77/26</span> が所属するネットワークアドレスを答えよ。</p>
+    <div role="status" style="background: #FDEEE3; color: #9A3D07; border-radius: 14px; padding: 12px 16px; display: flex; align-items: center; gap: 10px">
+      <span aria-hidden="true" style="font-size: 20px; font-weight: 700; line-height: 1">✗</span>
+      <span style="font-size: 20px; font-weight: 700">不正解</span>
+    </div>
+    <dl aria-label="回答と正解" style="margin: 0; background: #FFFFFF; border: 1px solid #E3E6EB; border-radius: 14px; padding: 4px 16px">
+      <div style="display: flex; align-items: center; gap: 10px; padding: 10px 0; border-bottom: 1px solid #E3E6EB">
+        <dt style="width: 96px; font-size: 13px; color: #5B6472">あなたの回答</dt>
+        <dd style="margin: 0; flex-grow: 1; font-family: 'IBM Plex Mono', monospace; font-size: 18px; color: #9A3D07; text-decoration: line-through">192.168.10.0</dd>
+        <span aria-label="不正解" style="font-size: 16px; font-weight: 700; color: #9A3D07">✗</span>
+      </div>
+      <div style="display: flex; align-items: center; gap: 10px; padding: 10px 0">
+        <dt style="width: 96px; font-size: 13px; color: #5B6472">正解</dt>
+        <dd style="margin: 0; flex-grow: 1; font-family: 'IBM Plex Mono', monospace; font-size: 18px; font-weight: 600; color: #0B5A53">192.168.10.64</dd>
+        <span aria-label="正解" style="font-size: 16px; font-weight: 700; color: #0B5A53">✓</span>
+      </div>
+    </dl>
+    <section aria-label="解説" style="background: #FFFFFF; border: 1px solid #E3E6EB; border-radius: 14px; padding: 14px 16px; display: flex; flex-direction: column; gap: 8px">
+      <h2 style="margin: 0; font-size: 15px; font-weight: 700">解説</h2>
+      <p style="margin: 0; font-size: 15px; line-height: 1.75">/26 のサブネットマスクは <span style="font-family: 'IBM Plex Mono', monospace">255.255.255.192</span>。ホストアドレスとマスクの論理積（AND）を取ると <span style="font-family: 'IBM Plex Mono', monospace">192.168.10.64</span> になる。</p>
+      <p style="margin: 0; font-size: 14px; line-height: 1.7; color: #374151; background: #F4F5F7; border-radius: 10px; padding: 8px 12px">暗算のコツ：第4オクテットのブロックサイズは 64。その倍数で区切ると早い。</p>
+    </section>
+    <a href="#" style="min-height: 48px; border-radius: 14px; border: 1px solid #D5DAE1; background: #FFFFFF; color: #2742A8; font-size: 15px; font-weight: 700; display: flex; align-items: center; justify-content: center; gap: 8px; text-decoration: none">
+      <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="16" height="20" x="4" y="2" rx="2"></rect><path d="M8 6h8"></path><path d="M16 14v4"></path><path d="M16 10h.01"></path><path d="M12 10h.01"></path><path d="M8 10h.01"></path><path d="M12 14h.01"></path><path d="M8 14h.01"></path><path d="M12 18h.01"></path><path d="M8 18h.01"></path></svg>
+      計算機で確かめる
+    </a>
+  </main>
+  <div style="padding: 12px 20px 34px">
+    <button type="button" style="width: 100%; height: 60px; border-radius: 14px; border: none; background: #2742A8; color: #FFFFFF; font-size: 18px; font-weight: 700; cursor: pointer">次へ</button>
+  </div>
+</div>
+</div></figure><figure><figcaption>S-04 学習の結果</figcaption><div class="ph">
+
+<div style="width: 390px; height: 844px; box-sizing: border-box; background: #F4F5F7; color: #111827; font-family: 'IBM Plex Sans JP', 'Hiragino Sans', sans-serif; display: flex; flex-direction: column; padding-top: 70px">
+  <section aria-label="今回の成果" style="padding: 0 20px; display: flex; flex-direction: column; align-items: center; gap: 6px">
+    <h1 style="margin: 0; font-size: 17px; font-weight: 700; color: #5B6472">おつかれさまでした</h1>
+    <div style="display: flex; align-items: baseline; gap: 6px; margin-top: 6px">
+      <span style="font-family: 'IBM Plex Mono', monospace; font-size: 64px; font-weight: 600; line-height: 1; color: #2742A8">7</span>
+      <span style="font-family: 'IBM Plex Mono', monospace; font-size: 26px; font-weight: 600; color: #5B6472">/ 10</span>
+    </div>
+    <span style="font-size: 16px; font-weight: 700">問 正解</span>
+  </section>
+  <section aria-label="間違えた問題" style="margin: 28px 20px 0; display: flex; flex-direction: column; gap: 8px">
+    <h2 style="margin: 0; font-size: 13px; font-weight: 500; color: #5B6472">間違えた問題</h2>
+    <div style="background: #FFFFFF; border: 1px solid #E3E6EB; border-radius: 16px; display: flex; flex-direction: column">
+      <button type="button" style="min-height: 52px; border: none; border-bottom: 1px solid #E3E6EB; background: none; padding: 0 14px; display: flex; align-items: center; gap: 10px; text-align: left; color: #111827; cursor: pointer">
+        <span aria-label="不正解" style="width: 24px; height: 24px; border-radius: 6px; background: #FDEEE3; color: #9A3D07; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 700">✗</span>
+        <span style="flex-grow: 1; font-size: 15px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">/27 のサブネットで割り当て可能なホスト数は…</span>
+        <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8A93A0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"></path></svg>
+      </button>
+      <button type="button" style="min-height: 52px; border: none; border-bottom: 1px solid #E3E6EB; background: none; padding: 0 14px; display: flex; align-items: center; gap: 10px; text-align: left; color: #111827; cursor: pointer">
+        <span aria-label="不正解" style="width: 24px; height: 24px; border-radius: 6px; background: #FDEEE3; color: #9A3D07; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 700">✗</span>
+        <span style="flex-grow: 1; font-size: 15px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">IEEE 802.1Q のタグは何バイトか…</span>
+        <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8A93A0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"></path></svg>
+      </button>
+      <button type="button" style="min-height: 52px; border: none; background: none; padding: 0 14px; display: flex; align-items: center; gap: 10px; text-align: left; color: #111827; cursor: pointer">
+        <span aria-label="不正解" style="width: 24px; height: 24px; border-radius: 6px; background: #FDEEE3; color: #9A3D07; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 700">✗</span>
+        <span style="flex-grow: 1; font-size: 15px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">192.168.3.200/28 のブロードキャストアドレスは…</span>
+        <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8A93A0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"></path></svg>
+      </button>
+    </div>
+    <p style="margin: 4px 0 0; font-size: 13px; color: #5B6472; text-align: center">間違えた問題は明日また出ます</p>
+  </section>
+  <div style="flex-grow: 1"></div>
+  <div style="padding: 0 20px 20px; display: flex; flex-direction: column; gap: 12px">
+    <button type="button" style="height: 56px; border-radius: 14px; border: 1px solid #E3E6EB; background: #FFFFFF; color: #111827; font-size: 17px; font-weight: 500; cursor: pointer">ホームに戻る</button>
+    <button type="button" style="height: 60px; border-radius: 14px; border: none; background: #2742A8; color: #FFFFFF; font-size: 18px; font-weight: 700; cursor: pointer">もう1回学習する</button>
+  </div>
+  <nav aria-label="タブ" style="background: #FFFFFF; border-top: 1px solid #E3E6EB; display: flex; padding: 6px 8px 30px">
+    <button type="button" aria-current="page" style="flex: 1; min-height: 50px; border: none; background: none; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; color: #2742A8; font-size: 11px; font-weight: 700; cursor: pointer">
+      <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
+      <span>学習</span>
+    </button>
+    <button type="button" style="flex: 1; min-height: 50px; border: none; background: none; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; color: #5B6472; font-size: 11px; font-weight: 500; cursor: pointer">
+      <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="16" height="20" x="4" y="2" rx="2"></rect><path d="M8 6h8"></path><path d="M16 14v4"></path><path d="M16 10h.01"></path><path d="M12 10h.01"></path><path d="M8 10h.01"></path><path d="M12 14h.01"></path><path d="M8 14h.01"></path><path d="M12 18h.01"></path><path d="M8 18h.01"></path></svg>
+      <span>計算</span>
+    </button>
+    <button type="button" style="flex: 1; min-height: 50px; border: none; background: none; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; color: #5B6472; font-size: 11px; font-weight: 500; cursor: pointer">
+      <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"></path><path d="M18 17V9"></path><path d="M13 17V5"></path><path d="M8 17v-3"></path></svg>
+      <span>成績</span>
+    </button>
+    <button type="button" style="flex: 1; min-height: 50px; border: none; background: none; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; color: #5B6472; font-size: 11px; font-weight: 500; cursor: pointer">
+      <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21v-7"></path><path d="M4 10V3"></path><path d="M12 21v-9"></path><path d="M12 8V3"></path><path d="M20 21v-5"></path><path d="M20 12V3"></path><path d="M1 14h6"></path><path d="M9 8h6"></path><path d="M17 16h6"></path></svg>
+      <span>設定</span>
+    </button>
+  </nav>
+</div>
+</div></figure></div><h2>成績と設定</h2><div class="row"><figure><figcaption>S-05 成績</figcaption><div class="ph">
+
+<div style="width: 390px; height: 844px; box-sizing: border-box; background: #F4F5F7; color: #111827; font-family: 'IBM Plex Sans JP', 'Hiragino Sans', sans-serif; display: flex; flex-direction: column; padding-top: 62px">
+  <h1 style="margin: 0; padding: 0 20px; font-size: 32px; font-weight: 700">成績</h1>
+  <section aria-label="全体" style="margin: 18px 20px 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px">
+    <div style="background: #FFFFFF; border: 1px solid #E3E6EB; border-radius: 14px; padding: 12px 14px; display: flex; flex-direction: column; gap: 2px"><span style="font-size: 13px; color: #5B6472">回答数</span><span style="font-size: 24px; font-weight: 700"><span style="font-family: 'IBM Plex Mono', monospace">248</span> <span style="font-size: 14px">問</span></span></div>
+    <div style="background: #FFFFFF; border: 1px solid #E3E6EB; border-radius: 14px; padding: 12px 14px; display: flex; flex-direction: column; gap: 2px"><span style="font-size: 13px; color: #5B6472">正答率</span><span style="font-size: 24px; font-weight: 700; font-family: 'IBM Plex Mono', monospace; color: #2742A8">74%</span></div>
+    <div style="background: #FFFFFF; border: 1px solid #E3E6EB; border-radius: 14px; padding: 12px 14px; display: flex; flex-direction: column; gap: 2px"><span style="font-size: 13px; color: #5B6472">今日の復習</span><span style="font-size: 24px; font-weight: 700"><span style="font-family: 'IBM Plex Mono', monospace">12</span> <span style="font-size: 14px">問</span></span></div>
+    <div style="background: #FFFFFF; border: 1px solid #E3E6EB; border-radius: 14px; padding: 12px 14px; display: flex; flex-direction: column; gap: 2px"><span style="font-size: 13px; color: #5B6472">今日解いた問題</span><span style="font-size: 24px; font-weight: 700"><span style="font-family: 'IBM Plex Mono', monospace">8</span> <span style="font-size: 14px">問</span></span></div>
+  </section>
+  <section aria-label="分野別" style="margin: 22px 20px 0; display: flex; flex-direction: column; gap: 8px">
+    <h2 style="margin: 0; font-size: 13px; font-weight: 500; color: #5B6472">分野別</h2>
+    <div style="background: #FFFFFF; border: 1px solid #E3E6EB; border-radius: 16px; padding: 4px 16px">
+      <div style="padding: 12px 0; border-bottom: 1px solid #E3E6EB; display: flex; flex-direction: column; gap: 6px">
+        <div style="display: flex; align-items: baseline"><span style="flex-grow: 1; font-size: 15px; font-weight: 700">サブネット計算</span><span style="font-size: 12.5px; color: #5B6472; margin-right: 10px">120 問</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 15px; font-weight: 600">81%</span></div>
+        <div role="img" aria-label="正答率 81%" style="height: 8px; background: #E3E6EB; border-radius: 4px; overflow: hidden"><div style="width: 81%; height: 8px; background: #2742A8; border-radius: 4px"></div></div>
+      </div>
+      <div style="padding: 12px 0; border-bottom: 1px solid #E3E6EB; display: flex; flex-direction: column; gap: 6px">
+        <div style="display: flex; align-items: baseline"><span style="flex-grow: 1; font-size: 15px; font-weight: 700">ネットワークの基礎</span><span style="font-size: 12.5px; color: #5B6472; margin-right: 10px">60 問</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 15px; font-weight: 600">62%</span></div>
+        <div role="img" aria-label="正答率 62%" style="height: 8px; background: #E3E6EB; border-radius: 4px; overflow: hidden"><div style="width: 62%; height: 8px; background: #2742A8; border-radius: 4px"></div></div>
+      </div>
+      <div style="padding: 12px 0; border-bottom: 1px solid #E3E6EB; display: flex; flex-direction: column; gap: 6px">
+        <div style="display: flex; align-items: baseline"><span style="flex-grow: 1; font-size: 15px; font-weight: 700">ネットワークアクセス</span><span style="font-size: 12.5px; color: #5B6472; margin-right: 10px">48 問</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 15px; font-weight: 600">60%</span></div>
+        <div role="img" aria-label="正答率 60%" style="height: 8px; background: #E3E6EB; border-radius: 4px; overflow: hidden"><div style="width: 60%; height: 8px; background: #2742A8; border-radius: 4px"></div></div>
+      </div>
+      <div style="padding: 12px 0; border-bottom: 1px solid #E3E6EB; display: flex; align-items: baseline"><span style="flex-grow: 1; font-size: 15px; font-weight: 700">IP 接続</span><span style="font-size: 13px; color: #5B6472">まだ回答していません</span></div>
+      <div style="padding: 12px 0; display: flex; align-items: baseline; color: #6B7280"><span style="flex-grow: 1; font-size: 15px">ほか 3 分野</span><span style="font-size: 13px">準備中</span></div>
+    </div>
+  </section>
+  <div style="flex-grow: 1"></div>
+  <nav aria-label="タブ" style="background: #FFFFFF; border-top: 1px solid #E3E6EB; display: flex; padding: 6px 8px 30px">
+    <button type="button" style="flex: 1; min-height: 50px; border: none; background: none; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; color: #5B6472; font-size: 11px; font-weight: 500; cursor: pointer">
+      <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
+      <span>学習</span>
+    </button>
+    <button type="button" style="flex: 1; min-height: 50px; border: none; background: none; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; color: #5B6472; font-size: 11px; font-weight: 500; cursor: pointer">
+      <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="16" height="20" x="4" y="2" rx="2"></rect><path d="M8 6h8"></path><path d="M16 14v4"></path><path d="M16 10h.01"></path><path d="M12 10h.01"></path><path d="M8 10h.01"></path><path d="M12 14h.01"></path><path d="M8 14h.01"></path><path d="M12 18h.01"></path><path d="M8 18h.01"></path></svg>
+      <span>計算</span>
+    </button>
+    <button type="button" aria-current="page" style="flex: 1; min-height: 50px; border: none; background: none; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; color: #2742A8; font-size: 11px; font-weight: 700; cursor: pointer">
+      <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"></path><path d="M18 17V9"></path><path d="M13 17V5"></path><path d="M8 17v-3"></path></svg>
+      <span>成績</span>
+    </button>
+    <button type="button" style="flex: 1; min-height: 50px; border: none; background: none; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; color: #5B6472; font-size: 11px; font-weight: 500; cursor: pointer">
+      <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21v-7"></path><path d="M4 10V3"></path><path d="M12 21v-9"></path><path d="M12 8V3"></path><path d="M20 21v-5"></path><path d="M20 12V3"></path><path d="M1 14h6"></path><path d="M9 8h6"></path><path d="M17 16h6"></path></svg>
+      <span>設定</span>
+    </button>
+  </nav>
+</div>
+</div></figure><figure><figcaption>S-06 設定</figcaption><div class="ph">
+
+<div style="width: 390px; height: 844px; box-sizing: border-box; background: #F4F5F7; color: #111827; font-family: 'IBM Plex Sans JP', 'Hiragino Sans', sans-serif; display: flex; flex-direction: column; padding-top: 62px">
+  <h1 style="margin: 0; padding: 0 20px; font-size: 32px; font-weight: 700">設定</h1>
+  <section aria-label="データ" style="margin: 22px 20px 0; display: flex; flex-direction: column; gap: 8px">
+    <h2 style="margin: 0; font-size: 13px; font-weight: 500; color: #5B6472">データ</h2>
+    <div style="background: #FFFFFF; border: 1px solid #E3E6EB; border-radius: 16px">
+      <button type="button" style="width: 100%; min-height: 52px; border: none; background: none; padding: 0 16px; text-align: left; font-size: 16px; font-weight: 500; color: #B42318; cursor: pointer">学習履歴を削除する</button>
+    </div>
+    <p style="margin: 0; padding: 0 4px; font-size: 12.5px; line-height: 1.6; color: #5B6472">回答の記録と復習の予定をすべて削除します。削除の前に確認します。</p>
+  </section>
+  <section aria-label="このアプリについて" style="margin: 22px 20px 0; display: flex; flex-direction: column; gap: 8px">
+    <h2 style="margin: 0; font-size: 13px; font-weight: 500; color: #5B6472">このアプリについて</h2>
+    <div style="background: #FFFFFF; border: 1px solid #E3E6EB; border-radius: 16px; display: flex; flex-direction: column">
+      <a href="https://example.com/privacy" style="min-height: 52px; border-bottom: 1px solid #E3E6EB; padding: 0 16px; display: flex; align-items: center; text-decoration: none; color: #111827; font-size: 16px">
+        <span style="flex-grow: 1">プライバシーポリシー</span>
+        <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8A93A0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6"></path><path d="M10 14 21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg>
+      </a>
+      <a href="mailto:support@example.com" style="min-height: 52px; border-bottom: 1px solid #E3E6EB; padding: 0 16px; display: flex; align-items: center; text-decoration: none; color: #111827; font-size: 16px">
+        <span style="flex-grow: 1">お問い合わせ</span>
+        <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8A93A0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6"></path><path d="M10 14 21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg>
+      </a>
+      <div style="min-height: 52px; padding: 0 16px; display: flex; align-items: center; font-size: 16px">
+        <span style="flex-grow: 1">バージョン</span>
+        <span style="font-family: 'IBM Plex Mono', monospace; font-size: 15px; color: #5B6472">1.0 (1)</span>
+      </div>
+    </div>
+  </section>
+  <div style="flex-grow: 1"></div>
+  <nav aria-label="タブ" style="background: #FFFFFF; border-top: 1px solid #E3E6EB; display: flex; padding: 6px 8px 30px">
+    <button type="button" style="flex: 1; min-height: 50px; border: none; background: none; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; color: #5B6472; font-size: 11px; font-weight: 500; cursor: pointer">
+      <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
+      <span>学習</span>
+    </button>
+    <button type="button" style="flex: 1; min-height: 50px; border: none; background: none; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; color: #5B6472; font-size: 11px; font-weight: 500; cursor: pointer">
+      <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="16" height="20" x="4" y="2" rx="2"></rect><path d="M8 6h8"></path><path d="M16 14v4"></path><path d="M16 10h.01"></path><path d="M12 10h.01"></path><path d="M8 10h.01"></path><path d="M12 14h.01"></path><path d="M8 14h.01"></path><path d="M12 18h.01"></path><path d="M8 18h.01"></path></svg>
+      <span>計算</span>
+    </button>
+    <button type="button" style="flex: 1; min-height: 50px; border: none; background: none; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; color: #5B6472; font-size: 11px; font-weight: 500; cursor: pointer">
+      <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"></path><path d="M18 17V9"></path><path d="M13 17V5"></path><path d="M8 17v-3"></path></svg>
+      <span>成績</span>
+    </button>
+    <button type="button" aria-current="page" style="flex: 1; min-height: 50px; border: none; background: none; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; color: #2742A8; font-size: 11px; font-weight: 700; cursor: pointer">
+      <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21v-7"></path><path d="M4 10V3"></path><path d="M12 21v-9"></path><path d="M12 8V3"></path><path d="M20 21v-5"></path><path d="M20 12V3"></path><path d="M1 14h6"></path><path d="M9 8h6"></path><path d="M17 16h6"></path></svg>
+      <span>設定</span>
+    </button>
+  </nav>
+</div>
+</div></figure></div><h2>計算機</h2><div class="row"><figure><figcaption>S-07 計算機メニュー</figcaption><div class="ph">
+
+<div style="width: 390px; height: 844px; box-sizing: border-box; background: #F4F5F7; color: #111827; font-family: 'IBM Plex Sans JP', 'Hiragino Sans', sans-serif; display: flex; flex-direction: column; padding-top: 62px">
+  <h1 style="margin: 0; padding: 0 20px; font-size: 32px; font-weight: 700">計算</h1>
+  <p style="margin: 6px 20px 0; font-size: 14px; color: #5B6472">IPv4 のネットワーク設計と検算に</p>
+  <nav aria-label="計算機" style="margin: 20px 20px 0; background: #FFFFFF; border: 1px solid #E3E6EB; border-radius: 16px; display: flex; flex-direction: column">
+    <a href="#" style="min-height: 68px; border-bottom: 1px solid #E3E6EB; padding: 0 16px; display: flex; align-items: center; gap: 14px; text-decoration: none; color: #111827">
+      <span style="width: 40px; height: 40px; border-radius: 10px; background: #E9EEFB; color: #2742A8; display: flex; align-items: center; justify-content: center; font-family: 'IBM Plex Mono', monospace; font-size: 13px; font-weight: 600">/26</span>
+      <span style="flex-grow: 1; display: flex; flex-direction: column; gap: 2px"><span style="font-size: 16px; font-weight: 700">CIDR 計算</span><span style="font-size: 13px; color: #5B6472">ネットワーク・範囲・ホスト数</span></span>
+      <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8A93A0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"></path></svg>
+    </a>
+    <a href="#" style="min-height: 68px; border-bottom: 1px solid #E3E6EB; padding: 0 16px; display: flex; align-items: center; gap: 14px; text-decoration: none; color: #111827">
+      <span style="width: 40px; height: 40px; border-radius: 10px; background: #E9EEFB; color: #2742A8; display: flex; align-items: center; justify-content: center; font-family: 'IBM Plex Mono', monospace; font-size: 13px; font-weight: 600">÷4</span>
+      <span style="flex-grow: 1; display: flex; flex-direction: column; gap: 2px"><span style="font-size: 16px; font-weight: 700">サブネット分割</span><span style="font-size: 13px; color: #5B6472">分割数・ホスト数で等分</span></span>
+      <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8A93A0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"></path></svg>
+    </a>
+    <a href="#" style="min-height: 68px; border-bottom: 1px solid #E3E6EB; padding: 0 16px; display: flex; align-items: center; gap: 14px; text-decoration: none; color: #111827">
+      <span style="width: 40px; height: 40px; border-radius: 10px; background: #E9EEFB; color: #2742A8; display: flex; align-items: center; justify-content: center; font-family: 'IBM Plex Mono', monospace; font-size: 11px; font-weight: 600">VLSM</span>
+      <span style="flex-grow: 1; display: flex; flex-direction: column; gap: 2px"><span style="font-size: 16px; font-weight: 700">VLSM 設計</span><span style="font-size: 13px; color: #5B6472">用途ごとに無駄なく割り当て</span></span>
+      <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8A93A0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"></path></svg>
+    </a>
+    <a href="#" style="min-height: 68px; border-bottom: 1px solid #E3E6EB; padding: 0 16px; display: flex; align-items: center; gap: 14px; text-decoration: none; color: #111827">
+      <span style="width: 40px; height: 40px; border-radius: 10px; background: #E9EEFB; color: #2742A8; display: flex; align-items: center; justify-content: center; font-family: 'IBM Plex Mono', monospace; font-size: 13px; font-weight: 600">/22</span>
+      <span style="flex-grow: 1; display: flex; flex-direction: column; gap: 2px"><span style="font-size: 16px; font-weight: 700">経路集約</span><span style="font-size: 13px; color: #5B6472">複数のネットワークをまとめる</span></span>
+      <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8A93A0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"></path></svg>
+    </a>
+    <a href="#" style="min-height: 68px; padding: 0 16px; display: flex; align-items: center; gap: 14px; text-decoration: none; color: #111827">
+      <span style="width: 40px; height: 40px; border-radius: 10px; background: #E9EEFB; color: #2742A8; display: flex; align-items: center; justify-content: center; font-family: 'IBM Plex Mono', monospace; font-size: 13px; font-weight: 600">0x</span>
+      <span style="flex-grow: 1; display: flex; flex-direction: column; gap: 2px"><span style="font-size: 16px; font-weight: 700">進数変換</span><span style="font-size: 13px; color: #5B6472">10 進・2 進・16 進</span></span>
+      <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8A93A0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"></path></svg>
+    </a>
+  </nav>
+  <div style="flex-grow: 1"></div>
+  <nav aria-label="タブ" style="background: #FFFFFF; border-top: 1px solid #E3E6EB; display: flex; padding: 6px 8px 30px">
+    <button type="button" style="flex: 1; min-height: 50px; border: none; background: none; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; color: #5B6472; font-size: 11px; font-weight: 500; cursor: pointer">
+      <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
+      <span>学習</span>
+    </button>
+    <button type="button" aria-current="page" style="flex: 1; min-height: 50px; border: none; background: none; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; color: #2742A8; font-size: 11px; font-weight: 700; cursor: pointer">
+      <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="16" height="20" x="4" y="2" rx="2"></rect><path d="M8 6h8"></path><path d="M16 14v4"></path><path d="M16 10h.01"></path><path d="M12 10h.01"></path><path d="M8 10h.01"></path><path d="M12 14h.01"></path><path d="M8 14h.01"></path><path d="M12 18h.01"></path><path d="M8 18h.01"></path></svg>
+      <span>計算</span>
+    </button>
+    <button type="button" style="flex: 1; min-height: 50px; border: none; background: none; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; color: #5B6472; font-size: 11px; font-weight: 500; cursor: pointer">
+      <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"></path><path d="M18 17V9"></path><path d="M13 17V5"></path><path d="M8 17v-3"></path></svg>
+      <span>成績</span>
+    </button>
+    <button type="button" style="flex: 1; min-height: 50px; border: none; background: none; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; color: #5B6472; font-size: 11px; font-weight: 500; cursor: pointer">
+      <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21v-7"></path><path d="M4 10V3"></path><path d="M12 21v-9"></path><path d="M12 8V3"></path><path d="M20 21v-5"></path><path d="M20 12V3"></path><path d="M1 14h6"></path><path d="M9 8h6"></path><path d="M17 16h6"></path></svg>
+      <span>設定</span>
+    </button>
+  </nav>
+</div>
+</div></figure><figure><figcaption>S-08 CIDR 計算</figcaption><div class="ph">
+
+<div style="width: 390px; height: 844px; box-sizing: border-box; background: #F4F5F7; color: #111827; font-family: 'IBM Plex Sans JP', 'Hiragino Sans', sans-serif; display: flex; flex-direction: column; padding-top: 54px">
+  <header style="height: 48px; padding: 0 8px; display: flex; align-items: center; position: relative">
+    <a href="#" style="min-width: 44px; height: 44px; color: #2742A8; display: flex; align-items: center; gap: 2px; font-size: 17px; text-decoration: none">
+      <svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"></path></svg>
+      <span>計算</span>
+    </a>
+    <h1 style="position: absolute; left: 0; right: 0; text-align: center; margin: 0; font-size: 17px; font-weight: 700; pointer-events: none">CIDR 計算</h1>
+  </header>
+  <main style="flex-grow: 1; padding: 8px 20px 0; display: flex; flex-direction: column; gap: 12px">
+    <div style="display: flex; gap: 10px; align-items: flex-end">
+      <div style="flex-grow: 1; display: flex; flex-direction: column; gap: 4px">
+        <label for="ip" style="font-size: 12.5px; color: #5B6472">IP アドレス</label>
+        <input id="ip" type="text" inputmode="decimal" value="192.168.10.77" style="height: 50px; box-sizing: border-box; width: 100%; border-radius: 12px; border: 2px solid #2742A8; background: #FFFFFF; padding: 0 12px; font-family: 'IBM Plex Mono', monospace; font-size: 18px; font-weight: 600; color: #111827">
+      </div>
+      <span style="font-family: 'IBM Plex Mono', monospace; font-size: 22px; color: #5B6472; padding-bottom: 10px">/</span>
+      <div style="width: 86px; display: flex; flex-direction: column; gap: 4px">
+        <label for="pfx" style="font-size: 12.5px; color: #5B6472">長さ・マスク</label>
+        <input id="pfx" type="text" inputmode="decimal" value="26" style="height: 50px; box-sizing: border-box; width: 100%; border-radius: 12px; border: 1px solid #D5DAE1; background: #FFFFFF; padding: 0 12px; font-family: 'IBM Plex Mono', monospace; font-size: 18px; font-weight: 600; color: #111827">
+      </div>
+    </div>
+    <div style="display: flex; justify-content: flex-end; gap: 8px">
+      <button type="button" aria-label="プレフィックス長を 1 減らす" style="width: 52px; height: 36px; border-radius: 10px; border: 1px solid #D5DAE1; background: #FFFFFF; font-size: 18px; color: #111827; cursor: pointer">−</button>
+      <button type="button" aria-label="プレフィックス長を 1 増やす" style="width: 52px; height: 36px; border-radius: 10px; border: 1px solid #D5DAE1; background: #FFFFFF; font-size: 18px; color: #111827; cursor: pointer">＋</button>
+    </div>
+    <dl aria-label="計算結果" style="margin: 0; background: #FFFFFF; border: 1px solid #E3E6EB; border-radius: 16px; padding: 2px 14px">
+      <div style="display: flex; align-items: center; gap: 10px; min-height: 38px; border-bottom: 1px solid #E3E6EB"><dt style="width: 112px; font-size: 13px; color: #5B6472">ネットワーク</dt><dd style="margin: 0; flex-grow: 1; font-family: 'IBM Plex Mono', monospace; font-size: 15px; font-weight: 600">192.168.10.64</dd><button type="button" aria-label="ネットワークアドレスをコピー" style="width: 32px; height: 32px; border: none; background: none; color: #8A93A0; cursor: pointer"><svg aria-hidden="true" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2"></rect><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path></svg></button></div>
+      <div style="display: flex; align-items: center; gap: 10px; min-height: 38px; border-bottom: 1px solid #E3E6EB"><dt style="width: 112px; font-size: 13px; color: #5B6472">ブロードキャスト</dt><dd style="margin: 0; flex-grow: 1; font-family: 'IBM Plex Mono', monospace; font-size: 15px; font-weight: 600">192.168.10.127</dd><button type="button" aria-label="ブロードキャストアドレスをコピー" style="width: 32px; height: 32px; border: none; background: none; color: #8A93A0; cursor: pointer"><svg aria-hidden="true" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2"></rect><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path></svg></button></div>
+      <div style="display: flex; align-items: center; gap: 10px; min-height: 38px; border-bottom: 1px solid #E3E6EB"><dt style="width: 112px; font-size: 13px; color: #5B6472">サブネットマスク</dt><dd style="margin: 0; flex-grow: 1; font-family: 'IBM Plex Mono', monospace; font-size: 15px; font-weight: 600">255.255.255.192</dd><button type="button" aria-label="サブネットマスクをコピー" style="width: 32px; height: 32px; border: none; background: none; color: #8A93A0; cursor: pointer"><svg aria-hidden="true" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2"></rect><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path></svg></button></div>
+      <div style="display: flex; align-items: center; gap: 10px; min-height: 38px; border-bottom: 1px solid #E3E6EB"><dt style="width: 112px; font-size: 13px; color: #5B6472">ワイルドカード</dt><dd style="margin: 0; flex-grow: 1; font-family: 'IBM Plex Mono', monospace; font-size: 15px; font-weight: 600">0.0.0.63</dd><button type="button" aria-label="ワイルドカードマスクをコピー" style="width: 32px; height: 32px; border: none; background: none; color: #8A93A0; cursor: pointer"><svg aria-hidden="true" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2"></rect><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path></svg></button></div>
+      <div style="display: flex; align-items: center; gap: 10px; min-height: 38px; border-bottom: 1px solid #E3E6EB"><dt style="width: 112px; font-size: 13px; color: #5B6472">ホストの範囲</dt><dd style="margin: 0; flex-grow: 1; font-family: 'IBM Plex Mono', monospace; font-size: 13px; font-weight: 600">.65 〜 .126</dd></div>
+      <div style="display: flex; align-items: center; gap: 10px; min-height: 38px; border-bottom: 1px solid #E3E6EB"><dt style="width: 112px; font-size: 13px; color: #5B6472">使えるホスト数</dt><dd style="margin: 0; flex-grow: 1; font-size: 15px"><span style="font-family: 'IBM Plex Mono', monospace; font-weight: 600">62</span><span style="font-size: 12.5px; color: #5B6472">（総数 64）</span></dd></div>
+      <div style="display: flex; flex-direction: column; gap: 2px; padding: 8px 0; border-bottom: 1px solid #E3E6EB"><dt style="font-size: 13px; color: #5B6472">2 進数</dt><dd style="margin: 0; font-family: 'IBM Plex Mono', monospace; font-size: 13px; font-weight: 600; letter-spacing: 0.01em">11000000.10101000.00001010.01<span style="color: #B7BEC9">|</span><span style="color: #8A93A0">001101</span></dd></div>
+      <div style="display: flex; align-items: center; gap: 10px; min-height: 38px"><dt style="width: 112px; font-size: 13px; color: #5B6472">種別</dt><dd style="margin: 0; font-size: 14px; font-weight: 700">プライベート<span style="font-weight: 400; font-size: 12.5px; color: #5B6472">（RFC 1918）</span></dd></div>
+    </dl>
+    <details style="background: #FFFFFF; border: 1px solid #E3E6EB; border-radius: 14px; padding: 10px 14px">
+      <summary style="font-size: 14px; font-weight: 700; cursor: pointer">解き方</summary>
+      <p style="margin: 8px 0 0; font-size: 13.5px; line-height: 1.7">区切りは第 4 オクテット。ブロックサイズは 64。77 は 64 の 1 倍〜2 倍の間なので、ネットワークは .64</p>
+    </details>
+  </main>
+  <nav aria-label="タブ" style="background: #FFFFFF; border-top: 1px solid #E3E6EB; display: flex; padding: 6px 8px 30px">
+    <button type="button" style="flex: 1; min-height: 50px; border: none; background: none; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; color: #5B6472; font-size: 11px; font-weight: 500; cursor: pointer">
+      <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
+      <span>学習</span>
+    </button>
+    <button type="button" aria-current="page" style="flex: 1; min-height: 50px; border: none; background: none; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; color: #2742A8; font-size: 11px; font-weight: 700; cursor: pointer">
+      <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="16" height="20" x="4" y="2" rx="2"></rect><path d="M8 6h8"></path><path d="M16 14v4"></path><path d="M16 10h.01"></path><path d="M12 10h.01"></path><path d="M8 10h.01"></path><path d="M12 14h.01"></path><path d="M8 14h.01"></path><path d="M12 18h.01"></path><path d="M8 18h.01"></path></svg>
+      <span>計算</span>
+    </button>
+    <button type="button" style="flex: 1; min-height: 50px; border: none; background: none; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; color: #5B6472; font-size: 11px; font-weight: 500; cursor: pointer">
+      <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"></path><path d="M18 17V9"></path><path d="M13 17V5"></path><path d="M8 17v-3"></path></svg>
+      <span>成績</span>
+    </button>
+    <button type="button" style="flex: 1; min-height: 50px; border: none; background: none; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; color: #5B6472; font-size: 11px; font-weight: 500; cursor: pointer">
+      <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21v-7"></path><path d="M4 10V3"></path><path d="M12 21v-9"></path><path d="M12 8V3"></path><path d="M20 21v-5"></path><path d="M20 12V3"></path><path d="M1 14h6"></path><path d="M9 8h6"></path><path d="M17 16h6"></path></svg>
+      <span>設定</span>
+    </button>
+  </nav>
+</div>
+</div></figure><figure><figcaption>S-09 サブネット分割</figcaption><div class="ph">
+
+<div style="width: 390px; height: 844px; box-sizing: border-box; background: #F4F5F7; color: #111827; font-family: 'IBM Plex Sans JP', 'Hiragino Sans', sans-serif; display: flex; flex-direction: column; padding-top: 54px">
+  <header style="height: 48px; padding: 0 8px; display: flex; align-items: center; position: relative">
+    <a href="#" style="min-width: 44px; height: 44px; color: #2742A8; display: flex; align-items: center; gap: 2px; font-size: 17px; text-decoration: none">
+      <svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"></path></svg>
+      <span>計算</span>
+    </a>
+    <h1 style="position: absolute; left: 0; right: 0; text-align: center; margin: 0; font-size: 17px; font-weight: 700; pointer-events: none">サブネット分割</h1>
+  </header>
+  <main style="flex-grow: 1; padding: 8px 20px 0; display: flex; flex-direction: column; gap: 12px">
+    <div style="display: flex; gap: 10px; align-items: flex-end">
+      <div style="flex-grow: 1; display: flex; flex-direction: column; gap: 4px">
+        <label for="net" style="font-size: 12.5px; color: #5B6472">ネットワーク</label>
+        <input id="net" type="text" inputmode="decimal" value="192.168.10.0" style="height: 50px; box-sizing: border-box; width: 100%; border-radius: 12px; border: 1px solid #D5DAE1; background: #FFFFFF; padding: 0 12px; font-family: 'IBM Plex Mono', monospace; font-size: 18px; font-weight: 600; color: #111827">
+      </div>
+      <span style="font-family: 'IBM Plex Mono', monospace; font-size: 22px; color: #5B6472; padding-bottom: 10px">/</span>
+      <div style="width: 86px; display: flex; flex-direction: column; gap: 4px">
+        <label for="pfx" style="font-size: 12.5px; color: #5B6472">長さ</label>
+        <input id="pfx" type="text" inputmode="decimal" value="24" style="height: 50px; box-sizing: border-box; width: 100%; border-radius: 12px; border: 1px solid #D5DAE1; background: #FFFFFF; padding: 0 12px; font-family: 'IBM Plex Mono', monospace; font-size: 18px; font-weight: 600; color: #111827">
+      </div>
+    </div>
+    <div role="radiogroup" aria-label="分け方" style="display: flex; background: #E6E8EC; border-radius: 10px; padding: 3px; gap: 3px">
+      <button type="button" role="radio" aria-checked="true" style="flex: 1; height: 36px; border: none; border-radius: 8px; background: #FFFFFF; color: #111827; font-size: 15px; font-weight: 700; cursor: pointer">分割数</button>
+      <button type="button" role="radio" aria-checked="false" style="flex: 1; height: 36px; border: none; border-radius: 8px; background: transparent; color: #374151; font-size: 15px; font-weight: 500; cursor: pointer">必要なホスト数</button>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 4px">
+      <label for="n" style="font-size: 12.5px; color: #5B6472">分割数</label>
+      <input id="n" type="text" inputmode="numeric" value="4" style="height: 50px; box-sizing: border-box; width: 100%; border-radius: 12px; border: 2px solid #2742A8; background: #FFFFFF; padding: 0 12px; font-family: 'IBM Plex Mono', monospace; font-size: 18px; font-weight: 600; color: #111827">
+    </div>
+    <p style="margin: 4px 0 0; font-size: 14px"><span style="font-family: 'IBM Plex Mono', monospace; font-weight: 600">/26</span> ・ 1 サブネット <b>62</b> 台 ・ 全 <b>4</b> 件</p>
+    <ol aria-label="サブネットの一覧" style="list-style: none; margin: 0; padding: 2px 14px; background: #FFFFFF; border: 1px solid #E3E6EB; border-radius: 16px">
+      <li style="display: flex; gap: 12px; padding: 8px 0; border-bottom: 1px solid #E3E6EB"><span style="width: 16px; font-size: 12.5px; color: #5B6472; padding-top: 2px">1</span><span style="display: flex; flex-direction: column; gap: 1px"><span style="font-family: 'IBM Plex Mono', monospace; font-size: 15px; font-weight: 600">192.168.10.0/26</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 12.5px; color: #5B6472">.1 〜 .62 ・ BC .63</span></span></li>
+      <li style="display: flex; gap: 12px; padding: 8px 0; border-bottom: 1px solid #E3E6EB"><span style="width: 16px; font-size: 12.5px; color: #5B6472; padding-top: 2px">2</span><span style="display: flex; flex-direction: column; gap: 1px"><span style="font-family: 'IBM Plex Mono', monospace; font-size: 15px; font-weight: 600">192.168.10.64/26</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 12.5px; color: #5B6472">.65 〜 .126 ・ BC .127</span></span></li>
+      <li style="display: flex; gap: 12px; padding: 8px 0; border-bottom: 1px solid #E3E6EB"><span style="width: 16px; font-size: 12.5px; color: #5B6472; padding-top: 2px">3</span><span style="display: flex; flex-direction: column; gap: 1px"><span style="font-family: 'IBM Plex Mono', monospace; font-size: 15px; font-weight: 600">192.168.10.128/26</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 12.5px; color: #5B6472">.129 〜 .190 ・ BC .191</span></span></li>
+      <li style="display: flex; gap: 12px; padding: 8px 0"><span style="width: 16px; font-size: 12.5px; color: #5B6472; padding-top: 2px">4</span><span style="display: flex; flex-direction: column; gap: 1px"><span style="font-family: 'IBM Plex Mono', monospace; font-size: 15px; font-weight: 600">192.168.10.192/26</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 12.5px; color: #5B6472">.193 〜 .254 ・ BC .255</span></span></li>
+    </ol>
+  </main>
+  <nav aria-label="タブ" style="background: #FFFFFF; border-top: 1px solid #E3E6EB; display: flex; padding: 6px 8px 30px">
+    <button type="button" style="flex: 1; min-height: 50px; border: none; background: none; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; color: #5B6472; font-size: 11px; font-weight: 500; cursor: pointer">
+      <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
+      <span>学習</span>
+    </button>
+    <button type="button" aria-current="page" style="flex: 1; min-height: 50px; border: none; background: none; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; color: #2742A8; font-size: 11px; font-weight: 700; cursor: pointer">
+      <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="16" height="20" x="4" y="2" rx="2"></rect><path d="M8 6h8"></path><path d="M16 14v4"></path><path d="M16 10h.01"></path><path d="M12 10h.01"></path><path d="M8 10h.01"></path><path d="M12 14h.01"></path><path d="M8 14h.01"></path><path d="M12 18h.01"></path><path d="M8 18h.01"></path></svg>
+      <span>計算</span>
+    </button>
+    <button type="button" style="flex: 1; min-height: 50px; border: none; background: none; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; color: #5B6472; font-size: 11px; font-weight: 500; cursor: pointer">
+      <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"></path><path d="M18 17V9"></path><path d="M13 17V5"></path><path d="M8 17v-3"></path></svg>
+      <span>成績</span>
+    </button>
+    <button type="button" style="flex: 1; min-height: 50px; border: none; background: none; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; color: #5B6472; font-size: 11px; font-weight: 500; cursor: pointer">
+      <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21v-7"></path><path d="M4 10V3"></path><path d="M12 21v-9"></path><path d="M12 8V3"></path><path d="M20 21v-5"></path><path d="M20 12V3"></path><path d="M1 14h6"></path><path d="M9 8h6"></path><path d="M17 16h6"></path></svg>
+      <span>設定</span>
+    </button>
+  </nav>
+</div>
+</div></figure><figure><figcaption>S-10 VLSM 設計</figcaption><div class="ph">
+
+<div style="width: 390px; height: 844px; box-sizing: border-box; background: #F4F5F7; color: #111827; font-family: 'IBM Plex Sans JP', 'Hiragino Sans', sans-serif; display: flex; flex-direction: column; padding-top: 54px">
+  <header style="height: 48px; padding: 0 8px; display: flex; align-items: center; position: relative">
+    <a href="#" style="min-width: 44px; height: 44px; color: #2742A8; display: flex; align-items: center; gap: 2px; font-size: 17px; text-decoration: none">
+      <svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"></path></svg>
+      <span>計算</span>
+    </a>
+    <h1 style="position: absolute; left: 0; right: 0; text-align: center; margin: 0; font-size: 17px; font-weight: 700; pointer-events: none">VLSM 設計</h1>
+  </header>
+  <main style="flex-grow: 1; padding: 8px 20px 0; display: flex; flex-direction: column; gap: 10px">
+    <div style="display: flex; gap: 10px; align-items: flex-end">
+      <div style="flex-grow: 1; display: flex; flex-direction: column; gap: 4px">
+        <label for="net" style="font-size: 12.5px; color: #5B6472">親ネットワーク</label>
+        <input id="net" type="text" inputmode="decimal" value="192.168.10.0" style="height: 48px; box-sizing: border-box; width: 100%; border-radius: 12px; border: 1px solid #D5DAE1; background: #FFFFFF; padding: 0 12px; font-family: 'IBM Plex Mono', monospace; font-size: 17px; font-weight: 600; color: #111827">
+      </div>
+      <span style="font-family: 'IBM Plex Mono', monospace; font-size: 22px; color: #5B6472; padding-bottom: 9px">/</span>
+      <div style="width: 76px; display: flex; flex-direction: column; gap: 4px">
+        <label for="pfx" style="font-size: 12.5px; color: #5B6472">長さ</label>
+        <input id="pfx" type="text" inputmode="decimal" value="24" style="height: 48px; box-sizing: border-box; width: 100%; border-radius: 12px; border: 1px solid #D5DAE1; background: #FFFFFF; padding: 0 12px; font-family: 'IBM Plex Mono', monospace; font-size: 17px; font-weight: 600; color: #111827">
+      </div>
+    </div>
+    <div style="display: flex; font-size: 12.5px; color: #5B6472; margin-top: 4px"><span style="flex-grow: 1">用途</span><span style="width: 128px">必要ホスト数</span></div>
+    <div style="display: flex; gap: 8px; align-items: center">
+      <input aria-label="用途名 1" type="text" value="営業部" style="flex-grow: 1; min-width: 0; height: 46px; box-sizing: border-box; border-radius: 12px; border: 1px solid #D5DAE1; background: #FFFFFF; padding: 0 12px; font-size: 16px; color: #111827">
+      <input aria-label="必要ホスト数 1" type="text" inputmode="numeric" value="50" style="width: 76px; height: 46px; box-sizing: border-box; border-radius: 12px; border: 1px solid #D5DAE1; background: #FFFFFF; padding: 0 12px; font-family: 'IBM Plex Mono', monospace; font-size: 17px; font-weight: 600; color: #111827">
+      <button type="button" aria-label="営業部の行を消す" style="width: 44px; height: 44px; border: none; background: none; color: #8A93A0; font-size: 20px; cursor: pointer">⊖</button>
+    </div>
+    <div style="display: flex; gap: 8px; align-items: center">
+      <input aria-label="用途名 2" type="text" value="開発部" style="flex-grow: 1; min-width: 0; height: 46px; box-sizing: border-box; border-radius: 12px; border: 1px solid #D5DAE1; background: #FFFFFF; padding: 0 12px; font-size: 16px; color: #111827">
+      <input aria-label="必要ホスト数 2" type="text" inputmode="numeric" value="25" style="width: 76px; height: 46px; box-sizing: border-box; border-radius: 12px; border: 1px solid #D5DAE1; background: #FFFFFF; padding: 0 12px; font-family: 'IBM Plex Mono', monospace; font-size: 17px; font-weight: 600; color: #111827">
+      <button type="button" aria-label="開発部の行を消す" style="width: 44px; height: 44px; border: none; background: none; color: #8A93A0; font-size: 20px; cursor: pointer">⊖</button>
+    </div>
+    <div style="display: flex; gap: 8px; align-items: center">
+      <input aria-label="用途名 3" type="text" value="拠点間リンク" style="flex-grow: 1; min-width: 0; height: 46px; box-sizing: border-box; border-radius: 12px; border: 1px solid #D5DAE1; background: #FFFFFF; padding: 0 12px; font-size: 16px; color: #111827">
+      <input aria-label="必要ホスト数 3" type="text" inputmode="numeric" value="2" style="width: 76px; height: 46px; box-sizing: border-box; border-radius: 12px; border: 2px solid #2742A8; background: #FFFFFF; padding: 0 12px; font-family: 'IBM Plex Mono', monospace; font-size: 17px; font-weight: 600; color: #111827">
+      <button type="button" aria-label="拠点間リンクの行を消す" style="width: 44px; height: 44px; border: none; background: none; color: #8A93A0; font-size: 20px; cursor: pointer">⊖</button>
+    </div>
+    <button type="button" style="height: 44px; border-radius: 12px; border: 1px dashed #B7BEC9; background: none; color: #2742A8; font-size: 15px; font-weight: 700; cursor: pointer">＋ 用途を追加</button>
+    <ul aria-label="割り当て結果" style="list-style: none; margin: 4px 0 0; padding: 2px 14px; background: #FFFFFF; border: 1px solid #E3E6EB; border-radius: 16px">
+      <li style="display: flex; align-items: center; gap: 10px; min-height: 42px; border-bottom: 1px solid #E3E6EB"><span style="width: 92px; font-size: 14px; font-weight: 700">営業部</span><span style="flex-grow: 1; font-family: 'IBM Plex Mono', monospace; font-size: 14px; font-weight: 600">.0/26</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #5B6472">62 / 50</span></li>
+      <li style="display: flex; align-items: center; gap: 10px; min-height: 42px; border-bottom: 1px solid #E3E6EB"><span style="width: 92px; font-size: 14px; font-weight: 700">開発部</span><span style="flex-grow: 1; font-family: 'IBM Plex Mono', monospace; font-size: 14px; font-weight: 600">.64/27</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #5B6472">30 / 25</span></li>
+      <li style="display: flex; align-items: center; gap: 10px; min-height: 42px; border-bottom: 1px solid #E3E6EB"><span style="width: 92px; font-size: 14px; font-weight: 700">拠点間リンク</span><span style="flex-grow: 1; font-family: 'IBM Plex Mono', monospace; font-size: 14px; font-weight: 600">.96/30</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #5B6472">2 / 2</span></li>
+      <li style="display: flex; align-items: center; gap: 10px; min-height: 42px; color: #5B6472"><span style="width: 92px; font-size: 14px">空き</span><span style="flex-grow: 1; font-family: 'IBM Plex Mono', monospace; font-size: 13px">.100/30 .104/29 .112/28 .128/25</span></li>
+    </ul>
+    <p style="margin: 0; font-size: 12.5px; color: #5B6472">「使える数 / 必要数」。192.168.10 は省略して表示</p>
+  </main>
+  <nav aria-label="タブ" style="background: #FFFFFF; border-top: 1px solid #E3E6EB; display: flex; padding: 6px 8px 30px">
+    <button type="button" style="flex: 1; min-height: 50px; border: none; background: none; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; color: #5B6472; font-size: 11px; font-weight: 500; cursor: pointer">
+      <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
+      <span>学習</span>
+    </button>
+    <button type="button" aria-current="page" style="flex: 1; min-height: 50px; border: none; background: none; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; color: #2742A8; font-size: 11px; font-weight: 700; cursor: pointer">
+      <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="16" height="20" x="4" y="2" rx="2"></rect><path d="M8 6h8"></path><path d="M16 14v4"></path><path d="M16 10h.01"></path><path d="M12 10h.01"></path><path d="M8 10h.01"></path><path d="M12 14h.01"></path><path d="M8 14h.01"></path><path d="M12 18h.01"></path><path d="M8 18h.01"></path></svg>
+      <span>計算</span>
+    </button>
+    <button type="button" style="flex: 1; min-height: 50px; border: none; background: none; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; color: #5B6472; font-size: 11px; font-weight: 500; cursor: pointer">
+      <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"></path><path d="M18 17V9"></path><path d="M13 17V5"></path><path d="M8 17v-3"></path></svg>
+      <span>成績</span>
+    </button>
+    <button type="button" style="flex: 1; min-height: 50px; border: none; background: none; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; color: #5B6472; font-size: 11px; font-weight: 500; cursor: pointer">
+      <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21v-7"></path><path d="M4 10V3"></path><path d="M12 21v-9"></path><path d="M12 8V3"></path><path d="M20 21v-5"></path><path d="M20 12V3"></path><path d="M1 14h6"></path><path d="M9 8h6"></path><path d="M17 16h6"></path></svg>
+      <span>設定</span>
+    </button>
+  </nav>
+</div>
+</div></figure><figure><figcaption>S-11 経路集約</figcaption><div class="ph">
+
+<div style="width: 390px; height: 844px; box-sizing: border-box; background: #F4F5F7; color: #111827; font-family: 'IBM Plex Sans JP', 'Hiragino Sans', sans-serif; display: flex; flex-direction: column; padding-top: 54px">
+  <header style="height: 48px; padding: 0 8px; display: flex; align-items: center; position: relative">
+    <a href="#" style="min-width: 44px; height: 44px; color: #2742A8; display: flex; align-items: center; gap: 2px; font-size: 17px; text-decoration: none">
+      <svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"></path></svg>
+      <span>計算</span>
+    </a>
+    <h1 style="position: absolute; left: 0; right: 0; text-align: center; margin: 0; font-size: 17px; font-weight: 700; pointer-events: none">経路集約</h1>
+  </header>
+  <main style="flex-grow: 1; padding: 8px 20px 0; display: flex; flex-direction: column; gap: 10px">
+    <span style="font-size: 12.5px; color: #5B6472">まとめたいネットワーク</span>
+    <div style="display: flex; gap: 8px; align-items: center">
+      <input aria-label="ネットワーク 1" type="text" inputmode="decimal" value="192.168.0.0" style="flex-grow: 1; min-width: 0; height: 46px; box-sizing: border-box; border-radius: 12px; border: 1px solid #D5DAE1; background: #FFFFFF; padding: 0 12px; font-family: 'IBM Plex Mono', monospace; font-size: 17px; font-weight: 600; color: #111827">
+      <span style="font-family: 'IBM Plex Mono', monospace; font-size: 20px; color: #5B6472">/</span>
+      <input aria-label="長さ 1" type="text" inputmode="decimal" value="24" style="width: 60px; height: 46px; box-sizing: border-box; border-radius: 12px; border: 1px solid #D5DAE1; background: #FFFFFF; padding: 0 10px; font-family: 'IBM Plex Mono', monospace; font-size: 17px; font-weight: 600; color: #111827">
+      <button type="button" aria-label="1 行目を消す" style="width: 44px; height: 44px; border: none; background: none; color: #8A93A0; font-size: 20px; cursor: pointer">⊖</button>
+    </div>
+    <div style="display: flex; gap: 8px; align-items: center">
+      <input aria-label="ネットワーク 2" type="text" inputmode="decimal" value="192.168.1.0" style="flex-grow: 1; min-width: 0; height: 46px; box-sizing: border-box; border-radius: 12px; border: 1px solid #D5DAE1; background: #FFFFFF; padding: 0 12px; font-family: 'IBM Plex Mono', monospace; font-size: 17px; font-weight: 600; color: #111827">
+      <span style="font-family: 'IBM Plex Mono', monospace; font-size: 20px; color: #5B6472">/</span>
+      <input aria-label="長さ 2" type="text" inputmode="decimal" value="24" style="width: 60px; height: 46px; box-sizing: border-box; border-radius: 12px; border: 1px solid #D5DAE1; background: #FFFFFF; padding: 0 10px; font-family: 'IBM Plex Mono', monospace; font-size: 17px; font-weight: 600; color: #111827">
+      <button type="button" aria-label="2 行目を消す" style="width: 44px; height: 44px; border: none; background: none; color: #8A93A0; font-size: 20px; cursor: pointer">⊖</button>
+    </div>
+    <div style="display: flex; gap: 8px; align-items: center">
+      <input aria-label="ネットワーク 3" type="text" inputmode="decimal" value="192.168.2.0" style="flex-grow: 1; min-width: 0; height: 46px; box-sizing: border-box; border-radius: 12px; border: 2px solid #2742A8; background: #FFFFFF; padding: 0 12px; font-family: 'IBM Plex Mono', monospace; font-size: 17px; font-weight: 600; color: #111827">
+      <span style="font-family: 'IBM Plex Mono', monospace; font-size: 20px; color: #5B6472">/</span>
+      <input aria-label="長さ 3" type="text" inputmode="decimal" value="24" style="width: 60px; height: 46px; box-sizing: border-box; border-radius: 12px; border: 1px solid #D5DAE1; background: #FFFFFF; padding: 0 10px; font-family: 'IBM Plex Mono', monospace; font-size: 17px; font-weight: 600; color: #111827">
+      <button type="button" aria-label="3 行目を消す" style="width: 44px; height: 44px; border: none; background: none; color: #8A93A0; font-size: 20px; cursor: pointer">⊖</button>
+    </div>
+    <button type="button" style="height: 44px; border-radius: 12px; border: 1px dashed #B7BEC9; background: none; color: #2742A8; font-size: 15px; font-weight: 700; cursor: pointer">＋ ネットワークを追加</button>
+    <section aria-label="集約ルート" style="margin-top: 6px; background: #FFFFFF; border: 1px solid #E3E6EB; border-radius: 16px; padding: 14px 16px; display: flex; flex-direction: column; gap: 4px">
+      <span style="font-size: 13px; color: #5B6472">集約ルート</span>
+      <div style="display: flex; align-items: center"><span style="flex-grow: 1; font-family: 'IBM Plex Mono', monospace; font-size: 24px; font-weight: 600; color: #2742A8">192.168.0.0/22</span>
+      <button type="button" aria-label="集約ルートをコピー" style="width: 40px; height: 40px; border: none; background: none; color: #8A93A0; cursor: pointer"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2"></rect><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path></svg></button></div>
+      <div style="height: 1px; background: #E3E6EB; margin: 6px 0"></div>
+      <span style="font-size: 13px; color: #5B6472">余分に含まれる範囲</span>
+      <span style="font-family: 'IBM Plex Mono', monospace; font-size: 16px; font-weight: 600; color: #9A3D07">192.168.3.0/24</span>
+    </section>
+    <details style="background: #FFFFFF; border: 1px solid #E3E6EB; border-radius: 14px; padding: 10px 14px">
+      <summary style="font-size: 14px; font-weight: 700; cursor: pointer">解き方</summary>
+      <p style="margin: 8px 0 0; font-size: 13.5px; line-height: 1.7">第 3 オクテットの 0〜2 は 2 進で 000000|00〜000000|10。先頭 22 ビットが共通なので /22</p>
+    </details>
+  </main>
+  <nav aria-label="タブ" style="background: #FFFFFF; border-top: 1px solid #E3E6EB; display: flex; padding: 6px 8px 30px">
+    <button type="button" style="flex: 1; min-height: 50px; border: none; background: none; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; color: #5B6472; font-size: 11px; font-weight: 500; cursor: pointer">
+      <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
+      <span>学習</span>
+    </button>
+    <button type="button" aria-current="page" style="flex: 1; min-height: 50px; border: none; background: none; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; color: #2742A8; font-size: 11px; font-weight: 700; cursor: pointer">
+      <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="16" height="20" x="4" y="2" rx="2"></rect><path d="M8 6h8"></path><path d="M16 14v4"></path><path d="M16 10h.01"></path><path d="M12 10h.01"></path><path d="M8 10h.01"></path><path d="M12 14h.01"></path><path d="M8 14h.01"></path><path d="M12 18h.01"></path><path d="M8 18h.01"></path></svg>
+      <span>計算</span>
+    </button>
+    <button type="button" style="flex: 1; min-height: 50px; border: none; background: none; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; color: #5B6472; font-size: 11px; font-weight: 500; cursor: pointer">
+      <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"></path><path d="M18 17V9"></path><path d="M13 17V5"></path><path d="M8 17v-3"></path></svg>
+      <span>成績</span>
+    </button>
+    <button type="button" style="flex: 1; min-height: 50px; border: none; background: none; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; color: #5B6472; font-size: 11px; font-weight: 500; cursor: pointer">
+      <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21v-7"></path><path d="M4 10V3"></path><path d="M12 21v-9"></path><path d="M12 8V3"></path><path d="M20 21v-5"></path><path d="M20 12V3"></path><path d="M1 14h6"></path><path d="M9 8h6"></path><path d="M17 16h6"></path></svg>
+      <span>設定</span>
+    </button>
+  </nav>
+</div>
+</div></figure><figure><figcaption>S-12 進数変換</figcaption><div class="ph">
+
+<div style="width: 390px; height: 844px; box-sizing: border-box; background: #F4F5F7; color: #111827; font-family: 'IBM Plex Sans JP', 'Hiragino Sans', sans-serif; display: flex; flex-direction: column; padding-top: 54px">
+  <header style="height: 48px; padding: 0 8px; display: flex; align-items: center; position: relative">
+    <a href="#" style="min-width: 44px; height: 44px; color: #2742A8; display: flex; align-items: center; gap: 2px; font-size: 17px; text-decoration: none">
+      <svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"></path></svg>
+      <span>計算</span>
+    </a>
+    <h1 style="position: absolute; left: 0; right: 0; text-align: center; margin: 0; font-size: 17px; font-weight: 700; pointer-events: none">進数変換</h1>
+  </header>
+  <main style="flex-grow: 1; padding: 8px 20px 0; display: flex; flex-direction: column; gap: 10px">
+    <label for="v" style="font-size: 12.5px; color: #5B6472">IPv4 アドレスまたはマスク（10 進・2 進・16 進）</label>
+    <input id="v" type="text" value="255.255.255.192" style="height: 52px; box-sizing: border-box; width: 100%; border-radius: 12px; border: 2px solid #2742A8; background: #FFFFFF; padding: 0 12px; font-family: 'IBM Plex Mono', monospace; font-size: 19px; font-weight: 600; color: #111827">
+    <p role="status" style="margin: 0; font-size: 13px; color: #5B6472">10 進として読みました</p>
+    <dl aria-label="変換結果" style="margin: 6px 0 0; background: #FFFFFF; border: 1px solid #E3E6EB; border-radius: 16px; padding: 4px 14px">
+      <div style="display: flex; align-items: center; gap: 10px; padding: 12px 0; border-bottom: 1px solid #E3E6EB"><dt style="width: 44px; font-size: 13px; color: #5B6472">10 進</dt><dd style="margin: 0; flex-grow: 1; font-family: 'IBM Plex Mono', monospace; font-size: 17px; font-weight: 600">255.255.255.192</dd><button type="button" aria-label="10 進をコピー" style="width: 36px; height: 36px; border: none; background: none; color: #8A93A0; cursor: pointer"><svg aria-hidden="true" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2"></rect><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path></svg></button></div>
+      <div style="display: flex; align-items: center; gap: 10px; padding: 12px 0; border-bottom: 1px solid #E3E6EB"><dt style="width: 44px; font-size: 13px; color: #5B6472">2 進</dt><dd style="margin: 0; flex-grow: 1; font-family: 'IBM Plex Mono', monospace; font-size: 14px; font-weight: 600; line-height: 1.6">11111111.11111111.<br>11111111.11000000</dd><button type="button" aria-label="2 進をコピー" style="width: 36px; height: 36px; border: none; background: none; color: #8A93A0; cursor: pointer"><svg aria-hidden="true" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2"></rect><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path></svg></button></div>
+      <div style="display: flex; align-items: center; gap: 10px; padding: 12px 0"><dt style="width: 44px; font-size: 13px; color: #5B6472">16 進</dt><dd style="margin: 0; flex-grow: 1; font-family: 'IBM Plex Mono', monospace; font-size: 17px; font-weight: 600">FF.FF.FF.C0</dd><button type="button" aria-label="16 進をコピー" style="width: 36px; height: 36px; border: none; background: none; color: #8A93A0; cursor: pointer"><svg aria-hidden="true" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2"></rect><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path></svg></button></div>
+    </dl>
+    <p style="margin: 4px 0 0; font-size: 12.5px; line-height: 1.7; color: #5B6472">0x で始まる・a〜f を含む → 16 進<br>0 と 1 だけで 8 けた × 4 → 2 進 ／ それ以外 → 10 進</p>
+  </main>
+  <nav aria-label="タブ" style="background: #FFFFFF; border-top: 1px solid #E3E6EB; display: flex; padding: 6px 8px 30px">
+    <button type="button" style="flex: 1; min-height: 50px; border: none; background: none; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; color: #5B6472; font-size: 11px; font-weight: 500; cursor: pointer">
+      <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
+      <span>学習</span>
+    </button>
+    <button type="button" aria-current="page" style="flex: 1; min-height: 50px; border: none; background: none; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; color: #2742A8; font-size: 11px; font-weight: 700; cursor: pointer">
+      <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="16" height="20" x="4" y="2" rx="2"></rect><path d="M8 6h8"></path><path d="M16 14v4"></path><path d="M16 10h.01"></path><path d="M12 10h.01"></path><path d="M8 10h.01"></path><path d="M12 14h.01"></path><path d="M8 14h.01"></path><path d="M12 18h.01"></path><path d="M8 18h.01"></path></svg>
+      <span>計算</span>
+    </button>
+    <button type="button" style="flex: 1; min-height: 50px; border: none; background: none; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; color: #5B6472; font-size: 11px; font-weight: 500; cursor: pointer">
+      <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"></path><path d="M18 17V9"></path><path d="M13 17V5"></path><path d="M8 17v-3"></path></svg>
+      <span>成績</span>
+    </button>
+    <button type="button" style="flex: 1; min-height: 50px; border: none; background: none; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; color: #5B6472; font-size: 11px; font-weight: 500; cursor: pointer">
+      <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21v-7"></path><path d="M4 10V3"></path><path d="M12 21v-9"></path><path d="M12 8V3"></path><path d="M20 21v-5"></path><path d="M20 12V3"></path><path d="M1 14h6"></path><path d="M9 8h6"></path><path d="M17 16h6"></path></svg>
+      <span>設定</span>
+    </button>
+  </nav>
+</div>
+</div></figure></div>
+</body></html>

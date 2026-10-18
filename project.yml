@@ -1,0 +1,71 @@
+name: NetTre
+options:
+  bundleIdPrefix: jp.nettre
+  deploymentTarget:
+    iOS: "17.0"
+  createIntermediateGroups: true
+settings:
+  base:
+    SWIFT_VERSION: "5.0"
+    MARKETING_VERSION: "1.0"
+    CURRENT_PROJECT_VERSION: "1"
+targets:
+  NetTre:
+    type: application
+    platform: iOS
+    sources:
+      - path: NetTre
+    info:
+      path: NetTre/Info.plist
+      properties:
+        CFBundleDisplayName: ネトレ
+        CFBundleShortVersionString: $(MARKETING_VERSION)
+        CFBundleVersion: $(CURRENT_PROJECT_VERSION)
+        ITSAppUsesNonExemptEncryption: false
+        UILaunchScreen: {}
+        UISupportedInterfaceOrientations:
+          - UIInterfaceOrientationPortrait
+        UIRequiresFullScreen: true
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: jp.nettre.app
+        TARGETED_DEVICE_FAMILY: "1"
+        INFOPLIST_KEY_UILaunchScreen_Generation: YES
+      configs:
+        Release:
+          # UI テスト用の問題データはリリースに入れない
+          EXCLUDED_SOURCE_FILE_NAMES: questions_uitest.json
+  NetTreTests:
+    type: bundle.unit-test
+    platform: iOS
+    sources:
+      - path: NetTreTests
+    dependencies:
+      - target: NetTre
+    settings:
+      base:
+        GENERATE_INFOPLIST_FILE: YES
+        PRODUCT_BUNDLE_IDENTIFIER: jp.nettre.app.tests
+  NetTreUITests:
+    type: bundle.ui-testing
+    platform: iOS
+    sources:
+      - path: NetTreUITests
+    dependencies:
+      - target: NetTre
+    settings:
+      base:
+        GENERATE_INFOPLIST_FILE: YES
+        PRODUCT_BUNDLE_IDENTIFIER: jp.nettre.app.uitests
+        TEST_TARGET_NAME: NetTre
+schemes:
+  NetTre:
+    build:
+      targets:
+        NetTre: all
+        NetTreTests: [test]
+        NetTreUITests: [test]
+    test:
+      targets:
+        - NetTreTests
+        - NetTreUITests

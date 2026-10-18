@@ -1,0 +1,242 @@
+[
+  {
+    "id": "net-fund-0001",
+    "domain": "network-fundamentals",
+    "tags": [
+      "test"
+    ],
+    "difficulty": 1,
+    "stem": "［テスト］OSI 参照モデルは全部で何層か。",
+    "answer": "7",
+    "explanation": "OSI 参照モデルは物理層からアプリケーション層までの **7 層**。",
+    "version": 1
+  },
+  {
+    "id": "net-fund-0002",
+    "domain": "network-fundamentals",
+    "tags": [
+      "test"
+    ],
+    "difficulty": 1,
+    "stem": "［テスト］オプションを含まない TCP ヘッダーの長さは何バイトか。",
+    "answer": "20",
+    "explanation": "TCP ヘッダーはオプションなしで **20 バイト**。",
+    "version": 1
+  },
+  {
+    "id": "net-fund-0003",
+    "domain": "network-fundamentals",
+    "tags": [
+      "test"
+    ],
+    "difficulty": 1,
+    "stem": "［テスト］オプションを含まない IPv4 ヘッダーの長さは何バイトか。",
+    "answer": "20",
+    "explanation": "IPv4 ヘッダーはオプションなしで **20 バイト**。",
+    "version": 1
+  },
+  {
+    "id": "net-fund-0004",
+    "domain": "network-fundamentals",
+    "tags": [
+      "test"
+    ],
+    "difficulty": 1,
+    "stem": "［テスト］HTTP のウェルノウンポート番号を答えよ。",
+    "answer": "80",
+    "explanation": "HTTP は TCP **80** 番。",
+    "version": 1
+  },
+  {
+    "id": "net-fund-0005",
+    "domain": "network-fundamentals",
+    "tags": [
+      "test"
+    ],
+    "difficulty": 1,
+    "stem": "［テスト］HTTPS のウェルノウンポート番号を答えよ。",
+    "answer": "443",
+    "explanation": "HTTPS は TCP **443** 番。",
+    "version": 1
+  },
+  {
+    "id": "net-fund-0006",
+    "domain": "network-fundamentals",
+    "tags": [
+      "test"
+    ],
+    "difficulty": 1,
+    "stem": "［テスト］SSH のウェルノウンポート番号を答えよ。",
+    "answer": "22",
+    "explanation": "SSH は TCP **22** 番。",
+    "version": 1
+  },
+  {
+    "id": "net-fund-0007",
+    "domain": "network-fundamentals",
+    "tags": [
+      "test"
+    ],
+    "difficulty": 1,
+    "stem": "［テスト］DNS のウェルノウンポート番号を答えよ。",
+    "answer": "53",
+    "explanation": "DNS は **53** 番（UDP と TCP）。",
+    "version": 1
+  },
+  {
+    "id": "net-fund-0008",
+    "domain": "network-fundamentals",
+    "tags": [
+      "test"
+    ],
+    "difficulty": 1,
+    "stem": "［テスト］MAC アドレスは何ビットか。",
+    "answer": "48",
+    "explanation": "MAC アドレスは **48 ビット**（6 バイト）。",
+    "version": 1
+  },
+  {
+    "id": "net-fund-0009",
+    "domain": "network-fundamentals",
+    "tags": [
+      "test"
+    ],
+    "difficulty": 1,
+    "stem": "［テスト］IPv6 アドレスは何ビットか。",
+    "answer": "128",
+    "explanation": "IPv6 アドレスは **128 ビット**。",
+    "version": 1
+  },
+  {
+    "id": "net-fund-0010",
+    "domain": "network-fundamentals",
+    "tags": [
+      "test"
+    ],
+    "difficulty": 1,
+    "stem": "［テスト］Telnet のウェルノウンポート番号を答えよ。",
+    "answer": "23",
+    "explanation": "Telnet は TCP **23** 番。",
+    "version": 1
+  },
+  {
+    "id": "net-fund-0011",
+    "domain": "network-fundamentals",
+    "tags": [
+      "test"
+    ],
+    "difficulty": 1,
+    "stem": "［テスト］IPv4 のループバックアドレスとしてよく使うアドレスを答えよ。",
+    "answer": "127.0.0.1",
+    "explanation": "127.0.0.0/8 がループバック。よく使うのは **127.0.0.1**。",
+    "version": 1
+  },
+  {
+    "id": "net-fund-0012",
+    "domain": "network-fundamentals",
+    "tags": [
+      "test"
+    ],
+    "difficulty": 1,
+    "stem": "［テスト］UDP ヘッダーの長さは何バイトか。",
+    "answer": "8",
+    "explanation": "UDP ヘッダーは **8 バイト**。",
+    "version": 1
+  },
+  {
+    "id": "net-access-0001",
+    "domain": "network-access",
+    "tags": [
+      "test"
+    ],
+    "difficulty": 2,
+    "stem": "［テスト］IEEE 802.1Q の VLAN タグは何バイトか。",
+    "answer": "4",
+    "explanation": "802.1Q のタグは **4 バイト**。",
+    "version": 1
+  },
+  {
+    "id": "net-access-0002",
+    "domain": "network-access",
+    "tags": [
+      "test"
+    ],
+    "difficulty": 2,
+    "stem": "［テスト］通常使える VLAN ID の最大値を答えよ。",
+    "answer": "4094",
+    "explanation": "VLAN ID は 12 ビット。0 と 4095 は予約なので最大は **4094**。",
+    "version": 1
+  },
+  {
+    "id": "net-access-0003",
+    "domain": "network-access",
+    "tags": [
+      "test"
+    ],
+    "difficulty": 2,
+    "stem": "［テスト］イーサネットの標準の MTU は何バイトか。",
+    "answer": "1500",
+    "explanation": "イーサネットの標準の MTU は **1500 バイト**。",
+    "version": 1
+  },
+  {
+    "id": "net-access-0004",
+    "domain": "network-access",
+    "tags": [
+      "test"
+    ],
+    "difficulty": 2,
+    "stem": "［テスト］STP の既定のブリッジプライオリティの値を答えよ。",
+    "answer": "32768",
+    "explanation": "既定のブリッジプライオリティは **32768**。",
+    "version": 1
+  },
+  {
+    "id": "ip-conn-0001",
+    "domain": "ip-connectivity",
+    "tags": [
+      "test"
+    ],
+    "difficulty": 2,
+    "stem": "［テスト］OSPF のデフォルトの AD を答えよ。",
+    "answer": "110",
+    "explanation": "OSPF の AD は **110**。",
+    "version": 1
+  },
+  {
+    "id": "ip-conn-0002",
+    "domain": "ip-connectivity",
+    "tags": [
+      "test"
+    ],
+    "difficulty": 2,
+    "stem": "［テスト］スタティックルートのデフォルトの AD を答えよ。",
+    "answer": "1",
+    "explanation": "スタティックルートの AD は **1**。",
+    "version": 1
+  },
+  {
+    "id": "ip-conn-0003",
+    "domain": "ip-connectivity",
+    "tags": [
+      "test"
+    ],
+    "difficulty": 2,
+    "stem": "［テスト］EIGRP（内部）のデフォルトの AD を答えよ。",
+    "answer": "90",
+    "explanation": "EIGRP（内部）の AD は **90**。",
+    "version": 1
+  },
+  {
+    "id": "ip-conn-0004",
+    "domain": "ip-connectivity",
+    "tags": [
+      "test"
+    ],
+    "difficulty": 2,
+    "stem": "［テスト］RIP で到達できる最大のホップ数を答えよ。",
+    "answer": "15",
+    "explanation": "RIP は 16 ホップを到達不能とみなすので、最大は **15**。",
+    "version": 1
+  }
+]

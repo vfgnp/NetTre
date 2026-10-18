@@ -1,0 +1,726 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title>ネトレ 画面仕様レビュー</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Source+Code+Pro:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#ffffff; --surface:#f6f8fd; --ink:#0f172a; --sub:#64748b; --dim:#7c8ba1; --line:#e2e8f0;
+  --accent:#3d5dc6; --accent-deep:#2e47a6; --accent-tint:#eef2fb;
+  --ink-surface:#324c9e; --on-dark:#ffffff; --accent-on-dark:#aec2f2; --line-on-dark:#5570b8;
+  --radius:4px;
+  --ff:"Noto Sans JP","Hiragino Sans","Yu Gothic","Meiryo",sans-serif;
+  --ff-en:"Source Code Pro","SFMono-Regular",Menlo,monospace;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;background:var(--bg);overflow:hidden}
+.s{
+  position:absolute;top:50%;left:50%;width:960px;height:540px;
+  transform:translate(-50%,-50%) scale(var(--k,1));transform-origin:center center;
+  background:var(--bg);color:var(--ink);font-family:var(--ff);
+  visibility:hidden;opacity:0;display:flex;flex-direction:column;
+  padding:44px 56px 38px;
+}
+.s.active{visibility:visible;opacity:1}
+h1{font-size:56px;font-weight:700;line-height:1.22;letter-spacing:-.015em;margin:0}
+h2{font-size:28px;font-weight:700;line-height:1.35;letter-spacing:-.01em;margin:0}
+p{margin:0}
+code,.mono{font-family:var(--ff-en)}
+.ki{font-family:var(--ff-en);font-size:11px;font-weight:600;letter-spacing:.18em;color:var(--dim);margin-bottom:10px}
+.hr{height:1px;background:var(--line);margin:13px 0 18px}
+.pn{position:absolute;bottom:16px;right:20px;font-family:var(--ff-en);font-size:10px;color:var(--dim);letter-spacing:.08em}
+.body{flex:1;display:flex;flex-direction:column;gap:16px;min-height:0}
+.lead{font-size:15px;line-height:1.8;color:var(--sub)}
+.note{font-size:12px;line-height:1.7;color:var(--dim);padding-left:1.1em;text-indent:-1.1em}
+.id{font-family:var(--ff-en);font-weight:600;font-size:12.5px;color:var(--accent-deep);letter-spacing:.02em;white-space:nowrap}
+.chk{display:inline-block;font-size:12px;font-weight:700;color:var(--accent-deep);border:1px solid var(--accent-deep);border-radius:var(--radius);padding:0 6px;line-height:1.6;white-space:nowrap}
+.new{display:inline-block;font-family:var(--ff-en);font-size:11px;font-weight:700;color:#fff;background:var(--accent-deep);border-radius:var(--radius);padding:0 5px;line-height:1.6;margin-left:6px;vertical-align:1px}
+.tbl{width:100%;border-collapse:collapse;font-size:13.5px}
+.tbl th{text-align:left;font-size:11px;font-family:var(--ff-en);letter-spacing:.14em;color:var(--dim);font-weight:600;padding:0 0 7px;border-bottom:1px solid var(--line)}
+.tbl td{padding:6px 12px 6px 0;border-bottom:1px solid var(--line);vertical-align:top;line-height:1.55}
+.tbl tr:last-child td{border-bottom:none}
+.tbl td.b{font-weight:700;white-space:nowrap}
+.colh{font-size:15px;font-weight:700;margin-bottom:6px}
+.split{display:flex;gap:40px;align-items:flex-start}
+.phone{position:relative;width:196px;height:356px;flex:none;border:1.5px solid var(--ink);border-radius:var(--radius);padding:12px 12px 0;display:flex;flex-direction:column;gap:7px;font-size:12px;background:var(--bg)}
+.ph-t{font-size:15px;font-weight:700}
+.ph-n{display:flex;font-size:12px;font-weight:700}
+.mcard{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:7px 10px}
+.mbtn{border:1px solid var(--line);border-radius:var(--radius);height:30px;display:flex;align-items:center;justify-content:center;font-size:12.5px;font-weight:700}
+.mbtn.pri{background:var(--accent-deep);border-color:var(--accent-deep);color:#fff}
+.mbtn.l{justify-content:flex-start;padding:0 10px}
+.fld{border:1px solid var(--line);border-radius:var(--radius);height:26px;display:flex;align-items:center;padding:0 8px;font-family:var(--ff-en);font-size:12.5px;font-weight:600}
+.fld.on{border:1.5px solid var(--accent-deep)}
+.kb{margin:auto -12px 0;height:62px;background:var(--line);display:flex;align-items:center;justify-content:center;color:var(--sub);font-size:12px}
+.tabs{margin-top:auto;margin-left:-12px;margin-right:-12px;border-top:1px solid var(--line);display:flex;font-size:12px;color:var(--sub)}
+.tabs span{flex:1;text-align:center;padding:7px 0}
+.tabs span.on{color:var(--accent-deep);font-weight:700}
+.kv{display:flex;gap:6px;line-height:1.5}
+.kv .k{width:62px;flex:none;color:var(--sub)}
+.kv .v{font-family:var(--ff-en);font-weight:600}
+.bd{position:absolute;width:18px;height:18px;border-radius:50%;background:var(--accent-deep);color:#fff;font-family:var(--ff-en);font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center}
+.items{flex:1}
+.it{display:flex;gap:12px;padding:6px 0;border-bottom:1px solid var(--line);font-size:13.5px;line-height:1.6}
+.it:last-child{border-bottom:none}
+.it .n{flex:none;width:18px;height:18px;border-radius:50%;background:var(--accent-deep);color:#fff;font-family:var(--ff-en);font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;margin-top:2px}
+.it .nm{width:118px;flex:none;font-weight:700}
+.it .tx{flex:1}
+.st{font-size:13px;line-height:1.6;color:var(--sub);margin-top:8px}
+.st b{color:var(--ink)}
+.wm{position:absolute;left:0;right:0;white-space:nowrap;overflow:hidden;font-size:24px;font-weight:700;color:var(--line);letter-spacing:.02em;line-height:1.5}
+.rl{font-size:13.5px;line-height:1.65;padding:6px 0;border-bottom:1px solid var(--line)}
+.rl:last-child{border-bottom:none}
+</style>
+</head>
+<body>
+<!-- kit:slide-zukai-kit v1.1 theme:A use:internal style:standard viz:mid -->
+
+<!-- 1 表紙（型 E） -->
+<div class="s active" style="padding:0">
+  <div class="wm" style="top:26px;left:-20px">ホーム　分野選択　出題　回答する　解説　次へ　学習の結果　成績　設定　今日の復習　正答率</div>
+  <div class="wm" style="top:62px;left:-80px">CIDR 計算　サブネット分割　VLSM 設計　経路集約　進数変換　ワイルドカード　ブロードキャスト</div>
+  <div style="flex:1;display:flex;flex-direction:column;justify-content:center;padding:0 56px">
+    <div class="ki" style="margin-bottom:18px">INTERNAL / SCREEN SPECIFICATION</div>
+    <h1>ネトレ<br>画面仕様</h1>
+    <p style="font-size:18px;line-height:1.7;color:var(--sub);margin-top:20px">12 画面を、通勤中に片手で使える形にする</p>
+    <div style="display:flex;gap:12px;align-items:center;margin-top:24px">
+      <span style="background:var(--accent-tint);padding:6px 14px;border-radius:var(--radius);font-weight:700;font-size:13px">画面仕様書 v0.3 ドラフト</span>
+      <span style="font-size:13.5px;color:var(--sub)">記載内容の確認用 ・ 2026-10-18</span>
+    </div>
+  </div>
+  <div class="wm" style="bottom:62px;left:-40px">計算機で確かめる　もう1回学習する　ホームに戻る　学習履歴を削除する　コピーしました　解き方</div>
+  <div class="wm" style="bottom:26px;left:-110px">片手操作　56pt　数字キーボード　Dynamic Type　VoiceOver　正解　不正解　準備中　用途を追加</div>
+  <div class="pn">01 / 20</div>
+</div>
+
+<!-- 2 結論 -->
+<div class="s">
+  <div class="ki">CONCLUSION</div>
+  <h2>結論 — 画面づくりの方針</h2>
+  <div class="hr"></div>
+  <div class="body" style="gap:22px">
+    <div style="background:var(--ink-surface);color:var(--on-dark);border-radius:var(--radius);padding:28px 34px">
+      <div class="ki" style="color:var(--accent-on-dark);margin-bottom:12px">ONE LINE</div>
+      <div style="font-size:23px;font-weight:700;line-height:1.6">学習中は全画面で、答えの数字を打って解く<br>計算機は、入力するたびに結果が変わる</div>
+      <p style="font-size:14px;line-height:1.8;margin-top:12px">よく使う操作は画面の下半分に。タブは学習・計算・成績・設定の 4 つ。OS の権限は求めない</p>
+    </div>
+    <div style="display:flex;align-items:stretch">
+      <div style="flex:1;padding:4px 24px 4px 0;border-right:1px solid var(--line)">
+        <div class="ki" style="margin-bottom:8px">SCREENS</div>
+        <div><span class="id" style="font-size:40px;font-weight:700">12</span><span style="font-size:14px;margin-left:6px">画面</span></div>
+        <p style="font-size:13.5px;color:var(--sub);margin-top:4px">S-01〜S-12<br>うち計算機 6 画面</p>
+      </div>
+      <div style="flex:1;padding:4px 24px;border-right:1px solid var(--line)">
+        <div class="ki" style="margin-bottom:8px">TABS</div>
+        <div><span class="id" style="font-size:40px;font-weight:700">4</span><span style="font-size:14px;margin-left:6px">つ</span></div>
+        <p style="font-size:13.5px;color:var(--sub);margin-top:4px">学習・計算・<br>成績・設定</p>
+      </div>
+      <div style="flex:1;padding:4px 24px;border-right:1px solid var(--line)">
+        <div class="ki" style="margin-bottom:8px">TAP TARGET</div>
+        <div><span class="id" style="font-size:40px;font-weight:700">56</span><span style="font-size:14px;margin-left:6px">pt 以上</span></div>
+        <p style="font-size:13.5px;color:var(--sub);margin-top:4px">タップできる部分の高さ</p>
+      </div>
+      <div style="flex:1;padding:4px 0 4px 24px">
+        <div class="ki" style="margin-bottom:8px">OPEN ISSUES</div>
+        <div><span class="id" style="font-size:40px;font-weight:700">2</span><span style="font-size:14px;margin-left:6px">件</span></div>
+        <p style="font-size:13.5px;color:var(--sub);margin-top:4px">今回決めること</p>
+      </div>
+    </div>
+  </div>
+  <div class="pn">02 / 20</div>
+</div>
+
+<!-- 3 変更点 -->
+<div class="s">
+  <div class="ki">CHANGES</div>
+  <h2>v0.2・v0.3 での変更点</h2>
+  <div class="hr"></div>
+  <div class="body">
+    <p class="lead">要件定義 v1.1・v1.2 と基本設計 v1.2 に合わせて直した</p>
+    <div style="display:flex;gap:0;align-items:stretch;flex:1">
+      <div style="flex:1;border:1px solid var(--line);border-right:none;border-radius:var(--radius) 0 0 var(--radius);padding:18px 24px;display:flex;flex-direction:column;gap:6px">
+        <div class="ki" style="margin-bottom:0">V0.2</div>
+        <div style="font-size:18px;font-weight:700;line-height:1.5">出題画面を入力専用にした</div>
+        <div class="rl">選択肢をなくし、入力欄と「回答する」に置き換えた</div>
+        <div class="rl">数字キーボードには改行キーがないので<br>「回答する」をキーボードのすぐ上に置く</div>
+        <div class="rl">回答後は「あなたの回答」と「正解」を並べる</div>
+      </div>
+      <div style="flex:1;border:1px solid var(--line);border-radius:0 var(--radius) var(--radius) 0;background:var(--surface);padding:18px 24px;display:flex;flex-direction:column;gap:6px">
+        <div class="ki" style="margin-bottom:0">V0.3</div>
+        <div style="font-size:18px;font-weight:700;line-height:1.5">計算機の画面を加えた</div>
+        <div class="rl">タブ「計算」と S-07〜S-12 の 6 画面</div>
+        <div class="rl">計算機に共通する決まり（キーボード・コピー・解き方）</div>
+        <div class="rl">回答後の解説に「計算機で確かめる」（S-03 ⑫）</div>
+      </div>
+    </div>
+  </div>
+  <div class="pn">03 / 20</div>
+</div>
+
+<!-- 4 共通の決まり -->
+<div class="s">
+  <div class="ki">COMMON RULES</div>
+  <h2>全画面に共通する決まり</h2>
+  <div class="hr"></div>
+  <div class="body">
+    <table class="tbl" style="font-size:14px">
+      <tr><th style="width:150px">項目</th><th>決まり</th></tr>
+      <tr><td class="b">向き</td><td>縦向きのみ</td></tr>
+      <tr><td class="b">画面の下部</td><td>タブバー（学習／計算／成績／設定）<span class="new">V0.3</span>。出題画面（S-03）だけはタブバーを隠して全画面にする</td></tr>
+      <tr><td class="b">片手操作</td><td>よく使うボタンは画面下半分に置く。タップできる部分の高さは 56pt 以上（標準の 44pt より大きく）</td></tr>
+      <tr><td class="b">文字</td><td>標準の文字スタイルを使い、Dynamic Type で大きくしても欠けない（はみ出す場合はスクロール）</td></tr>
+      <tr><td class="b">色</td><td>ライト・ダークの両方に対応。正誤は色だけで区別せず、記号（✓／✗）と文字も併せて出す</td></tr>
+      <tr><td class="b">触覚フィードバック</td><td>正解・不正解のときに軽い振動（成功／エラー）を返す</td></tr>
+      <tr><td class="b">文言</td><td>「です・ます」調。ボタンは動詞で短く（「次へ」「回答する」）</td></tr>
+      <tr><td class="b">権限</td><td>どの画面でも OS の権限を求めない</td></tr>
+    </table>
+  </div>
+  <div class="pn">04 / 20</div>
+</div>
+
+<!-- 5 S-01 -->
+<div class="s">
+  <div class="ki">S-01</div>
+  <h2>ホーム</h2>
+  <div class="hr"></div>
+  <div class="body">
+    <div class="split">
+      <div class="phone">
+        <div class="ph-t">ネトレ</div>
+        <div class="mcard" style="position:relative"><div style="color:var(--sub)">今日の復習</div><div style="font-size:20px;font-weight:700">12 問</div><div style="color:var(--sub);margin-top:2px">今日解いた問題　8 問</div>
+          <span class="bd" style="right:-40px;top:14px">1</span><span class="bd" style="right:-40px;top:52px">2</span></div>
+        <div style="flex:1"></div>
+        <div class="mbtn l" style="position:relative;height:34px">分野を選ぶ<span style="margin-left:auto">＞</span><span class="bd" style="right:-40px;top:7px">3</span></div>
+        <div class="mbtn pri" style="position:relative;height:40px;margin-bottom:6px">学習を始める<span class="bd" style="right:-40px;top:10px">4</span></div>
+        <div class="tabs"><span class="on">学習</span><span>計算</span><span>成績</span><span>設定</span></div>
+      </div>
+      <div class="items">
+        <div class="colh">すぐに学習を始められ、今日の復習の量が一目でわかる</div>
+        <div class="it"><span class="n">1</span><span class="nm">今日の復習</span><span class="tx">出す日が今日以前の問題の数（すべての分野）</span></div>
+        <div class="it"><span class="n">2</span><span class="nm">今日解いた問題</span><span class="tx">今日の 0:00 以降に回答した数</span></div>
+        <div class="it"><span class="n">3</span><span class="nm">分野を選ぶ</span><span class="tx">S-02 へ進む</span></div>
+        <div class="it"><span class="n">4</span><span class="nm">学習を始める</span><span class="tx">出題範囲「おまかせ」で S-03 を開く<br>復習が先、足りない分は新しい問題。いちばん目立たせる</span></div>
+        <p class="st"><b>初めて起動したとき</b>　①に「まずは1回、解いてみましょう」と表示<br><b>復習が 0 問</b>　①に「今日の復習は終わりました」。④はそのまま使える</p>
+      </div>
+    </div>
+  </div>
+  <div class="pn">05 / 20</div>
+</div>
+
+<!-- 6 S-02 -->
+<div class="s">
+  <div class="ki">S-02</div>
+  <h2>分野選択</h2>
+  <div class="hr"></div>
+  <div class="body">
+    <div class="split">
+      <div class="items">
+        <div class="colh">出題範囲を選ぶ</div>
+        <div class="it"><span class="n">1</span><span class="nm">難易度</span><span class="tx">基礎／標準／応用。初期値は「標準」。最後に選んだものを覚えておく</span></div>
+        <div class="it"><span class="n">2</span><span class="nm">始める</span><span class="tx">「サブネット計算ドリル」と選んだ難易度で S-03 を開く</span></div>
+        <div class="it"><span class="n">3</span><span class="nm">分野の行</span><span class="tx">分野名・正答率（未回答は「―」）・収録問題数・今日の復習数<br>タップでその分野の S-03 を開く</span></div>
+        <div class="it"><span class="n">4</span><span class="nm">準備中</span><span class="tx">収録問題が 0 問の分野。グレーで表示し、タップできない</span></div>
+        <p class="st">分野は要件定義書 §4.1 の順に並べる<br>サブネット計算ドリルを上に置く（MVP では問題数が最も多く、よく使う見込み）</p>
+      </div>
+      <div class="phone">
+        <div class="ph-t">＜　分野を選ぶ</div>
+        <div style="color:var(--sub)">サブネット計算ドリル</div>
+        <div class="mcard" style="position:relative;display:flex;flex-direction:column;gap:6px">
+          <div style="display:flex;border:1px solid var(--line);border-radius:var(--radius);background:var(--bg)"><span style="flex:1;text-align:center;padding:3px 0">基礎</span><span style="flex:1;text-align:center;padding:3px 0;background:var(--accent-tint);font-weight:700">標準</span><span style="flex:1;text-align:center;padding:3px 0">応用</span></div>
+          <div style="display:flex">始める<span style="margin-left:auto">＞</span></div>
+          <span class="bd" style="left:-40px;top:6px">1</span><span class="bd" style="left:-40px;top:36px">2</span>
+        </div>
+        <div style="color:var(--sub);margin-top:4px">分野</div>
+        <div style="position:relative;border-bottom:1px solid var(--line);padding-bottom:5px"><div style="display:flex;font-weight:700">ネットワークの基礎<span style="margin-left:auto">82%</span></div><div style="color:var(--sub)">30問 ・ 復習 3問</div><span class="bd" style="left:-40px;top:8px">3</span></div>
+        <div style="border-bottom:1px solid var(--line);padding-bottom:5px"><div style="display:flex;font-weight:700">ネットワークアクセス<span style="margin-left:auto">60%</span></div><div style="color:var(--sub)">12問 ・ 復習 0問</div></div>
+        <div style="position:relative;color:var(--dim);display:flex">IP サービス<span style="margin-left:auto">準備中</span><span class="bd" style="left:-40px;top:0">4</span></div>
+        <div class="tabs"><span class="on">学習</span><span>計算</span><span>成績</span><span>設定</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="pn">06 / 20</div>
+</div>
+
+<!-- 7 S-03 回答前 -->
+<div class="s">
+  <div class="ki">S-03 / BEFORE ANSWER</div>
+  <h2>出題（回答前）<span class="new" style="font-size:12px;vertical-align:6px">V0.2</span></h2>
+  <div class="hr"></div>
+  <div class="body">
+    <div class="split">
+      <div class="phone" style="gap:9px">
+        <div style="position:relative;display:flex;font-weight:700"><span>✕</span><span style="margin:0 auto">3 / 10</span><span class="bd" style="right:-40px;top:-2px">2</span><span class="bd" style="left:-40px;top:-2px">1</span></div>
+        <div style="position:relative;height:4px;background:var(--line);border-radius:2px"><div style="width:30%;height:4px;background:var(--accent-deep);border-radius:2px"></div><span class="bd" style="right:-40px;top:-7px">3</span></div>
+        <div style="position:relative;color:var(--sub)">ネットワークの基礎・標準<span class="bd" style="right:-40px;top:0">4</span></div>
+        <div style="position:relative;font-size:12.5px;line-height:1.55"><span class="mono">192.168.10.77/26</span> が所属するネットワークアドレスを答えよ。<span class="bd" style="right:-40px;top:8px">5</span></div>
+        <div style="flex:1"></div>
+        <div style="position:relative;display:flex;flex-direction:column;gap:3px"><span style="color:var(--sub)">回答</span><div class="fld on" style="height:30px">192.168.10.64</div><span class="bd" style="right:-40px;top:14px">6</span></div>
+        <div class="mbtn pri" style="position:relative">回答する<span class="bd" style="right:-40px;top:6px">7</span></div>
+        <div class="kb">「.」付きの数字キーボード</div>
+      </div>
+      <div class="items">
+        <div class="colh">答えの数字を打って解く（タブバーを隠した全画面）</div>
+        <div class="it"><span class="n">1</span><span class="nm">中断（✕）</span><span class="tx">学習をやめて S-04 へ。確認は出さない<br>誤って押しにくいよう、あえて左上に置く</span></div>
+        <div class="it"><span class="n">2</span><span class="nm">進み具合</span><span class="tx">「今の問題 / 全体の問題数」</span></div>
+        <div class="it"><span class="n">3</span><span class="nm">進捗バー</span><span class="tx">進み具合の割合</span></div>
+        <div class="it"><span class="n">4</span><span class="nm">問題の情報</span><span class="tx">分野の表示名・難易度。復習の問題には「復習」の印</span></div>
+        <div class="it"><span class="n">5</span><span class="nm">問題文</span><span class="tx">長いときは問題文の部分だけスクロールする</span></div>
+        <div class="it"><span class="n">6</span><span class="nm">入力欄</span><span class="tx">開いたら選んだ状態にし、キーボードを出す<br>数字だけ → 数字、数字と「.」→「.」付き</span></div>
+        <div class="it"><span class="n">7</span><span class="nm">回答する</span><span class="tx">キーボードのすぐ上に置く。何か入力するまで押せない<br>数字キーボードには改行キーがないので、回答はこのボタン</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="pn">07 / 20</div>
+</div>
+
+<!-- 8 S-03 回答後 -->
+<div class="s">
+  <div class="ki">S-03 / AFTER ANSWER</div>
+  <h2>出題（回答後）</h2>
+  <div class="hr"></div>
+  <div class="body">
+    <div class="split">
+      <div class="items">
+        <div class="colh">同じ画面の中で、正誤と解説に切り替える</div>
+        <div class="it"><span class="n">8</span><span class="nm">正誤</span><span class="tx">「✓ 正解」または「✗ 不正解」。触覚フィードバックを返す<br>回答したらキーボードを閉じる</span></div>
+        <div class="it"><span class="n">9</span><span class="nm">回答と正解</span><span class="tx">「あなたの回答」と「正解」を 2 行で並べる<br>不正解なら回答に ✗、正解に ✓（色と記号の両方）<span class="new">V0.2</span></span></div>
+        <div class="it"><span class="n" style="font-size:10px">10</span><span class="nm">解説</span><span class="tx">Markdown の太字・箇条書きに対応<br>長いときはこの部分だけスクロール</span></div>
+        <div class="it"><span class="n" style="font-size:10px">11</span><span class="nm">次へ</span><span class="tx">画面の下端（親指の届く位置）に置く。最後は「結果を見る」<br>次の問題では入力欄が選ばれた状態でキーボードが出る</span></div>
+        <div class="it"><span class="n" style="font-size:10px">12</span><span class="nm">計算機で確かめる</span><span class="tx">サブネット問題のときだけ。問題の値を入れた S-08 を<br>シートで開き、閉じると解説に戻る<span class="new">V0.3</span></span></div>
+      </div>
+      <div class="phone" style="gap:7px">
+        <div style="display:flex;font-weight:700"><span>✕</span><span style="margin:0 auto">3 / 10</span></div>
+        <div style="position:relative;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:5px 10px;font-weight:700">✗ 不正解<span class="bd" style="left:-40px;top:4px">8</span></div>
+        <div style="position:relative;border:1px solid var(--line);border-radius:var(--radius);padding:4px 10px;line-height:1.7">
+          <div style="display:flex;gap:6px"><span style="color:var(--sub);width:30px">回答</span><span class="mono" style="text-decoration:line-through">192.168.10.0</span><span style="margin-left:auto">✗</span></div>
+          <div style="display:flex;gap:6px"><span style="color:var(--sub);width:30px">正解</span><span class="mono" style="font-weight:700">192.168.10.64</span><span style="margin-left:auto">✓</span></div>
+          <span class="bd" style="left:-40px;top:14px">9</span>
+        </div>
+        <div style="position:relative;line-height:1.55"><div style="font-weight:700">解説</div><div style="color:var(--sub)">/26 のマスクは 255.255.255.192。AND を取ると .64 …</div><span class="bd" style="left:-40px;top:10px">10</span></div>
+        <div class="mbtn" style="position:relative;color:var(--accent-deep)">計算機で確かめる<span class="bd" style="left:-40px;top:6px">12</span></div>
+        <div style="flex:1"></div>
+        <div class="mbtn pri" style="position:relative;height:36px;margin-bottom:12px">次へ<span class="bd" style="left:-40px;top:9px">11</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="pn">08 / 20</div>
+</div>
+
+<!-- 9 S-04 -->
+<div class="s">
+  <div class="ki">S-04</div>
+  <h2>学習の結果</h2>
+  <div class="hr"></div>
+  <div class="body">
+    <div class="split">
+      <div class="phone">
+        <div style="text-align:center;font-weight:700;margin-top:4px">おつかれさまでした</div>
+        <div style="position:relative;text-align:center;font-size:20px;font-weight:700">7 / 10 問 正解<span class="bd" style="right:-40px;top:6px">1</span></div>
+        <div style="color:var(--sub)">間違えた問題</div>
+        <div style="position:relative;line-height:1.9"><div>✗ /27 のホスト数は…　＞</div><div>✗ 802.1Q のタグは何…＞</div><div>✗ 192.168.3.200/28 …＞</div><span class="bd" style="right:-40px;top:18px">2</span></div>
+        <div style="position:relative;color:var(--sub);text-align:center">間違えた問題は明日また出ます<span class="bd" style="right:-40px;top:0">3</span></div>
+        <div style="flex:1"></div>
+        <div class="mbtn pri" style="position:relative">もう1回学習する<span class="bd" style="right:-40px;top:6px">4</span></div>
+        <div class="mbtn" style="position:relative;margin-bottom:6px">ホームに戻る<span class="bd" style="right:-40px;top:6px">5</span></div>
+        <div class="tabs"><span class="on">学習</span><span>計算</span><span>成績</span><span>設定</span></div>
+      </div>
+      <div class="items">
+        <div class="colh">今回の成果を見せ、間違えた問題を振り返れるようにする</div>
+        <div class="it"><span class="n">1</span><span class="nm">正解数</span><span class="tx">「正解数 / 回答した数」。中断したときは回答した分だけで数える</span></div>
+        <div class="it"><span class="n">2</span><span class="nm">間違えた問題</span><span class="tx">問題文の書き出し（1 行）。タップで回答後の表示を見られる<br>全問正解なら「全問正解です」</span></div>
+        <div class="it"><span class="n">3</span><span class="nm">案内</span><span class="tx">間違えた問題があるときだけ表示</span></div>
+        <div class="it"><span class="n">4</span><span class="nm">もう1回学習する</span><span class="tx">同じ出題範囲で、新しく S-03 を開く</span></div>
+        <div class="it"><span class="n">5</span><span class="nm">ホームに戻る</span><span class="tx">S-01 へ（どの出題範囲から来ても S-01 に戻る）</span></div>
+        <p class="st">1 問も回答せずに中断したときは、この画面を出さずに元の画面へ戻る</p>
+      </div>
+    </div>
+  </div>
+  <div class="pn">09 / 20</div>
+</div>
+
+<!-- 10 S-05 -->
+<div class="s">
+  <div class="ki">S-05</div>
+  <h2>成績</h2>
+  <div class="hr"></div>
+  <div class="body">
+    <div class="split">
+      <div class="items">
+        <div class="colh">学習の進み具合と、苦手な分野を知る</div>
+        <div class="it"><span class="n">1</span><span class="nm">全体の数字</span><span class="tx">回答数・正答率（全期間）、今日の復習数、今日解いた数</span></div>
+        <div class="it"><span class="n">2</span><span class="nm">分野別</span><span class="tx">サブネット計算（自動生成問題）と 6 分野の回答数と正答率<br>正答率は横棒と数字の両方。回答 0 は「まだ回答していません」</span></div>
+        <p class="st"><b>正答率</b>　正解した回答の数 ÷ 回答の数（同じ問題も毎回数える）<br><b>履歴なし</b>　「問題を解くと、ここに成績が表示されます」</p>
+        <div style="border:1px solid var(--accent-deep);border-radius:var(--radius);padding:10px 14px;margin-top:12px;font-size:13.5px;line-height:1.65">
+          <span class="chk">要確認</span><br>自動生成のサブネット問題は、分野としては「ネットワークの基礎」に属する<br>成績では「サブネット計算」として分けて出す
+        </div>
+      </div>
+      <div class="phone">
+        <div class="ph-t">成績</div>
+        <div style="position:relative;display:grid;grid-template-columns:1fr 1fr;gap:6px">
+          <div class="mcard"><div style="color:var(--sub)">回答数</div><div style="font-weight:700">248 問</div></div>
+          <div class="mcard"><div style="color:var(--sub)">正答率</div><div style="font-weight:700">74%</div></div>
+          <div class="mcard"><div style="color:var(--sub)">今日の復習</div><div style="font-weight:700">12 問</div></div>
+          <div class="mcard"><div style="color:var(--sub)">今日解いた</div><div style="font-weight:700">8 問</div></div>
+          <span class="bd" style="left:-40px;top:40px">1</span>
+        </div>
+        <div style="color:var(--sub);margin-top:4px">分野別</div>
+        <div style="position:relative"><div style="display:flex">サブネット計算<span style="margin-left:auto">81%</span></div><div style="height:6px;background:var(--line);border-radius:2px;margin-top:3px"><div style="width:81%;height:6px;background:var(--accent-deep);border-radius:2px"></div></div><span class="bd" style="left:-40px;top:4px">2</span></div>
+        <div><div style="display:flex">ネットワークの基礎<span style="margin-left:auto">62%</span></div><div style="height:6px;background:var(--line);border-radius:2px;margin-top:3px"><div style="width:62%;height:6px;background:var(--accent-deep);border-radius:2px"></div></div></div>
+        <div class="tabs"><span>学習</span><span>計算</span><span class="on">成績</span><span>設定</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="pn">10 / 20</div>
+</div>
+
+<!-- 11 S-06 -->
+<div class="s">
+  <div class="ki">S-06</div>
+  <h2>設定</h2>
+  <div class="hr"></div>
+  <div class="body">
+    <div class="split" style="gap:28px">
+      <div class="phone">
+        <div class="ph-t">設定</div>
+        <div style="color:var(--sub)">データ</div>
+        <div style="position:relative;font-weight:700;border-bottom:1px solid var(--line);padding-bottom:6px">学習履歴を削除する<span class="bd" style="right:-40px;top:0">1</span></div>
+        <div style="color:var(--sub);margin-top:6px">このアプリについて</div>
+        <div style="position:relative;display:flex;border-bottom:1px solid var(--line);padding-bottom:6px">プライバシーポリシー<span style="margin-left:auto">↗</span><span class="bd" style="right:-40px;top:0">2</span></div>
+        <div style="position:relative;display:flex">バージョン<span style="margin-left:auto;color:var(--sub)">1.0 (1)</span><span class="bd" style="right:-40px;top:0">3</span></div>
+        <div class="tabs"><span>学習</span><span>計算</span><span>成績</span><span class="on">設定</span></div>
+      </div>
+      <div style="width:190px;flex:none;margin-left:20px">
+        <div style="font-size:12.5px;color:var(--sub);margin-bottom:6px">①の確認ダイアログ</div>
+        <div style="border:1.5px solid var(--ink);border-radius:var(--radius);padding:12px;font-size:12.5px;line-height:1.6">
+          <div style="font-weight:700">学習履歴をすべて<br>削除しますか？</div>
+          <div style="color:var(--sub)">この操作は取り消せません。</div>
+          <div style="display:flex;gap:6px;margin-top:10px"><span class="mbtn" style="flex:1;font-size:12px">キャンセル</span><span class="mbtn" style="flex:1;font-size:12px;border-color:var(--ink)">削除する</span></div>
+        </div>
+        <p style="font-size:12px;color:var(--sub);line-height:1.6;margin-top:6px">実機では「削除する」を赤で示す</p>
+      </div>
+      <div class="items">
+        <div class="it"><span class="n">1</span><span class="nm" style="width:96px">履歴の削除</span><span class="tx">赤字で表示<br>確認のダイアログを出す<br>削除すると<br>ホーム・成績の数字が 0 に戻る</span></div>
+        <div class="it"><span class="n">2</span><span class="nm" style="width:96px">プライバシー<br>ポリシー</span><span class="tx">Safari で開く<br>URL は要件定義 U-06 で決める</span></div>
+        <div class="it"><span class="n">3</span><span class="nm" style="width:96px">バージョン</span><span class="tx">アプリのバージョンと<br>ビルド番号</span></div>
+        <div style="border:1px solid var(--accent-deep);border-radius:var(--radius);padding:10px 14px;margin-top:12px;font-size:13.5px;line-height:1.65">
+          <span class="chk">要確認</span><br>お問い合わせ先（メールなど）を載せるかどうか
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="pn">11 / 20</div>
+</div>
+
+<!-- 12 計算機に共通する決まり -->
+<div class="s">
+  <div class="ki">CALCULATORS / COMMON</div>
+  <h2>計算機に共通する決まり<span class="new" style="font-size:12px;vertical-align:6px">V0.3</span></h2>
+  <div class="hr"></div>
+  <div class="body">
+    <table class="tbl" style="font-size:13.5px">
+      <tr><th style="width:150px">項目</th><th>決まり</th></tr>
+      <tr><td class="b">配置</td><td>入力欄を上、結果を下に置く。入力が変わるたびに結果を更新する（計算ボタンは置かない）</td></tr>
+      <tr><td class="b">キーボード</td><td>IP アドレス・マスク・プレフィックス長の欄は「.」付きの数字キーボード<br>数字キーボードには「/」がないので、<b>IP アドレスとプレフィックス長は別の欄</b>にする<br><code>192.168.10.77/26</code> を貼り付けたときは、2 つの欄に分けて入れる</td></tr>
+      <tr><td class="b">プレフィックス長</td><td><code>26</code> と <code>255.255.255.192</code> のどちらでも入力できる。−／＋ ボタンで 1 ずつ変えられる</td></tr>
+      <tr><td class="b">誤った入力</td><td>欄の下に「✗ 第3オクテットが 256 です（0〜255）」と記号と文で示す。結果欄は空にする</td></tr>
+      <tr><td class="b">結果の値</td><td>等幅の書体。各行の右にコピーボタン、長押しでもコピー。コピーしたら「コピーしました」</td></tr>
+      <tr><td class="b">解き方</td><td>結果の下に折りたたんで置く。開くと計算の過程を 1〜3 行で示す</td></tr>
+      <tr><td class="b">入力の保持</td><td>アプリを閉じるまで画面ごとに残す。保存はしない（U-09）</td></tr>
+    </table>
+  </div>
+  <div class="pn">12 / 20</div>
+</div>
+
+<!-- 13 S-07 -->
+<div class="s">
+  <div class="ki">S-07</div>
+  <h2>計算機メニュー</h2>
+  <div class="hr"></div>
+  <div class="body">
+    <div class="split">
+      <div class="phone">
+        <div class="ph-t">計算</div>
+        <div style="position:relative;border:1px solid var(--line);border-radius:var(--radius);display:flex;flex-direction:column;margin-top:4px">
+          <div style="padding:5px 10px;border-bottom:1px solid var(--line)"><div style="font-weight:700;display:flex">CIDR 計算<span style="margin-left:auto">＞</span></div><div style="color:var(--sub)">範囲・ホスト数</div></div>
+          <div style="padding:5px 10px;border-bottom:1px solid var(--line)"><div style="font-weight:700;display:flex">サブネット分割<span style="margin-left:auto">＞</span></div><div style="color:var(--sub)">等分する</div></div>
+          <div style="padding:5px 10px;border-bottom:1px solid var(--line)"><div style="font-weight:700;display:flex">VLSM 設計<span style="margin-left:auto">＞</span></div><div style="color:var(--sub)">用途ごとに割り当て</div></div>
+          <div style="padding:5px 10px;border-bottom:1px solid var(--line)"><div style="font-weight:700;display:flex">経路集約<span style="margin-left:auto">＞</span></div><div style="color:var(--sub)">まとめる</div></div>
+          <div style="padding:5px 10px"><div style="font-weight:700;display:flex">進数変換<span style="margin-left:auto">＞</span></div><div style="color:var(--sub)">10・2・16 進</div></div>
+          <span class="bd" style="right:-40px;top:12px">1</span>
+        </div>
+        <div class="tabs"><span>学習</span><span class="on">計算</span><span>成績</span><span>設定</span></div>
+      </div>
+      <div class="items">
+        <div class="colh">使いたい計算機をすぐに選ぶ（タブ「計算」）</div>
+        <div class="it"><span class="n">1</span><span class="nm">計算機の行</span><span class="tx">計算機の名前と、何ができるかを 1 行で示す<br>タップで S-08〜S-12 へ</span></div>
+        <p class="st">並びは使う頻度の高い順（CIDR 計算を先頭）</p>
+        <table class="tbl" style="margin-top:14px">
+          <tr><th style="width:62px">画面</th><th style="width:130px">計算機</th><th>要件</th></tr>
+          <tr><td><span class="id">S-08</span></td><td>CIDR 計算</td><td><span class="id">FR-17</span></td></tr>
+          <tr><td><span class="id">S-09</span></td><td>サブネット分割</td><td><span class="id">FR-18</span>・一覧は 256 件まで（D6）</td></tr>
+          <tr><td><span class="id">S-10</span></td><td>VLSM 設計</td><td><span class="id">FR-19</span>・用途は 50 件まで（D7）</td></tr>
+          <tr><td><span class="id">S-11</span></td><td>経路集約</td><td><span class="id">FR-20</span>・32 件まで（D8）</td></tr>
+          <tr><td><span class="id">S-12</span></td><td>進数変換</td><td><span class="id">FR-21</span>・進数を自動で見分ける（D9）</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="pn">13 / 20</div>
+</div>
+
+<!-- 14 S-08 -->
+<div class="s">
+  <div class="ki">S-08</div>
+  <h2>CIDR 計算</h2>
+  <div class="hr"></div>
+  <div class="body">
+    <div class="split">
+      <div class="items">
+        <div class="colh">IP アドレスとプレフィックス長から、ネットワークの情報を一度に知る</div>
+        <div class="it"><span class="n">1</span><span class="nm">IP アドレス</span><span class="tx">「.」付きの数字キーボード。<code>/26</code> 付きで貼り付けたら②に分けて入れる</span></div>
+        <div class="it"><span class="n">2</span><span class="nm">プレフィックス長</span><span class="tx"><code>0</code>〜<code>32</code> またはサブネットマスク。−／＋ で 1 ずつ変えられる</span></div>
+        <div class="it"><span class="n">3</span><span class="nm">結果</span><span class="tx">ネットワーク、ブロードキャスト、マスク、ワイルドカード<br>ホストの範囲、使えるホスト数と総数、アドレスの種別<br>各行にコピーボタン</span></div>
+        <div class="it"><span class="n">4</span><span class="nm">2 進数</span><span class="tx">オクテットごとに区切り、ネットワーク部とホスト部の境目に区切り線<br>ホスト部は薄い色</span></div>
+        <div class="it"><span class="n">5</span><span class="nm">解き方</span><span class="tx">区切りのオクテット → ブロックサイズ → 何番目の倍数か</span></div>
+        <p class="st">解説の「計算機で確かめる」から開いたときはシートで出し、左上を「閉じる」にする<br>/31 は「使えるホスト数 2（ポイントツーポイント用）」、/32 は「1 台のホスト」</p>
+      </div>
+      <div class="phone" style="gap:6px">
+        <div class="ph-n">＜ 計算<span style="margin:0 auto 0 30px">CIDR 計算</span></div>
+        <div style="position:relative;display:flex;gap:4px;align-items:center"><div class="fld on" style="flex:1">192.168.10.77</div><span>/</span><div class="fld" style="width:34px">26</div>
+          <span class="bd" style="left:-40px;top:4px">1</span><span class="bd" style="left:-40px;top:30px">2</span></div>
+        <div style="display:flex;justify-content:flex-end;gap:4px"><span class="mbtn" style="width:34px;height:22px">−</span><span class="mbtn" style="width:34px;height:22px">＋</span></div>
+        <div style="position:relative;border:1px solid var(--line);border-radius:var(--radius);padding:4px 8px">
+          <div class="kv"><span class="k" style="width:74px">ネットワーク</span><span class="v">.64</span></div>
+          <div class="kv"><span class="k" style="width:74px">ブロード</span><span class="v">.127</span></div>
+          <div class="kv"><span class="k" style="width:74px">マスク</span><span class="v">…255.192</span></div>
+          <div class="kv"><span class="k" style="width:74px">ワイルド</span><span class="v">0.0.0.63</span></div>
+          <div class="kv"><span class="k" style="width:74px">範囲</span><span class="v">.65〜.126</span></div>
+          <div class="kv"><span class="k" style="width:74px">ホスト数</span><span class="v">62</span><span style="color:var(--sub)">（64）</span></div>
+          <div class="kv" style="position:relative"><span class="k" style="width:74px">2 進数</span><span class="v">…01|001101</span><span class="bd" style="left:-48px;top:0">4</span></div>
+          <div class="kv"><span class="k" style="width:74px">種別</span><span>プライベート</span></div>
+          <span class="bd" style="left:-48px;top:40px">3</span>
+        </div>
+        <div style="position:relative;font-weight:700">▸ 解き方<span class="bd" style="left:-40px;top:-1px">5</span></div>
+        <div class="tabs"><span>学習</span><span class="on">計算</span><span>成績</span><span>設定</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="pn">14 / 20</div>
+</div>
+
+<!-- 15 S-09 -->
+<div class="s">
+  <div class="ki">S-09</div>
+  <h2>サブネット分割</h2>
+  <div class="hr"></div>
+  <div class="body">
+    <div class="split">
+      <div class="phone" style="gap:6px">
+        <div class="ph-n">＜ 計算<span style="margin:0 auto 0 22px">サブネット分割</span></div>
+        <div style="position:relative;display:flex;gap:4px;align-items:center"><div class="fld" style="flex:1">192.168.10.0</div><span>/</span><div class="fld" style="width:34px">24</div><span class="bd" style="right:-40px;top:4px">1</span></div>
+        <div style="position:relative;display:flex;border:1px solid var(--line);border-radius:var(--radius)"><span style="flex:1;text-align:center;padding:3px 0;background:var(--accent-tint);font-weight:700">分割数</span><span style="flex:1;text-align:center;padding:3px 0">ホスト数</span><span class="bd" style="right:-40px;top:3px">2</span></div>
+        <div style="position:relative"><div class="fld on">4</div><span class="bd" style="right:-40px;top:4px">3</span></div>
+        <div style="position:relative"><span class="mono" style="font-weight:600">/26</span> ・ 62 台 ・ 全 4 件<span class="bd" style="right:-40px;top:0">4</span></div>
+        <div style="position:relative;border:1px solid var(--line);border-radius:var(--radius);padding:4px 8px;line-height:1.45">
+          <div><span class="mono" style="font-weight:600">1 .0/26</span> <span style="color:var(--sub)">.1〜.62</span></div>
+          <div><span class="mono" style="font-weight:600">2 .64/26</span> <span style="color:var(--sub)">.65〜.126</span></div>
+          <div><span class="mono" style="font-weight:600">3 .128/26</span> <span style="color:var(--sub)">〜.190</span></div>
+          <div><span class="mono" style="font-weight:600">4 .192/26</span> <span style="color:var(--sub)">〜.254</span></div>
+          <span class="bd" style="right:-48px;top:24px">5</span>
+        </div>
+        <div class="tabs"><span>学習</span><span class="on">計算</span><span>成績</span><span>設定</span></div>
+      </div>
+      <div class="items">
+        <div class="colh">ネットワークを等分したときのサブネットの一覧を出す</div>
+        <div class="it"><span class="n">1</span><span class="nm">ネットワーク</span><span class="tx">IP アドレスとプレフィックス長の 2 つの欄</span></div>
+        <div class="it"><span class="n">2</span><span class="nm">分け方</span><span class="tx">「分割数」と「ホスト数」の切り替え</span></div>
+        <div class="it"><span class="n">3</span><span class="nm">数</span><span class="tx">分割数、または 1 サブネットに必要なホスト数。数字のキーボード</span></div>
+        <div class="it"><span class="n">4</span><span class="nm">概要</span><span class="tx">分割後のプレフィックス長、1 サブネットの使えるホスト数、件数<br>2 の累乗でないときは「5 分割 → 8 分割になります」と添える</span></div>
+        <div class="it"><span class="n">5</span><span class="nm">一覧</span><span class="tx">番号、CIDR、ホストの範囲、ブロードキャスト。長押しで CIDR をコピー<br><b>先頭 256 件まで</b>。超えたら「全 ◯ 件のうち先頭 256 件」（D6）</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="pn">15 / 20</div>
+</div>
+
+<!-- 16 S-10 -->
+<div class="s">
+  <div class="ki">S-10</div>
+  <h2>VLSM 設計</h2>
+  <div class="hr"></div>
+  <div class="body">
+    <div class="split">
+      <div class="items">
+        <div class="colh">用途ごとの必要ホスト数から、無駄の少ないサブネットを割り当てる</div>
+        <div class="it"><span class="n">1</span><span class="nm">親ネットワーク</span><span class="tx">IP アドレスとプレフィックス長の 2 つの欄</span></div>
+        <div class="it"><span class="n">2</span><span class="nm">用途の行</span><span class="tx">用途名（通常のキーボード）と必要ホスト数（数字）。⊖ で行を消す</span></div>
+        <div class="it"><span class="n">3</span><span class="nm">用途を追加</span><span class="tx">行を 1 つ足す。<b>50 件まで</b>（D7）。上限で押せなくし、理由を添える</span></div>
+        <div class="it"><span class="n">4</span><span class="nm">割り当て結果</span><span class="tx">必要ホスト数の多い順に、用途名・CIDR・範囲・「使える数 / 必要数」<br>長押しで CIDR をコピー</span></div>
+        <div class="it"><span class="n">5</span><span class="nm">空き</span><span class="tx">使わずに残った範囲を CIDR のまとまりで示す</span></div>
+        <p class="st">入りきらないときは、結果の代わりに「✗ 親ネットワークに ◯ アドレス足りません」</p>
+      </div>
+      <div class="phone" style="gap:6px">
+        <div class="ph-n">＜ 計算<span style="margin:0 auto 0 30px">VLSM 設計</span></div>
+        <div style="position:relative;display:flex;gap:4px;align-items:center"><div class="fld" style="flex:1">192.168.10.0</div><span>/</span><div class="fld" style="width:34px">24</div><span class="bd" style="left:-40px;top:4px">1</span></div>
+        <div style="position:relative;display:flex;flex-direction:column;gap:4px">
+          <div style="display:flex;gap:4px"><div class="fld" style="flex:1;font-family:var(--ff)">営業部</div><div class="fld" style="width:34px">50</div></div>
+          <div style="display:flex;gap:4px"><div class="fld" style="flex:1;font-family:var(--ff)">開発部</div><div class="fld" style="width:34px">25</div></div>
+          <div style="display:flex;gap:4px"><div class="fld" style="flex:1;font-family:var(--ff)">拠点間リンク</div><div class="fld on" style="width:34px">2</div></div>
+          <span class="bd" style="left:-40px;top:30px">2</span>
+        </div>
+        <div style="position:relative;text-align:center;color:var(--accent-deep);font-weight:700;border:1px dashed var(--line);border-radius:var(--radius);padding:3px 0">＋ 用途を追加<span class="bd" style="left:-40px;top:2px">3</span></div>
+        <div style="position:relative;border:1px solid var(--line);border-radius:var(--radius);padding:4px 8px;line-height:1.5">
+          <div style="display:flex"><b style="width:64px">営業部</b><span class="mono">.0/26</span><span style="margin-left:auto;color:var(--sub)">62/50</span></div>
+          <div style="display:flex"><b style="width:64px">開発部</b><span class="mono">.64/27</span><span style="margin-left:auto;color:var(--sub)">30/25</span></div>
+          <div style="display:flex"><b style="width:64px">拠点間</b><span class="mono">.96/30</span><span style="margin-left:auto;color:var(--sub)">2/2</span></div>
+          <div style="position:relative;display:flex;color:var(--sub)"><span style="width:64px">空き</span><span class="mono">.100/30 ほか</span><span class="bd" style="left:-48px;top:0">5</span></div>
+          <span class="bd" style="left:-48px;top:10px">4</span>
+        </div>
+        <div class="tabs"><span>学習</span><span class="on">計算</span><span>成績</span><span>設定</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="pn">16 / 20</div>
+</div>
+
+<!-- 17 S-11 -->
+<div class="s">
+  <div class="ki">S-11</div>
+  <h2>経路集約</h2>
+  <div class="hr"></div>
+  <div class="body">
+    <div class="split">
+      <div class="phone" style="gap:6px">
+        <div class="ph-n">＜ 計算<span style="margin:0 auto 0 34px">経路集約</span></div>
+        <div style="position:relative;display:flex;flex-direction:column;gap:4px">
+          <div style="display:flex;gap:4px;align-items:center"><div class="fld" style="flex:1">192.168.0.0</div><span>/</span><div class="fld" style="width:30px">24</div></div>
+          <div style="display:flex;gap:4px;align-items:center"><div class="fld" style="flex:1">192.168.1.0</div><span>/</span><div class="fld" style="width:30px">24</div></div>
+          <div style="display:flex;gap:4px;align-items:center"><div class="fld on" style="flex:1">192.168.2.0</div><span>/</span><div class="fld" style="width:30px">24</div></div>
+          <span class="bd" style="right:-40px;top:30px">1</span>
+        </div>
+        <div style="position:relative;text-align:center;color:var(--accent-deep);font-weight:700;border:1px dashed var(--line);border-radius:var(--radius);padding:3px 0">＋ ネットワークを追加<span class="bd" style="right:-40px;top:2px">2</span></div>
+        <div style="position:relative;border:1px solid var(--line);border-radius:var(--radius);padding:6px 8px;line-height:1.5">
+          <div style="color:var(--sub)">集約ルート</div>
+          <div class="mono" style="font-size:15px;font-weight:700;color:var(--accent-deep)">192.168.0.0/22</div>
+          <div style="color:var(--sub);margin-top:4px">余分に含まれる範囲</div>
+          <div class="mono" style="font-weight:600">192.168.3.0/24</div>
+          <span class="bd" style="right:6px;top:6px">3</span><span class="bd" style="right:6px;top:46px">4</span>
+        </div>
+        <div style="font-weight:700">▸ 解き方</div>
+        <div class="tabs"><span>学習</span><span class="on">計算</span><span>成績</span><span>設定</span></div>
+      </div>
+      <div class="items">
+        <div class="colh">複数のネットワークをまとめる集約ルートを求める</div>
+        <div class="it"><span class="n">1</span><span class="nm">ネットワークの行</span><span class="tx">IP アドレスとプレフィックス長の 2 つの欄。⊖ で行を消す<br>ホスト部が 0 でないときは「ホスト部を 0 にして扱いました」</span></div>
+        <div class="it"><span class="n">2</span><span class="nm">追加</span><span class="tx">行を 1 つ足す。<b>32 件まで</b>（D8）</span></div>
+        <div class="it"><span class="n">3</span><span class="nm">集約ルート</span><span class="tx">すべてを含む最小の集約ルート。コピーできる</span></div>
+        <div class="it"><span class="n">4</span><span class="nm">余分な範囲</span><span class="tx">集約で入力以外に含まれてしまう範囲<br>なければ「ありません（ちょうど集約できます）」</span></div>
+        <p class="st">解き方の例：第 3 オクテットの 0〜2 は先頭 6 ビットが共通 → /22</p>
+      </div>
+    </div>
+  </div>
+  <div class="pn">17 / 20</div>
+</div>
+
+<!-- 18 S-12 -->
+<div class="s">
+  <div class="ki">S-12</div>
+  <h2>進数変換</h2>
+  <div class="hr"></div>
+  <div class="body">
+    <div class="split">
+      <div class="items">
+        <div class="colh">IPv4 アドレスやマスクを 10 進・2 進・16 進で見比べる</div>
+        <div class="it"><span class="n">1</span><span class="nm">入力</span><span class="tx">英数字のキーボード（16 進の a〜f と <code>0x</code> を打てるように）</span></div>
+        <div class="it"><span class="n">2</span><span class="nm">読み取った進数</span><span class="tx">自動で見分けた結果を示す（D9）<br><code>0x</code>・a〜f → 16 進、0 と 1 で 8 けた × 4 → 2 進、それ以外 → 10 進</span></div>
+        <div class="it"><span class="n">3</span><span class="nm">結果</span><span class="tx">10 進・2 進・16 進の 3 行。オクテットごとに区切る<br>2 進は 8 けた、16 進は 2 けた。各行にコピーボタン</span></div>
+      </div>
+      <div class="phone" style="gap:7px">
+        <div class="ph-n">＜ 計算<span style="margin:0 auto 0 34px">進数変換</span></div>
+        <div style="position:relative"><div class="fld on">255.255.255.192</div><span class="bd" style="left:-40px;top:4px">1</span></div>
+        <div style="position:relative;color:var(--sub)">10 進として読みました<span class="bd" style="left:-40px;top:0">2</span></div>
+        <div style="position:relative;border:1px solid var(--line);border-radius:var(--radius);padding:6px 8px;line-height:1.6">
+          <div class="kv"><span class="k" style="width:36px">10 進</span><span class="v">255.255.255.192</span></div>
+          <div class="kv"><span class="k" style="width:36px">2 進</span></div><div class="v mono" style="font-weight:600">11111111.11111111.<br>11111111.11000000</div>
+          <div class="kv"><span class="k" style="width:36px">16 進</span><span class="v">FF.FF.FF.C0</span></div>
+          <span class="bd" style="left:-48px;top:30px">3</span>
+        </div>
+        <div class="tabs"><span>学習</span><span class="on">計算</span><span>成績</span><span>設定</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="pn">18 / 20</div>
+</div>
+
+<!-- 19 要件と画面の対応 -->
+<div class="s">
+  <div class="ki">TRACEABILITY</div>
+  <h2>要件と画面の対応</h2>
+  <div class="hr"></div>
+  <div class="body">
+    <div style="display:flex;gap:36px;align-items:flex-start">
+      <table class="tbl" style="flex:1">
+        <tr><th style="width:110px">要件 ID</th><th>画面</th></tr>
+        <tr><td><span class="id">FR-01〜04</span></td><td>S-03</td></tr>
+        <tr><td><span class="id">FR-11</span></td><td>S-01 ④、S-03 ④（復習の印）</td></tr>
+        <tr><td><span class="id">FR-12</span></td><td>S-02</td></tr>
+        <tr><td><span class="id">FR-13</span></td><td>S-01 ①②、S-05</td></tr>
+        <tr><td><span class="id">FR-14</span></td><td>S-06 ①</td></tr>
+        <tr><td><span class="id">FR-15</span></td><td>S-03 ①、S-04</td></tr>
+        <tr><td><span class="id">NFR-01, 02</span></td><td>S-03 ⑥⑦⑪</td></tr>
+        <tr><td><span class="id">NFR-08</span></td><td>全画面に共通する決まり</td></tr>
+        <tr><td><span class="id">LR-06</span></td><td>S-06 ②</td></tr>
+      </table>
+      <table class="tbl" style="flex:1">
+        <tr><th style="width:110px">要件 ID</th><th>画面</th></tr>
+        <tr><td><span class="id">FR-16</span></td><td>S-07</td></tr>
+        <tr><td><span class="id">FR-17〜21</span></td><td>S-08〜S-12</td></tr>
+        <tr><td><span class="id">FR-22</span></td><td>S-08〜S-11 の「解き方」</td></tr>
+        <tr><td><span class="id">FR-23</span></td><td>S-03 ⑫ → S-08（シート）</td></tr>
+        <tr><td><span class="id">FR-24</span></td><td>計算機に共通する決まり（コピー）</td></tr>
+        <tr><td><span class="id">NFR-13</span></td><td>計算機に共通する決まり<br>（キーボード・誤った入力）</td></tr>
+      </table>
+    </div>
+  </div>
+  <div class="pn">19 / 20</div>
+</div>
+
+<!-- 20 決めていただきたいこと -->
+<div class="s">
+  <div class="ki">DECISIONS</div>
+  <h2>決めていただきたいこと</h2>
+  <div class="hr"></div>
+  <div class="body" style="gap:16px">
+    <div style="background:var(--ink-surface);color:var(--on-dark);border-radius:var(--radius);padding:18px 26px">
+      <div style="font-size:15px;font-weight:700;margin-bottom:6px">このレビューで決める 2 点</div>
+      <div style="display:flex;gap:18px;align-items:baseline;padding:10px 0;border-bottom:1px solid var(--line-on-dark)">
+        <span class="mono" style="font-size:12.5px;font-weight:700;width:40px;flex:none">S-05</span>
+        <span style="flex:1;font-size:14.5px;line-height:1.6">成績で、自動生成のサブネット問題を「ネットワークの基礎」から<br>分けて「サブネット計算」として出すか</span>
+        <span style="font-size:13px">案</span><span style="font-size:18px;font-weight:700;color:var(--accent-on-dark);width:150px;flex:none">分けて出す</span>
+      </div>
+      <div style="display:flex;gap:18px;align-items:baseline;padding:10px 0">
+        <span class="mono" style="font-size:12.5px;font-weight:700;width:40px;flex:none">S-06</span>
+        <span style="flex:1;font-size:14.5px;line-height:1.6">設定画面にお問い合わせ先（メールなど）を載せるか</span>
+        <span style="font-size:13px">案</span><span style="font-size:18px;font-weight:700;color:var(--accent-on-dark);width:150px;flex:none">載せる</span>
+      </div>
+    </div>
+    <p style="font-size:14px;line-height:1.75">S-06 の案は、App Store がサポート用の URL の登録を必須にしているため<br>同じ連絡先を設定画面にも載せると、問い合わせの入口がそろう</p>
+    <p style="font-size:14px;line-height:1.75">あわせて、各画面の配置・文言・状態ごとの表示に誤りや抜けがないかをご確認ください</p>
+    <p class="note" style="margin-right:100px">※ 決まったら画面仕様書を v1.0 にします。3 文書がそろったら、詳細設計とテスト仕様書に進みます</p>
+  </div>
+  <div class="pn">20 / 20</div>
+</div>
+
+<script>
+function fit(){document.documentElement.style.setProperty('--k',Math.min(innerWidth/960,innerHeight/540))}
+addEventListener('resize',fit);fit();
+let i=0;const slides=document.querySelectorAll('.s');
+function show(n){i=Math.max(0,Math.min(slides.length-1,n));slides.forEach((el,j)=>el.classList.toggle('active',j===i))}
+addEventListener('keydown',e=>{if(e.key==='ArrowRight'||e.key===' ')show(i+1);if(e.key==='ArrowLeft')show(i-1)});
+show(0);
+</script>
+</body>
+</html>

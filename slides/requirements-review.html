@@ -1,0 +1,553 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title>ネトレ 要件定義レビュー</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Source+Code+Pro:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#ffffff; --surface:#f6f8fd; --ink:#0f172a; --sub:#64748b; --dim:#7c8ba1; --line:#e2e8f0;
+  --accent:#3d5dc6; --accent-deep:#2e47a6; --accent-tint:#eef2fb;
+  --ink-surface:#324c9e; --on-dark:#ffffff; --accent-on-dark:#aec2f2; --line-on-dark:#5570b8;
+  --radius:4px;
+  --ff:"Noto Sans JP","Hiragino Sans","Yu Gothic","Meiryo",sans-serif;
+  --ff-en:"Source Code Pro","SFMono-Regular",Menlo,monospace;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;background:var(--bg);overflow:hidden}
+.s{
+  position:absolute;top:50%;left:50%;width:960px;height:540px;
+  transform:translate(-50%,-50%) scale(var(--k,1));transform-origin:center center;
+  background:var(--bg);color:var(--ink);font-family:var(--ff);
+  visibility:hidden;opacity:0;display:flex;flex-direction:column;
+  padding:44px 56px 38px;
+}
+.s.active{visibility:visible;opacity:1}
+h1{font-size:56px;font-weight:700;line-height:1.22;letter-spacing:-.015em;margin:0}
+h2{font-size:28px;font-weight:700;line-height:1.35;letter-spacing:-.01em;margin:0}
+p{margin:0}
+code,.mono{font-family:var(--ff-en)}
+.ki{font-family:var(--ff-en);font-size:11px;font-weight:600;letter-spacing:.18em;color:var(--dim);margin-bottom:10px}
+.hr{height:1px;background:var(--line);margin:13px 0 18px}
+.pn{position:absolute;bottom:16px;right:20px;font-family:var(--ff-en);font-size:10px;color:var(--dim);letter-spacing:.08em}
+.body{flex:1;display:flex;flex-direction:column;gap:16px;min-height:0}
+.lead{font-size:15px;line-height:1.8;color:var(--sub)}
+.note{font-size:12px;line-height:1.7;color:var(--dim);padding-left:1.1em;text-indent:-1.1em}
+.pill{background:var(--accent-tint);color:var(--ink);padding:10px 16px;border-radius:var(--radius);font-weight:700;font-size:14.5px;white-space:nowrap;text-align:center}
+.arw{color:var(--accent-deep);font-size:18px;font-weight:700;line-height:1}
+.id{font-family:var(--ff-en);font-weight:600;font-size:12.5px;color:var(--accent-deep);letter-spacing:.02em;white-space:nowrap}
+.chk{display:inline-block;font-size:12px;font-weight:700;color:var(--accent-deep);border:1px solid var(--accent-deep);border-radius:var(--radius);padding:0 6px;line-height:1.6;margin-left:6px;vertical-align:1px;white-space:nowrap}
+.new{display:inline-block;font-family:var(--ff-en);font-size:11px;font-weight:700;color:#fff;background:var(--accent-deep);border-radius:var(--radius);padding:0 5px;line-height:1.6;margin-left:6px;vertical-align:1px}
+.tbl{width:100%;border-collapse:collapse;font-size:13.5px}
+.tbl th{text-align:left;font-size:11px;font-family:var(--ff-en);letter-spacing:.14em;color:var(--dim);font-weight:600;padding:0 0 7px;border-bottom:1px solid var(--line)}
+.tbl td{padding:6px 12px 6px 0;border-bottom:1px solid var(--line);vertical-align:top;line-height:1.55}
+.tbl td.c-id{width:62px}
+.tbl td.c-name{width:150px;font-weight:700;padding-right:18px}
+.tbl.v td.c-name{width:172px;padding-right:12px}
+.tbl tr:last-child td{border-bottom:none}
+.li{font-size:14px;line-height:1.6;padding:7px 0;border-bottom:1px solid var(--line);display:flex;gap:10px}
+.li:last-child{border-bottom:none}
+.dot{flex:none;width:6px;height:6px;border-radius:50%;background:var(--accent-deep);margin-top:9px}
+.dot.off{background:var(--line)}
+.colh{font-size:15px;font-weight:700;margin-bottom:6px}
+.nf{display:flex;gap:12px;font-size:13.5px;line-height:1.55;padding:6px 0;border-bottom:1px solid var(--line)}
+.nf:last-child{border-bottom:none}
+.nf .id{width:56px;flex:none;padding-top:1px}
+.kv{display:flex;gap:14px;align-items:baseline;padding:6px 0;border-bottom:1px solid var(--line);font-size:13.5px}
+.kv:last-child{border-bottom:none}
+.kv .k{width:150px;flex:none;color:var(--sub)}
+.kv .v{font-family:var(--ff-en);font-weight:600;font-size:14px}
+</style>
+</head>
+<body>
+<!-- kit:slide-zukai-kit v1.1 theme:A use:internal style:standard viz:mid -->
+
+<!-- 1 表紙（型 G） -->
+<div class="s active" style="padding:0">
+  <div style="position:absolute;top:60px;left:56px;right:56px;height:1px;background:var(--ink)"></div>
+  <div style="position:absolute;top:72px;left:56px;font-family:var(--ff-en);font-size:11px;letter-spacing:.18em;color:var(--dim)">INTERNAL / REVIEW</div>
+  <div style="flex:1;display:flex;flex-direction:column;justify-content:center;padding:0 56px">
+    <div class="ki" style="margin-bottom:18px">REQUIREMENTS DEFINITION</div>
+    <h1>ネトレ<br>要件定義</h1>
+    <p style="font-size:18px;line-height:1.7;color:var(--sub);margin-top:20px">数字を打って解く CCNA 演習と、ネットワーク設計の計算機</p>
+    <div style="display:flex;gap:12px;align-items:center;margin-top:26px">
+      <span class="pill" style="font-size:13px;padding:6px 14px">要件定義書 v1.2</span>
+      <span style="font-size:13.5px;color:var(--sub)">記載内容の確認用 ・ 回答の入力化と計算機の追加を反映</span>
+    </div>
+  </div>
+  <div style="position:absolute;bottom:72px;left:56px;font-family:var(--ff-en);font-size:13px;color:var(--sub);letter-spacing:.04em">2026-10-18</div>
+  <div style="position:absolute;bottom:60px;left:56px;right:56px;height:1px;background:var(--ink)"></div>
+  <div class="pn">01 / 16</div>
+</div>
+
+<!-- 2 結論 -->
+<div class="s">
+  <div class="ki">CONCLUSION</div>
+  <h2>結論 — v1.0 で作るもの</h2>
+  <div class="hr"></div>
+  <div class="body" style="gap:22px">
+    <div style="background:var(--ink-surface);color:var(--on-dark);border-radius:var(--radius);padding:28px 34px">
+      <div class="ki" style="color:var(--accent-on-dark);margin-bottom:12px">ONE LINE</div>
+      <div style="font-size:23px;font-weight:700;line-height:1.6">答えの数字を自分で打って解く、片手の CCNA 演習<br>CIDR 計算やサブネット設計の計算機で、確かめて使える</div>
+      <p style="font-size:14px;line-height:1.8;margin-top:12px">間違えた問題は間隔反復で復習させる。端末内だけで動き、通信も OS の権限も使わない</p>
+    </div>
+    <div style="display:flex;align-items:stretch">
+      <div style="flex:1;padding:4px 24px 4px 0;border-right:1px solid var(--line)">
+        <div class="ki" style="margin-bottom:8px">FUNCTIONAL</div>
+        <div><span class="id" style="font-size:40px;font-weight:700">24</span><span style="font-size:14px;margin-left:6px">件</span></div>
+        <p style="font-size:13.5px;color:var(--sub);margin-top:4px">機能要件<br>うち計算機 9 件</p>
+      </div>
+      <div style="flex:1;padding:4px 24px;border-right:1px solid var(--line)">
+        <div class="ki" style="margin-bottom:8px">NON-FUNCTIONAL</div>
+        <div><span class="id" style="font-size:40px;font-weight:700">13</span><span style="font-size:14px;margin-left:6px">件</span></div>
+        <p style="font-size:13.5px;color:var(--sub);margin-top:4px">非機能要件</p>
+      </div>
+      <div style="flex:1;padding:4px 24px;border-right:1px solid var(--line)">
+        <div class="ki" style="margin-bottom:8px">CONTENT / LEGAL</div>
+        <div><span class="id" style="font-size:40px;font-weight:700">6</span><span style="font-size:14px;margin-left:6px">件</span></div>
+        <p style="font-size:13.5px;color:var(--sub);margin-top:4px">コンテンツ・法務の要件</p>
+      </div>
+      <div style="flex:1;padding:4px 0 4px 24px">
+        <div class="ki" style="margin-bottom:8px">OPEN ISSUES</div>
+        <div><span class="id" style="font-size:40px;font-weight:700">6</span><span style="font-size:14px;margin-left:6px">件</span></div>
+        <p style="font-size:13.5px;color:var(--sub);margin-top:4px">未決事項<br>うち 3 件を今回決める</p>
+      </div>
+    </div>
+  </div>
+  <div class="pn">02 / 16</div>
+</div>
+
+<!-- 3 変更点 -->
+<div class="s">
+  <div class="ki">CHANGES</div>
+  <h2>v1.1・v1.2 での変更点</h2>
+  <div class="hr"></div>
+  <div class="body">
+    <p class="lead">v1.0 の承認後、ご指示で 2 回改訂した。どちらも v1.0 の範囲に入る</p>
+    <div style="display:flex;gap:0;align-items:stretch;flex:1">
+      <div style="flex:1;border:1px solid var(--line);border-right:none;border-radius:var(--radius) 0 0 var(--radius);padding:20px 26px;display:flex;flex-direction:column;gap:10px">
+        <div class="ki" style="margin-bottom:0">V1.1</div>
+        <div style="font-size:19px;font-weight:700;line-height:1.5">回答は数字の入力だけにする</div>
+        <p style="font-size:14px;line-height:1.75">選択式（単一・複数）をなくし、答えの数字を自分で打つ<br>IP アドレスやマスクのような「.」を含む数字も<br>入力で答える<br>自動生成問題の誤答づくりは不要になった</p>
+        <p style="font-size:13px;line-height:1.7;color:var(--sub);margin-top:auto">FR-01・02・03・05・08、NFR-10、§3.1</p>
+      </div>
+      <div style="flex:1;border:1px solid var(--line);border-radius:0 var(--radius) var(--radius) 0;background:var(--surface);padding:20px 26px;display:flex;flex-direction:column;gap:10px">
+        <div class="ki" style="margin-bottom:0">V1.2</div>
+        <div style="font-size:19px;font-weight:700;line-height:1.5">実用の計算機を加える</div>
+        <p style="font-size:14px;line-height:1.75">CIDR 計算・サブネット分割・VLSM 設計<br>経路集約・進数変換の 5 種<br>結果に解き方を添え、問題の解説から計算機を開ける<br>問題を「解く」と、計算機で「確かめる・使う」を<br>行き来する</p>
+        <p style="font-size:13px;line-height:1.7;color:var(--sub);margin-top:auto">§1〜3、FR-16〜24、§4.3、NFR-10・13、U-07〜09</p>
+      </div>
+    </div>
+  </div>
+  <div class="pn">03 / 16</div>
+</div>
+
+<!-- 4 目的と利用シーン -->
+<div class="s">
+  <div class="ki">PURPOSE</div>
+  <h2>目的と利用シーン</h2>
+  <div class="hr"></div>
+  <div class="body" style="gap:18px">
+    <div style="display:flex;align-items:stretch;gap:0">
+      <div style="flex:1;border:1px solid var(--line);border-radius:var(--radius);padding:14px 20px">
+        <div class="ki" style="margin-bottom:6px">出発点</div>
+        <p style="font-size:14.5px;line-height:1.7">既存の演習サービス（Ping-t）は PC 向けのレイアウトで、スマホでは使いにくい</p>
+      </div>
+      <div style="display:flex;align-items:center;padding:0 16px" class="arw">→</div>
+      <div style="flex:1.25;background:var(--accent-tint);border-radius:var(--radius);padding:14px 20px">
+        <div class="ki" style="margin-bottom:6px">目標</div>
+        <p style="font-size:14.5px;line-height:1.7;font-weight:700">「Ping-t レベルの問題演習を、通勤中に片手で」</p>
+        <p style="font-size:13.5px;line-height:1.7">あわせて、実際の設計に使える計算機を備える<span class="new">V1.2</span></p>
+      </div>
+    </div>
+    <table class="tbl" style="font-size:14px">
+      <tr><th style="width:150px">項目</th><th>内容</th></tr>
+      <tr><td style="font-weight:700">主な利用者</td><td>CCNA の受験を予定している社会人・学生（ネットワークの初学者〜中級者）</td></tr>
+      <tr><td style="font-weight:700">利用シーン</td><td>問題演習：通勤電車の中など、片手がふさがっていて数分しかないとき<br>計算機：学習中の検算、演習や実務でのアドレス設計・確認<span class="new">V1.2</span></td></tr>
+      <tr><td style="font-weight:700">利用時間</td><td>1 回 3〜5 分、1 問 30 秒程度</td></tr>
+      <tr><td style="font-weight:700">端末</td><td>iPhone（縦向き）</td></tr>
+    </table>
+  </div>
+  <div class="pn">04 / 16</div>
+</div>
+
+<!-- 5 範囲 -->
+<div class="s">
+  <div class="ki">SCOPE</div>
+  <h2>v1.0 の範囲</h2>
+  <div class="hr"></div>
+  <div class="body">
+    <div style="display:flex;gap:0;align-items:stretch;flex:1">
+      <div style="flex:1;background:var(--surface);border:1px solid var(--line);border-right:none;border-radius:var(--radius) 0 0 var(--radius);padding:16px 24px">
+        <div class="colh" style="color:var(--accent-deep)">含める（MVP）</div>
+        <div class="li"><span class="dot"></span><span>サブネット問題の自動出題（5 種類 × 難易度 3 段階）</span></div>
+        <div class="li"><span class="dot"></span><span>手書き問題の出題（初期 30 問程度）</span></div>
+        <div class="li"><span class="dot"></span><span>回答（すべて数字の入力）・正誤判定・解説</span></div>
+        <div class="li"><span class="dot"></span><span>学習履歴の端末内保存と、間隔反復による復習</span></div>
+        <div class="li"><span class="dot"></span><span>分野別の出題メニュー</span></div>
+        <div class="li"><span class="dot"></span><span>成績画面（分野別の正答率など）</span></div>
+        <div class="li"><span class="dot"></span><span style="flex:1">実用の計算機 5 種</span><span class="chk" style="align-self:center">要確認 U-07</span></div>
+      </div>
+      <div style="flex:1;background:var(--bg);border:1px solid var(--line);border-radius:0 var(--radius) var(--radius) 0;padding:16px 24px">
+        <div class="colh" style="color:var(--sub)">含めない（将来の検討事項）</div>
+        <div class="li" style="color:var(--sub)"><span class="dot off"></span><span>課金（買い切り／分野別課金）</span></div>
+        <div class="li" style="color:var(--sub)"><span class="dot off"></span><span>サブネット以外の自動生成問題（ACL など）</span></div>
+        <div class="li" style="color:var(--sub)"><span class="dot off"></span><span>アカウント・端末間の同期・バックアップ</span></div>
+        <div class="li" style="color:var(--sub)"><span class="dot off"></span><span>復習リマインダーの通知</span></div>
+        <div class="li" style="color:var(--sub)"><span class="dot off"></span><span>iPad 向けの最適化（互換モードでの動作は必須）</span></div>
+        <div class="li" style="color:var(--sub)"><span class="dot off"></span><span>CCNA 以外の資格・日本語以外の言語</span></div>
+        <div class="li" style="color:var(--sub)"><span class="dot off"></span><span style="flex:1">IPv6 の計算・計算履歴の保存</span><span class="chk" style="align-self:center">要確認 U-08・09</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="pn">05 / 16</div>
+</div>
+
+<!-- 6 機能要件の全体像（学習） -->
+<div class="s">
+  <div class="ki">FUNCTIONAL REQUIREMENTS</div>
+  <h2>学習の機能要件の全体像</h2>
+  <div class="hr"></div>
+  <div class="body" style="gap:18px">
+    <p class="lead">学習 1 回の流れに沿って、FR-01〜15 を割り当てた（計算機の FR-16〜24 は p.9）</p>
+    <div style="display:flex;align-items:flex-start;gap:0">
+      <div style="flex:1;display:flex;flex-direction:column;gap:10px">
+        <div class="pill">出題</div>
+        <div style="font-size:13.5px;line-height:1.5;display:flex;flex-direction:column;gap:7px">
+          <div><span class="id">FR-01</span><br>1 問ずつ表示</div>
+          <div><span class="id">FR-05</span><br>サブネット自動生成</div>
+          <div><span class="id">FR-07</span><br>難易度 3 段階</div>
+          <div><span class="id">FR-08</span><br>手書き問題の収録</div>
+        </div>
+      </div>
+      <div class="arw" style="padding:11px 12px 0">→</div>
+      <div style="flex:1;display:flex;flex-direction:column;gap:10px">
+        <div class="pill">回答</div>
+        <div style="font-size:13.5px;line-height:1.5;display:flex;flex-direction:column;gap:7px">
+          <div><span class="id">FR-02</span><br>答えの数字を入力</div>
+        </div>
+      </div>
+      <div class="arw" style="padding:11px 12px 0">→</div>
+      <div style="flex:1;display:flex;flex-direction:column;gap:10px">
+        <div class="pill">判定・解説</div>
+        <div style="font-size:13.5px;line-height:1.5;display:flex;flex-direction:column;gap:7px">
+          <div><span class="id">FR-03</span><br>正誤判定</div>
+          <div><span class="id">FR-04</span><br>解説表示</div>
+        </div>
+      </div>
+      <div class="arw" style="padding:11px 12px 0">→</div>
+      <div style="flex:1;display:flex;flex-direction:column;gap:10px">
+        <div class="pill">記録</div>
+        <div style="font-size:13.5px;line-height:1.5;display:flex;flex-direction:column;gap:7px">
+          <div><span class="id">FR-09</span><br>学習履歴の記録</div>
+          <div><span class="id">FR-15</span><br>途中で中断できる</div>
+        </div>
+      </div>
+      <div class="arw" style="padding:11px 12px 0">→</div>
+      <div style="flex:1;display:flex;flex-direction:column;gap:10px">
+        <div class="pill">復習</div>
+        <div style="font-size:13.5px;line-height:1.5;display:flex;flex-direction:column;gap:7px">
+          <div><span class="id">FR-10</span><br>間隔反復</div>
+          <div><span class="id">FR-11</span><br>復習を先に出す</div>
+          <div><span class="id">FR-06</span><br>ID から問題を再現</div>
+        </div>
+      </div>
+    </div>
+    <div style="display:flex;gap:14px;align-items:center;border-top:1px solid var(--line);padding-top:14px;margin-right:100px">
+      <span style="font-size:13px;font-weight:700;color:var(--sub);white-space:nowrap">流れの外で使う機能</span>
+      <span style="font-size:13.5px;border:1px solid var(--line);border-radius:var(--radius);padding:5px 12px"><span class="id">FR-12</span> 分野別出題</span>
+      <span style="font-size:13.5px;border:1px solid var(--line);border-radius:var(--radius);padding:5px 12px"><span class="id">FR-13</span> 成績表示</span>
+      <span style="font-size:13.5px;border:1px solid var(--line);border-radius:var(--radius);padding:5px 12px"><span class="id">FR-14</span> 履歴のリセット</span>
+    </div>
+  </div>
+  <div class="pn">06 / 16</div>
+</div>
+
+<!-- 7 FR-01〜08 -->
+<div class="s">
+  <div class="ki">FUNCTIONAL REQUIREMENTS 1 / 3</div>
+  <h2>機能要件 FR-01〜08</h2>
+  <div class="hr"></div>
+  <div class="body">
+    <table class="tbl v">
+      <tr><th>ID</th><th>機能</th><th>要件</th></tr>
+      <tr><td class="c-id"><span class="id">FR-01</span></td><td class="c-name">出題<span class="new">V1.1</span></td><td>問題を 1 問ずつ表示する。問題文と入力欄を 1 画面に収める</td></tr>
+      <tr><td class="c-id"><span class="id">FR-02</span></td><td class="c-name">回答形式<span class="new">V1.1</span></td><td>回答はすべて、数字を自分で入力する形式。選択式は扱わない<br>IP アドレスやマスクのように「.」を含む数字も入力で答える</td></tr>
+      <tr><td class="c-id"><span class="id">FR-03</span></td><td class="c-name">正誤判定<span class="new">V1.1</span></td><td>入力を整えて（空白を除き、全角の数字や「．」も半角に）正解と一致したら正解</td></tr>
+      <tr><td class="c-id"><span class="id">FR-04</span></td><td class="c-name">解説表示</td><td>回答後すぐに正誤・正解・解説を表示する</td></tr>
+      <tr><td class="c-id"><span class="id">FR-05</span></td><td class="c-name">サブネット問題の<br>自動生成<span class="new">V1.1</span></td><td>ネットワーク／ブロードキャスト／ホスト数／マスク（プレフィックス長から）／<br>最後のホストの 5 種類。答えは入力させる（選択肢は作らない）</td></tr>
+      <tr><td class="c-id"><span class="id">FR-06</span></td><td class="c-name">問題の再現</td><td>自動生成問題は ID（seed を含む）から同じ問題を再生成できる</td></tr>
+      <tr><td class="c-id"><span class="id">FR-07</span></td><td class="c-name">難易度</td><td>基礎・標準・応用の 3 段階。サブネット問題は難易度ごとにプレフィックス長の範囲を変える</td></tr>
+      <tr><td class="c-id"><span class="id">FR-08</span></td><td class="c-name">手書き問題の収録<span class="new">V1.1</span></td><td>同梱するデータ（JSON）から読み込む。答えが数字になる問題だけを収録する</td></tr>
+    </table>
+  </div>
+  <div class="pn">07 / 16</div>
+</div>
+
+<!-- 8 FR-09〜15 -->
+<div class="s">
+  <div class="ki">FUNCTIONAL REQUIREMENTS 2 / 3</div>
+  <h2>機能要件 FR-09〜15</h2>
+  <div class="hr"></div>
+  <div class="body">
+    <table class="tbl">
+      <tr><th>ID</th><th>機能</th><th>要件</th></tr>
+      <tr><td class="c-id"><span class="id">FR-09</span></td><td class="c-name">学習履歴の記録</td><td>回答ごとに、正誤と回答日時を端末内に保存する</td></tr>
+      <tr><td class="c-id"><span class="id">FR-10</span></td><td class="c-name">間隔反復</td><td>間違えた問題は翌日に、正解した問題は間隔を広げて再出題する（SM-2 の簡略版）</td></tr>
+      <tr><td class="c-id"><span class="id">FR-11</span></td><td class="c-name">復習優先</td><td>学習を始めたとき、復習日を迎えた問題を新しい問題より先に出す</td></tr>
+      <tr><td class="c-id"><span class="id">FR-12</span></td><td class="c-name">分野別出題</td><td>CCNA 200-301 の 6 分野と「サブネット計算ドリル」から出題範囲を選べる</td></tr>
+      <tr><td class="c-id"><span class="id">FR-13</span></td><td class="c-name">成績表示</td><td>全体と分野別に、回答数・正答率・今日の復習予定数を表示する</td></tr>
+      <tr><td class="c-id"><span class="id">FR-14</span></td><td class="c-name">学習履歴のリセット</td><td>確認のうえ、学習履歴をすべて削除できる</td></tr>
+      <tr><td class="c-id"><span class="id">FR-15</span></td><td class="c-name">中断</td><td>学習の途中でやめられる。それまでの回答は履歴に残す</td></tr>
+    </table>
+    <p class="note">※ FR-01〜24 はすべて MVP（v1.0）の対象。ただし計算機（FR-16〜24）の範囲は U-07 で確定させる</p>
+  </div>
+  <div class="pn">08 / 16</div>
+</div>
+
+<!-- 9 計算機の全体像 -->
+<div class="s">
+  <div class="ki">CALCULATORS</div>
+  <h2>計算機の全体像<span class="new" style="font-size:12px;vertical-align:6px">V1.2</span></h2>
+  <div class="hr"></div>
+  <div class="body" style="gap:18px">
+    <div style="display:flex;align-items:center;gap:14px">
+      <div class="pill" style="background:var(--bg);border:1px solid var(--line);padding:16px 18px;text-align:left"><span class="id">FR-16</span><br><span style="font-size:15px">タブ「計算」</span></div>
+      <div class="arw">→</div>
+      <div style="flex:1;display:flex;gap:8px">
+        <div class="pill" style="flex:1;padding:10px 8px;white-space:normal"><span class="id">FR-17</span><br>CIDR 計算</div>
+        <div class="pill" style="flex:1;padding:10px 8px;white-space:normal"><span class="id">FR-18</span><br>サブネット分割</div>
+        <div class="pill" style="flex:1;padding:10px 8px;white-space:normal"><span class="id">FR-19</span><br>VLSM 設計</div>
+        <div class="pill" style="flex:1;padding:10px 8px;white-space:normal"><span class="id">FR-20</span><br>経路集約</div>
+        <div class="pill" style="flex:1;padding:10px 8px;white-space:normal"><span class="id">FR-21</span><br>進数変換</div>
+      </div>
+    </div>
+    <div>
+      <div class="colh">学習とのつながり</div>
+      <div style="display:flex;gap:0;align-items:stretch;border-top:1px solid var(--line)">
+        <div style="flex:1;padding:14px 22px 4px 0;border-right:1px solid var(--line)">
+          <div class="id" style="margin-bottom:6px">FR-22</div>
+          <div style="font-size:15.5px;font-weight:700;margin-bottom:6px">計算の過程</div>
+          <p style="font-size:13.5px;line-height:1.75;color:var(--sub)">結果に解き方を添える<br>（ブロックサイズ、AND の取り方など）</p>
+        </div>
+        <div style="flex:1;padding:14px 22px 4px;border-right:1px solid var(--line)">
+          <div class="id" style="margin-bottom:6px">FR-23</div>
+          <div style="font-size:15.5px;font-weight:700;margin-bottom:6px">問題から計算機へ</div>
+          <p style="font-size:13.5px;line-height:1.75;color:var(--sub)">サブネット問題の解説から<br>その値を入れた CIDR 計算を開ける</p>
+        </div>
+        <div style="flex:1;padding:14px 0 4px 22px">
+          <div class="id" style="margin-bottom:6px">FR-24</div>
+          <div style="font-size:15.5px;font-weight:700;margin-bottom:6px">結果のコピー</div>
+          <p style="font-size:13.5px;line-height:1.75;color:var(--sub)">各値をコピーして<br>設計資料などに貼れる</p>
+        </div>
+      </div>
+    </div>
+    <p class="note">※ 対象は IPv4 のみ（IPv6 は U-08）。計算履歴は保存しない（U-09）</p>
+  </div>
+  <div class="pn">09 / 16</div>
+</div>
+
+<!-- 10 CIDR 計算 -->
+<div class="s">
+  <div class="ki">FUNCTIONAL REQUIREMENTS 3 / 3</div>
+  <h2>CIDR 計算（FR-17）</h2>
+  <div class="hr"></div>
+  <div class="body">
+    <div style="display:flex;gap:28px;align-items:flex-start">
+      <div style="width:270px;flex:none;display:flex;flex-direction:column;gap:12px">
+        <div class="colh" style="margin-bottom:0">入力</div>
+        <div style="border:1.5px solid var(--accent-deep);border-radius:var(--radius);padding:12px 14px;font-family:var(--ff-en);font-size:17px;font-weight:600">192.168.10.77/26</div>
+        <p style="font-size:13.5px;line-height:1.75">IPv4 アドレス ＋<br>プレフィックス長（/0〜/32）<br>またはサブネットマスク（255.255.255.192）</p>
+        <p style="font-size:13px;line-height:1.7;color:var(--sub)">/31 は 2 アドレスとも使える<br>（ポイントツーポイント用。RFC 3021）<br>/32 は 1 台のホストを指す</p>
+      </div>
+      <div style="flex:1">
+        <div class="colh">出力（左の入力での例）</div>
+        <div class="kv"><span class="k">ネットワークアドレス</span><span class="v">192.168.10.64</span></div>
+        <div class="kv"><span class="k">ブロードキャスト</span><span class="v">192.168.10.127</span></div>
+        <div class="kv"><span class="k">サブネットマスク</span><span class="v">255.255.255.192</span></div>
+        <div class="kv"><span class="k">ワイルドカードマスク</span><span class="v">0.0.0.63</span></div>
+        <div class="kv"><span class="k">ホストの範囲</span><span class="v">192.168.10.65 〜 192.168.10.126</span></div>
+        <div class="kv"><span class="k">使えるホスト数</span><span class="v">62</span><span style="color:var(--sub);font-size:13px">（アドレスの総数 64）</span></div>
+        <div class="kv"><span class="k">2 進数</span><span class="v" style="font-size:13.5px">11000000.10101000.00001010.01<span style="color:var(--sub)">001101</span></span></div>
+        <div class="kv"><span class="k">アドレスの種別</span><span style="font-weight:600">プライベート（RFC 1918）</span></div>
+        <p class="note" style="margin-top:8px">※ 2 進数は、ネットワーク部（先頭 26 ビット）とホスト部（灰色）を分けて示す</p>
+      </div>
+    </div>
+  </div>
+  <div class="pn">10 / 16</div>
+</div>
+
+<!-- 11 ほかの計算機と入力のきまり -->
+<div class="s">
+  <div class="ki">CALCULATORS</div>
+  <h2>ほかの計算機と入力のきまり</h2>
+  <div class="hr"></div>
+  <div class="body" style="gap:12px">
+    <table class="tbl" style="font-size:13.5px">
+      <tr><th style="width:62px">ID</th><th style="width:130px">計算機</th><th style="width:200px">入力</th><th>出力</th></tr>
+      <tr><td><span class="id">FR-18</span></td><td style="font-weight:700">サブネット分割</td><td>ネットワーク（CIDR）＋<br>分割数 または 必要なホスト数</td><td>分割後のプレフィックス長と 1 サブネットのホスト数<br>サブネットの一覧（ネットワーク・範囲・ブロードキャスト）</td></tr>
+      <tr><td><span class="id">FR-19</span></td><td style="font-weight:700">VLSM 設計</td><td>親ネットワーク（CIDR）＋<br>用途名と必要ホスト数の組<br>（複数）</td><td>必要ホスト数の多い順に割り当てたサブネット<br>（用途名・CIDR・範囲・使える数と必要数）<br>残った範囲。入りきらないときは不足する量</td></tr>
+      <tr><td><span class="id">FR-20</span></td><td style="font-weight:700">経路集約</td><td>複数のネットワーク（CIDR）</td><td>すべてを含む最小の集約ルートと、余分に含まれる範囲</td></tr>
+      <tr><td><span class="id">FR-21</span></td><td style="font-weight:700">進数変換</td><td>IPv4 アドレスまたはマスク<br>（10・2・16 進のどれでも）</td><td>10 進・2 進・16 進の表記。オクテットごとに区切って示す</td></tr>
+    </table>
+    <div style="border:1px solid var(--line);background:var(--surface);border-radius:var(--radius);padding:12px 18px;font-size:13.5px;line-height:1.75">
+      <span class="id">NFR-13</span>　<b>計算機の入力</b>　全角の数字・空白も受け付け、マスクは /26 と 255.255.255.192 のどちらでも入力できる<br>誤った入力はどこが誤りかをその場で示し、結果は入力に合わせてすぐ更新する（計算ボタンは押させない）
+    </div>
+  </div>
+  <div class="pn">11 / 16</div>
+</div>
+
+<!-- 12 出題分野と1回の学習量 -->
+<div class="s">
+  <div class="ki">QUESTION SCOPE</div>
+  <h2>出題分野と1回の学習量</h2>
+  <div class="hr"></div>
+  <div class="body">
+    <div style="display:flex;gap:28px;align-items:stretch;flex:1">
+      <div style="flex:1.7;display:flex;flex-direction:column;gap:10px">
+        <div class="colh">CCNA 200-301 に準拠した 6 分野</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+          <div style="border:1px solid var(--line);border-radius:var(--radius);padding:12px 16px"><div style="font-size:15px;font-weight:700">ネットワークの基礎</div><div style="font-family:var(--ff-en);font-size:12px;color:var(--sub);margin-top:3px">network-fundamentals</div></div>
+          <div style="border:1px solid var(--line);border-radius:var(--radius);padding:12px 16px"><div style="font-size:15px;font-weight:700">ネットワークアクセス</div><div style="font-family:var(--ff-en);font-size:12px;color:var(--sub);margin-top:3px">network-access</div></div>
+          <div style="border:1px solid var(--line);border-radius:var(--radius);padding:12px 16px"><div style="font-size:15px;font-weight:700">IP 接続</div><div style="font-family:var(--ff-en);font-size:12px;color:var(--sub);margin-top:3px">ip-connectivity</div></div>
+          <div style="border:1px solid var(--line);border-radius:var(--radius);padding:12px 16px"><div style="font-size:15px;font-weight:700">IP サービス</div><div style="font-family:var(--ff-en);font-size:12px;color:var(--sub);margin-top:3px">ip-services</div></div>
+          <div style="border:1px solid var(--line);border-radius:var(--radius);padding:12px 16px"><div style="font-size:15px;font-weight:700">セキュリティの基礎</div><div style="font-family:var(--ff-en);font-size:12px;color:var(--sub);margin-top:3px">security-fundamentals</div></div>
+          <div style="border:1px solid var(--line);border-radius:var(--radius);padding:12px 16px"><div style="font-size:15px;font-weight:700">自動化とプログラマビリティ</div><div style="font-family:var(--ff-en);font-size:12px;color:var(--sub);margin-top:3px">automation-programmability</div></div>
+        </div>
+        <p style="font-size:13.5px;line-height:1.7;color:var(--sub);margin-top:4px">出題範囲の選択肢は、この 6 分野と「サブネット計算ドリル」の 7 つ（FR-12）<br>どの分野も、答えが数字になる問題だけを収録する（FR-08）</p>
+      </div>
+      <div style="flex:1;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:22px 26px;display:flex;flex-direction:column;gap:10px">
+        <div class="ki" style="margin-bottom:0">ONE SESSION</div>
+        <div class="colh" style="margin-bottom:0">1 回の学習の問題数</div>
+        <div><span class="id" style="font-size:56px;font-weight:700">10</span><span style="font-size:16px;margin-left:8px;font-weight:700">問</span></div>
+        <p style="font-size:14px;line-height:1.75;color:var(--sub)">途中でやめることもできる（FR-15）<br>それまでの回答は履歴に残る</p>
+      </div>
+    </div>
+  </div>
+  <div class="pn">12 / 16</div>
+</div>
+
+<!-- 13 非機能要件 -->
+<div class="s">
+  <div class="ki">NON-FUNCTIONAL REQUIREMENTS</div>
+  <h2>非機能要件</h2>
+  <div class="hr"></div>
+  <div class="body" style="gap:10px">
+    <div style="display:flex;gap:36px;align-items:flex-start">
+      <div style="flex:1">
+        <div class="colh">使い心地と対応環境</div>
+        <div class="nf"><span class="id">NFR-01</span><span><b>操作性</b>　回答・次へなど学習中の主な操作を、親指が届く画面下半分に置く</span></div>
+        <div class="nf"><span class="id">NFR-02</span><span><b>操作性</b>　1 問 30 秒程度で解ける。回答から次の問題まではタップ 1 回</span></div>
+        <div class="nf"><span class="id">NFR-03</span><span><b>性能</b>　起動から 1 問目まで 2 秒以内（目標値）。問題の切り替えに待ち時間なし</span></div>
+        <div class="nf"><span class="id">NFR-07</span><span><b>対応環境</b>　iOS 17 以上の iPhone、縦向き。iPad 互換モードでもクラッシュせず全機能を使える</span></div>
+        <div class="nf"><span class="id">NFR-08</span><span><b>アクセシビリティ</b>　Dynamic Type・ダークモード・VoiceOver に対応</span></div>
+        <div class="nf"><span class="id">NFR-12</span><span><b>言語</b>　日本語のみ</span></div>
+      </div>
+      <div style="flex:1">
+        <div class="colh">安心と品質</div>
+        <div class="nf"><span class="id">NFR-04</span><span><b>オフライン</b>　すべての機能を通信なしで使える</span></div>
+        <div class="nf"><span class="id">NFR-05</span><span><b>プライバシー</b>　学習履歴は端末内にだけ保存し外部に送らない。App Privacy は「データを収集しません」</span></div>
+        <div class="nf"><span class="id">NFR-06</span><span><b>権限</b>　OS の権限（位置情報・通知・カメラなど）を一切要求しない</span></div>
+        <div class="nf"><span class="id">NFR-09</span><span><b>信頼性</b>　途中でアプリを終了しても、それまでの回答履歴を失わない</span></div>
+        <div class="nf"><span class="id">NFR-10</span><span><b>正確性</b>　問題の正解と計算機の結果は計算で求め誤りなし。標準的なライブラリと大量の値で照合する<span class="new">V1.2</span></span></div>
+        <div class="nf"><span class="id">NFR-11</span><span><b>保守性</b>　問題データの差し替えだけで（コードを変えずに）手書き問題を追加・修正できる</span></div>
+      </div>
+    </div>
+    <p class="note">※ NFR-13（計算機の入力）は p.11 に記載</p>
+  </div>
+  <div class="pn">13 / 16</div>
+</div>
+
+<!-- 14 コンテンツと法務 -->
+<div class="s">
+  <div class="ki">CONTENT AND LEGAL</div>
+  <h2>コンテンツと法務の要件</h2>
+  <div class="hr"></div>
+  <div class="body">
+    <div style="display:flex;gap:0;align-items:stretch;flex:1">
+      <div style="flex:1;background:var(--surface);border:1px solid var(--line);border-right:none;border-radius:var(--radius) 0 0 var(--radius);padding:20px 26px">
+        <div class="colh">しないこと</div>
+        <div class="li"><span class="id" style="width:48px;flex:none">LR-01</span><span>Ping-t や市販の参考書の問題・解説を<br>転載・改変して使わない（著作権）</span></div>
+        <div class="li"><span class="id" style="width:48px;flex:none">LR-02</span><span>実際の試験問題を再現しない（ブレインダンプの禁止。Cisco の受験規約に違反する）</span></div>
+        <div class="li"><span class="id" style="width:48px;flex:none">LR-04</span><span>「CCNA」「Cisco」をアプリ名の先頭に置かない</span></div>
+        <div class="li"><span class="id" style="width:48px;flex:none">LR-05</span><span>アプリ名に「Ping」を含めない（Ping-t との混同を避ける）</span></div>
+      </div>
+      <div style="flex:1;background:var(--bg);border:1px solid var(--line);border-radius:0 var(--radius) var(--radius) 0;padding:20px 26px">
+        <div class="colh">すること</div>
+        <div class="li"><span class="id" style="width:48px;flex:none">LR-03</span><span>問題はすべてオリジナル<br>AI で下書きした問題も、技術的に正しいか<br>人が確認してから収録する</span></div>
+        <div class="li"><span class="id" style="width:48px;flex:none">LR-04</span><span>サブタイトルや説明文で「CCNA対策」のように説明として使う</span></div>
+        <div class="li"><span class="id" style="width:48px;flex:none">LR-06</span><span>プライバシーポリシーを用意し<br>App Store とアプリ内から見られるようにする</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="pn">14 / 16</div>
+</div>
+
+<!-- 15 前提と受け入れ基準 -->
+<div class="s">
+  <div class="ki">PREMISES AND ACCEPTANCE</div>
+  <h2>前提と受け入れ基準</h2>
+  <div class="hr"></div>
+  <div class="body" style="gap:14px">
+    <div>
+      <div class="colh" style="margin-bottom:2px">制約・前提</div>
+      <div class="li" style="padding:9px 0"><span class="id" style="width:28px;flex:none">01</span><span>開発は SwiftUI、iOS 17 以上。サーバーは持たない</span></div>
+      <div class="li" style="padding:9px 0"><span class="id" style="width:28px;flex:none">02</span><span>公開は App Store。ビルドとアップロードは Xcode Cloud を使う想定（他の自作アプリと同じ運用）</span></div>
+      <div class="li" style="padding:9px 0"><span class="id" style="width:28px;flex:none">03</span><span>アプリ名（仮）ネトレ - ネットワーク資格ドリル ／ サブタイトル（仮）通勤1問、CCNA対策をスキマ時間で<br><span style="color:var(--sub)">App Store Connect での仮登録と、J-PlatPat での商標検索はまだ済んでいない</span></span></div>
+    </div>
+    <div>
+      <div class="colh" style="margin-bottom:2px">受け入れ基準</div>
+      <div class="li" style="padding:9px 0"><span class="id" style="width:28px;flex:none">01</span><span>機能・非機能・コンテンツと法務の各要件が、要件定義テスト仕様書（未作成）の試験にすべて合格すること</span></div>
+      <div class="li" style="padding:9px 0"><span class="id" style="width:28px;flex:none">02</span><span>App Store の審査ガイドライン（特に 2.1 完全性、5.1.1 プライバシー）に反していないこと</span></div>
+    </div>
+  </div>
+  <div class="pn">15 / 16</div>
+</div>
+
+<!-- 16 決めていただきたいこと -->
+<div class="s">
+  <div class="ki">DECISIONS</div>
+  <h2>決めていただきたいこと</h2>
+  <div class="hr"></div>
+  <div class="body" style="gap:14px">
+    <div style="background:var(--ink-surface);color:var(--on-dark);border-radius:var(--radius);padding:16px 26px">
+      <div style="font-size:15px;font-weight:700;margin-bottom:4px">このレビューで決める 3 点（計算機）</div>
+      <div style="display:flex;gap:16px;align-items:baseline;padding:6px 0;border-bottom:1px solid var(--line-on-dark)">
+        <span style="font-family:var(--ff-en);font-size:12.5px;font-weight:600;width:44px;flex:none">U-07</span>
+        <span style="flex:1;font-size:14.5px">計算機の範囲</span>
+        <span style="font-size:13px">案</span><span style="font-size:18px;font-weight:700;color:var(--accent-on-dark);width:230px">5 種すべて v1.0 に入れる</span>
+      </div>
+      <div style="display:flex;gap:16px;align-items:baseline;padding:6px 0;border-bottom:1px solid var(--line-on-dark)">
+        <span style="font-family:var(--ff-en);font-size:12.5px;font-weight:600;width:44px;flex:none">U-08</span>
+        <span style="flex:1;font-size:14.5px">IPv6 の計算に対応するか</span>
+        <span style="font-size:13px">案</span><span style="font-size:18px;font-weight:700;color:var(--accent-on-dark);width:230px">v1.0 では対応しない</span>
+      </div>
+      <div style="display:flex;gap:16px;align-items:baseline;padding:6px 0">
+        <span style="font-family:var(--ff-en);font-size:12.5px;font-weight:600;width:44px;flex:none">U-09</span>
+        <span style="flex:1;font-size:14.5px">計算履歴を保存するか</span>
+        <span style="font-size:13px">案</span><span style="font-size:18px;font-weight:700;color:var(--accent-on-dark);width:230px">v1.0 では保存しない</span>
+      </div>
+    </div>
+    <div>
+      <div class="colh" style="font-size:14px;color:var(--sub);margin-bottom:0">あとで決めるもの</div>
+      <div class="li" style="padding:6px 0"><span class="id" style="width:44px;flex:none">U-01</span><span style="flex:1">アプリ名（商標検索と App Store Connect での名前の空きを確認してから）</span><span style="color:var(--sub);width:110px;flex:none">提出前</span></div>
+      <div class="li" style="padding:6px 0"><span class="id" style="width:44px;flex:none">U-04</span><span style="flex:1">課金の方式と時期</span><span style="color:var(--sub);width:110px;flex:none">v1.0 公開後</span></div>
+      <div class="li" style="padding:6px 0"><span class="id" style="width:44px;flex:none">U-06</span><span style="flex:1">プライバシーポリシーの置き場所（GitHub Pages など）</span><span style="color:var(--sub);width:110px;flex:none">提出前</span></div>
+    </div>
+    <p class="note" style="margin-right:100px">※ あわせて v1.1 の変更（回答は数字の入力のみ）と、全体の記載に誤りや抜けがないかをご確認ください</p>
+  </div>
+  <div class="pn">16 / 16</div>
+</div>
+
+<script>
+function fit(){document.documentElement.style.setProperty('--k',Math.min(innerWidth/960,innerHeight/540))}
+addEventListener('resize',fit);fit();
+let i=0;const slides=document.querySelectorAll('.s');
+function show(n){i=Math.max(0,Math.min(slides.length-1,n));slides.forEach((el,j)=>el.classList.toggle('active',j===i))}
+addEventListener('keydown',e=>{if(e.key==='ArrowRight'||e.key===' ')show(i+1);if(e.key==='ArrowLeft')show(i-1)});
+show(0);
+</script>
+</body>
+</html>
