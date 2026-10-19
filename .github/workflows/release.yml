@@ -13,12 +13,14 @@ jobs:
     runs-on: macos-26
     timeout-minutes: 60
     env:
-      KEY_PATH: ${{ runner.temp }}/AuthKey.p8
-      ARCHIVE: ${{ runner.temp }}/NetTre.xcarchive
       # ビルド番号は実行ごとに増える番号を使う
       BUILD_NUMBER: ${{ github.run_number }}
     steps:
       - uses: actions/checkout@v4
+      - name: 作業用のパス
+        run: |
+          echo "KEY_PATH=$RUNNER_TEMP/AuthKey.p8" >> "$GITHUB_ENV"
+          echo "ARCHIVE=$RUNNER_TEMP/NetTre.xcarchive" >> "$GITHUB_ENV"
       - name: Xcode のバージョン
         run: xcodebuild -version
       - name: API キーを置く
@@ -37,7 +39,7 @@ jobs:
       - name: App Store Connect にアップロード
         run: |
           xcodebuild -exportArchive -archivePath "$ARCHIVE" \
-            -exportOptionsPlist ExportOptions.plist -exportPath "${{ runner.temp }}/export" \
+            -exportOptionsPlist ExportOptions.plist -exportPath "$RUNNER_TEMP/export" \
             -allowProvisioningUpdates \
             -authenticationKeyPath "$KEY_PATH" \
             -authenticationKeyID "${{ secrets.ASC_KEY_ID }}" \
