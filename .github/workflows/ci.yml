@@ -1,0 +1,23 @@
+# Xcode 26 で単体テストを流す（この Mac の Xcode 16.2 では確かめられないため）
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: macos-26
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - name: Xcode のバージョン
+        run: xcodebuild -version
+      - name: 単体テスト（Swift Testing）
+        run: |
+          UDID=$(xcrun simctl list devices available -j | python3 -c "import json,sys; d=json.load(sys.stdin)['devices']; print(next(x['udid'] for k,v in d.items() if 'iOS' in k for x in v if x['name'].startswith('iPhone')))")
+          echo "simulator: $UDID"
+          xcodebuild test -project NetTre.xcodeproj -scheme NetTre -destination "id=$UDID" \
+            -only-testing:NetTreTests CODE_SIGNING_ALLOWED=NO

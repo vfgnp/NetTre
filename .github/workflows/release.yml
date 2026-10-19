@@ -1,0 +1,47 @@
+# App Store Connect へのアップロード（手動で起動する）。
+# この Mac（Intel）では Xcode 26 が動かず App Store に出せないため、GitHub の macOS 環境でビルドする。
+# 必要なシークレット：ASC_KEY_ID・ASC_ISSUER_ID・ASC_KEY_P8（.p8 を base64 にしたもの）
+name: Release
+
+on:
+  workflow_dispatch:
+
+concurrency: release
+
+jobs:
+  upload:
+    runs-on: macos-26
+    timeout-minutes: 60
+    env:
+      KEY_PATH: ${{ runner.temp }}/AuthKey.p8
+      ARCHIVE: ${{ runner.temp }}/NetTre.xcarchive
+      # ビルド番号は実行ごとに増える番号を使う
+      BUILD_NUMBER: ${{ github.run_number }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Xcode のバージョン
+        run: xcodebuild -version
+      - name: API キーを置く
+        env:
+          ASC_KEY_P8: ${{ secrets.ASC_KEY_P8 }}
+        run: echo "$ASC_KEY_P8" | base64 --decode > "$KEY_PATH"
+      - name: アーカイブ
+        run: |
+          xcodebuild archive -project NetTre.xcodeproj -scheme NetTre -configuration Release \
+            -destination 'generic/platform=iOS' -archivePath "$ARCHIVE" \
+            CURRENT_PROJECT_VERSION="$BUILD_NUMBER" \
+            -allowProvisioningUpdates \
+            -authenticationKeyPath "$KEY_PATH" \
+            -authenticationKeyID "${{ secrets.ASC_KEY_ID }}" \
+            -authenticationKeyIssuerID "${{ secrets.ASC_ISSUER_ID }}"
+      - name: App Store Connect にアップロード
+        run: |
+          xcodebuild -exportArchive -archivePath "$ARCHIVE" \
+            -exportOptionsPlist ExportOptions.plist -exportPath "${{ runner.temp }}/export" \
+            -allowProvisioningUpdates \
+            -authenticationKeyPath "$KEY_PATH" \
+            -authenticationKeyID "${{ secrets.ASC_KEY_ID }}" \
+            -authenticationKeyIssuerID "${{ secrets.ASC_ISSUER_ID }}"
+      - name: API キーを消す
+        if: always()
+        run: rm -f "$KEY_PATH"
