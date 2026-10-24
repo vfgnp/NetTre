@@ -10,6 +10,8 @@ struct LaunchOptions {
     var failModelContainer = false
     var brokenQuestions = false
     var keepDefaults = false
+    /// App Store のスクリーンショット用に、見本の学習履歴を入れる
+    var demoHistory = false
     var day = 1
 
     static let current: LaunchOptions = {
@@ -29,6 +31,7 @@ struct LaunchOptions {
         failModelContainer = args.contains("-uitestFailModelContainer")
         brokenQuestions = args.contains("-uitestBrokenQuestions")
         keepDefaults = args.contains("-uitestKeepDefaults")
+        demoHistory = args.contains("-uitestDemoHistory")
         if let i = args.firstIndex(of: "-uitestDay"), args.indices.contains(i + 1), let n = Int(args[i + 1]), n >= 1 {
             day = n
         }
@@ -98,6 +101,39 @@ final class AppModel {
         self.container = container
         databaseFailed = failed
         store = ReviewStore(context: container.mainContext, calendar: environment.calendar)
+        if options.demoHistory { insertDemoHistory(context: container.mainContext) }
+    }
+
+    /// スクリーンショット用の見本の履歴（分類ごとの回答数と正解数、今日の回答 8・今日の復習 12）
+    private func insertDemoHistory(context: ModelContext) {
+        let today = environment.now()
+        let calendar = environment.calendar
+        let plan: [(domain: Domain, generated: Bool, answered: Int, correct: Int)] = [
+            (.networkFundamentals, true, 120, 97),
+            (.networkFundamentals, false, 60, 37),
+            (.networkAccess, false, 30, 21),
+            (.ipConnectivity, false, 25, 18),
+            (.ipServices, false, 8, 6),
+            (.securityFundamentals, false, 5, 3),
+        ]
+        var count = 0
+        for item in plan {
+            for i in 0..<item.answered {
+                count += 1
+                // 最初の 8 件だけ今日、ほかは過去 14 日に散らす
+                let daysAgo = count <= 8 ? 0 : 1 + count % 14
+                let date = calendar.date(byAdding: .day, value: -daysAgo, to: today) ?? today
+                let id = item.generated ? "gen-subnet-networkAddress-2-\(i + 1)" : "\(item.domain.idPrefix)-\(String(format: "%04d", i % 9 + 1))"
+                context.insert(AnswerLog(questionId: id, domainRaw: item.domain.rawValue, isGenerated: item.generated,
+                                         isCorrect: i < item.correct, answeredAt: date))
+            }
+        }
+        for i in 0..<12 {
+            context.insert(ReviewRecord(questionId: "gen-subnet-lastHost-3-\(i + 1)", questionVersion: 1,
+                                        domainRaw: Domain.networkFundamentals.rawValue, isGenerated: true,
+                                        state: ReviewState(dueDate: calendar.startOfDay(for: today))))
+        }
+        try? context.save()
     }
 
     var now: Date { environment.now() }

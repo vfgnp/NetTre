@@ -25,7 +25,7 @@ struct HomeView: View {
                 .accessibilityIdentifier("startButton")
         }
         .padding()
-        .navigationTitle("ネトレ")
+        .navigationTitle("NetTre")
         .task(id: model.dataVersion) { refresh() }
         .onAppear { refresh() }
     }

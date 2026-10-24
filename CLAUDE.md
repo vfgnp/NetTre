@@ -5,9 +5,9 @@ CCNAなどネットワーク資格向けの、スマホ特化の問題演習iOS�
 Ping-t がスマホで使いにくい（PCレイアウト）という不満が出発点。
 目標は「Ping-tレベルの問題演習を、通勤中に片手で」。App Store で公開する。
 
-- アプリ名（仮）：ネトレ - ネットワーク資格ドリル
-- サブタイトル（仮）：通勤1問、CCNA対策をスキマ時間で
-- 名前は未確定。App Store Connect での仮登録と J-PlatPat の商標検索がまだ。
+- アプリ名：NetTre - ネットワーク資格ドリル（表示名 NetTre。2026-10-18 ユーザー決定）
+- サブタイトル：通勤1問、CCNA対策をスキマ時間で
+- Bundle ID：`jp.nettre.app`（App Store Connect に登録済み）。App Store に同名アプリなし。J-PlatPat の商標検索はまだ。
 
 ## 絶対に守ること（コンテンツ・法務）
 - Ping-t・市販参考書の問題や解説を転載・改変して使わない（著作権）。
@@ -25,7 +25,12 @@ Ping-t がスマホで使いにくい（PCレイアウト）という不満が�
 ## 現在のファイル
 | パス | 内容 |
 |---|---|
-| project.yml | XcodeGen の定義（`xcodegen generate` で NetTre.xcodeproj を作る。.xcodeproj は git に入れない） |
+| project.yml | XcodeGen の定義。Xcode Cloud でビルドするため、生成した NetTre.xcodeproj もコミットする（project.yml を変えたら `xcodegen generate` してコミット） |
+| ci_scripts/ci_pre_xcodebuild.sh | Xcode Cloud でビルド番号を自動で振る |
+| .github/workflows/ci.yml | PR と main で、GitHub Actions（macos-26・Xcode 26）の単体テストを流す |
+| appstore/ | App Store の掲載文の下書き（metadata_ja.md）とスクリーンショット（6.9 インチ） |
+| site/ | サポートとプライバシーポリシーのページの元。公開は gh-pages ブランチ（https://vfgnp.github.io/NetTre/） |
+| drafts/ | 手書き問題の下書き 50 問と確認用の一覧（人の確認後に questions.json へ収録） |
 | NetTre/App/ | `NetTreApp`・`RootTabView`・`AppModel`（共有の状態と UI テスト用の起動引数）・`AppEnvironment`・`Constants` |
 | NetTre/Models/ | `Question`・`Domain`・`Difficulty`、`ReviewState`（間隔反復）、SwiftData の `ReviewRecord`・`AnswerLog` |
 | NetTre/Generators/SubnetQuestionGenerator.swift | サブネット問題 5 種の自動生成、ID の分解（`question(fromId:)`・`subnet(fromId:)`） |
@@ -81,11 +86,13 @@ docs/ に V字モデルで文書を置く。
 
 ## 既知の問題・TODO
 - **手書き問題が 3 問しかない**（`questions.json`）。MVP の 30 問は、人が技術的な正確さを確認してから収録する（AI の下書きをそのまま入れない）。
-- プライバシーポリシー・お問い合わせの URL が未定（要件定義 U-06）。決まるまで設定画面は「準備中」と出す（`AppLinks`）。
-- アプリのアイコン（Assets.xcassets）が未作成。
+- App Store に出すには Xcode 26 以上でのビルドが必要で、この Intel Mac では動かない → ビルドは Xcode Cloud（appstore-release スキル）。
+  Xcode Cloud：ciProduct `A45B19E6-230C-4330-848B-9D7F3DED2AD3`、ワークフロー Default `B8C4C5F8-241B-453A-AC0A-D06041170EBA`（main で自動・Archive・APP_STORE_ELIGIBLE・Xcode は Latest Release）。App ID `6824487258`。
+  Xcode 26.6 でのテストは GitHub Actions で合格（2026-10-19）。
 - 07（総合・受け入れテスト）は実機での手動テスト。未実施。
 
 ## 次にやること（優先順）
-1. 手書き問題を 30 問に増やす（人の確認つき）
-2. 実機で 07 の総合テストを行う。アイコンと URL を決める
-3. App Store Connect での名前の仮登録、J-PlatPat の商標検索
+1. PR #2 を main にマージ → Xcode Cloud が最初のビルドを TestFlight へ（ユーザーの承認が要る）
+2. TestFlight で実機確認（07 の代わり）
+3. ユーザー：手書き問題 50 問（drafts/）を確認 → OK なら questions.json に収録してテスト。App Privacy を「データを収集しない」で申告
+4. 提出は、release-readiness で確認し、ユーザーの明示の承認を得てから（appstore-release スキル）

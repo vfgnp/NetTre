@@ -1,6 +1,8 @@
 .DS_Store
 xcuserdata/
-*.xcodeproj/
+# Xcode Cloud でビルドするため .xcodeproj はコミットする（project.yml を変えたら xcodegen generate してコミット）
+*.xcodeproj/xcuserdata/
+*.xcodeproj/project.xcworkspace/xcuserdata/
 DerivedData/
 build/
 slides/.work/
