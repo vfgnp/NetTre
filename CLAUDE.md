@@ -27,6 +27,7 @@ Ping-t がスマホで使いにくい（PCレイアウト）という不満が�
 |---|---|
 | project.yml | XcodeGen の定義。Xcode Cloud でビルドするため、生成した NetTre.xcodeproj もコミットする（project.yml を変えたら `xcodegen generate` してコミット） |
 | ci_scripts/ci_pre_xcodebuild.sh | Xcode Cloud でビルド番号を自動で振る |
+| .github/workflows/ci.yml | PR と main で、GitHub Actions（macos-26・Xcode 26）の単体テストを流す |
 | appstore/ | App Store の掲載文の下書き（metadata_ja.md）とスクリーンショット（6.9 インチ） |
 | site/ | サポートとプライバシーポリシーのページの元。公開は gh-pages ブランチ（https://vfgnp.github.io/NetTre/） |
 | drafts/ | 手書き問題の下書き 50 問と確認用の一覧（人の確認後に questions.json へ収録） |
@@ -85,11 +86,13 @@ docs/ に V字モデルで文書を置く。
 
 ## 既知の問題・TODO
 - **手書き問題が 3 問しかない**（`questions.json`）。MVP の 30 問は、人が技術的な正確さを確認してから収録する（AI の下書きをそのまま入れない）。
-- App Store に出すには Xcode 26 でのビルドが必要で、この Intel Mac では動かない → ビルドは Xcode Cloud（appstore-release スキル）。Xcode 26 でコンパイルが通るかは未確認。
+- App Store に出すには Xcode 26 以上でのビルドが必要で、この Intel Mac では動かない → ビルドは Xcode Cloud（appstore-release スキル）。
+  Xcode Cloud：ciProduct `A45B19E6-230C-4330-848B-9D7F3DED2AD3`、ワークフロー Default `B8C4C5F8-241B-453A-AC0A-D06041170EBA`（main で自動・Archive・APP_STORE_ELIGIBLE・Xcode は Latest Release）。App ID `6824487258`。
+  Xcode 26.6 でのテストは GitHub Actions で合格（2026-10-19）。
 - 07（総合・受け入れテスト）は実機での手動テスト。未実施。
 
 ## 次にやること（優先順）
-1. ユーザー：手書き問題 50 問（drafts/）を確認 → OK なら questions.json に収録してテスト
-2. ユーザー：App Store Connect でアプリを新規登録、Xcode で Xcode Cloud をセットアップ、App Privacy を「データを収集しない」で申告
-3. ワークフローを API で整え（Xcode 26・main・App Store 配布）、TestFlight で実機確認（07 の代わり）
-4. 提出は、掲載文とスクリーンショットを登録し、ユーザーの明示の承認を得てから
+1. PR #2 を main にマージ → Xcode Cloud が最初のビルドを TestFlight へ（ユーザーの承認が要る）
+2. TestFlight で実機確認（07 の代わり）
+3. ユーザー：手書き問題 50 問（drafts/）を確認 → OK なら questions.json に収録してテスト。App Privacy を「データを収集しない」で申告
+4. 提出は、release-readiness で確認し、ユーザーの明示の承認を得てから（appstore-release スキル）
