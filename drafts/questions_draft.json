@@ -74,7 +74,7 @@
     "difficulty": 1,
     "stem": "IPv6 アドレスを 16 ビットごとにコロンで区切って書くとき、区切られたフィールドはいくつあるか。",
     "answer": "8",
-    "explanation": "128 ビット ÷ 16 ビット = **8 フィールド**。各フィールドを 4 けたの 16 進数で書く。",
+    "explanation": "128 ビット ÷ 16 ビット = **8 フィールド**。各フィールドは最大 4 けたの 16 進数で書く（先頭の 0 は省略できる）。",
     "version": 1
   },
   {
@@ -138,7 +138,7 @@
     "difficulty": 1,
     "stem": "IEEE 802.1Q のタグの中で、VLAN ID を表すフィールドは何ビットか。",
     "answer": "12",
-    "explanation": "VLAN ID は **12 ビット**なので 0〜4095 を表せる。0 と 4095 は予約されている。",
+    "explanation": "VLAN ID は **12 ビット**なので 0〜4095 を表せる。0 と 4095 は予約されていて、使えるのは 1〜4094。",
     "version": 1
   },
   {
@@ -189,7 +189,7 @@
     "difficulty": 2,
     "stem": "IEEE 802.1D の STP で、Max Age タイマーの既定値は何秒か。",
     "answer": "20",
-    "explanation": "Max Age は **20 秒**。この間 BPDU を受け取れないと、トポロジーが変わったとみなす。",
+    "explanation": "Max Age は **20 秒**。ポートで受け取った BPDU の情報は、新しい BPDU が届かないまま 20 秒たつと破棄され、STP の再計算が始まる。",
     "version": 1
   },
   {
@@ -213,9 +213,9 @@
       "cost"
     ],
     "difficulty": 3,
-    "stem": "Cisco スイッチの STP で、短い方式（802.1D-1998）を使うとき、1 Gbps のリンクのパスコストの既定値を答えよ。",
+    "stem": "Cisco スイッチの STP で、パスコストの計算方式が short（spanning-tree pathcost method short）のとき、1 Gbps のリンクのパスコストの既定値を答えよ。",
     "answer": "4",
-    "explanation": "短い方式のコストは 10 Mbps が 100、100 Mbps が 19、**1 Gbps が 4**、10 Gbps が 2。",
+    "explanation": "short 方式（IEEE 802.1D-1998 の値）のコストは 10 Mbps が 100、100 Mbps が 19、**1 Gbps が 4**、10 Gbps が 2。long 方式では 1 Gbps が 20,000 になる。",
     "version": 1
   },
   {
@@ -225,9 +225,9 @@
       "etherchannel"
     ],
     "difficulty": 2,
-    "stem": "EtherChannel で、1 つのバンドルの中で同時に転送に使える物理リンクは最大いくつか。",
+    "stem": "Cisco Catalyst スイッチの EtherChannel で、1 つのバンドルの中で同時に転送に使える物理リンクは最大いくつか。",
     "answer": "8",
-    "explanation": "1 つの EtherChannel で同時に使える（アクティブな）リンクは **8 本**まで。LACP では 8 本を超えて設定した分は待機（スタンバイ）になる。",
+    "explanation": "1 つの EtherChannel で同時に使える（アクティブな）リンクは **8 本**まで。LACP ではバンドルに 16 本まで設定でき、8 本を超えた分は待機（スタンバイ）になる。PAgP は 8 本まで。",
     "version": 1
   },
   {
@@ -237,9 +237,9 @@
       "wireless"
     ],
     "difficulty": 2,
-    "stem": "2.4 GHz 帯の無線 LAN で、20 MHz 幅のときに互いに重ならないチャネルとしてよく使われるのはいくつか。",
+    "stem": "2.4 GHz 帯の無線 LAN（20 MHz 幅）で、互いに重ならないように同時に使えるチャネルは一般にいくつか。",
     "answer": "3",
-    "explanation": "**1・6・11 の 3 つ**は周波数が重ならないので、隣り合うアクセスポイントに割り当てる。",
+    "explanation": "**1・6・11 の 3 つ**は周波数が重ならないので、隣り合うアクセスポイントに割り当てる。日本にはチャネル 14 もあるが 802.11b 専用なので、ふつうは数えない。",
     "version": 1
   },
   {
@@ -329,7 +329,7 @@
     "difficulty": 2,
     "stem": "Cisco IOS で、OSPF のコスト計算に使う参照帯域幅の既定値は何 Mbps か。",
     "answer": "100",
-    "explanation": "既定の参照帯域幅は **100 Mbps**。コスト = 参照帯域幅 ÷ インターフェイスの帯域幅なので、100 Mbps 以上のリンクはどれもコスト 1 になる。",
+    "explanation": "既定の参照帯域幅は **100 Mbps**。コスト = 参照帯域幅 ÷ インターフェイスの帯域幅で、結果が 1 未満でもコストは 1 になる。そのため既定のままでは 100 Mbps 以上のリンクはどれもコスト 1 で区別できない（auto-cost reference-bandwidth で変える）。",
     "version": 1
   },
   {
@@ -394,7 +394,7 @@
     "difficulty": 2,
     "stem": "HSRP のプライオリティの既定値を答えよ。",
     "answer": "100",
-    "explanation": "既定値は **100**。プライオリティの大きいルーターがアクティブになる。",
+    "explanation": "既定値は **100**。プライオリティの大きいルーター（同じなら IP アドレスの大きいルーター）がアクティブになる。ただし preempt を設定していないと、後から優先度の高いルーターが加わってもアクティブは交代しない。",
     "version": 1
   },
   {
@@ -433,7 +433,7 @@
     "difficulty": 1,
     "stem": "SNMP エージェントがマネージャーからの要求を受ける UDP のポート番号を答えよ。",
     "answer": "161",
-    "explanation": "要求は UDP **161** 番、トラップ（エージェントからの通知）は 162 番。",
+    "explanation": "要求は UDP **161** 番で受ける。エージェントが送るトラップ（通知）は、マネージャーが UDP 162 番で受ける。",
     "version": 1
   },
   {
@@ -479,13 +479,13 @@
     "id": "ip-svc-0006",
     "domain": "ip-services",
     "tags": [
-      "dhcp",
-      "port"
+      "qos",
+      "dscp"
     ],
-    "difficulty": 1,
-    "stem": "DHCP サーバーが使う UDP のポート番号を答えよ。",
-    "answer": "67",
-    "explanation": "DHCP は **サーバーが 67 番**、クライアントが 68 番。",
+    "difficulty": 2,
+    "stem": "QoS で、音声のような遅延に弱いトラフィックに付ける DSCP の EF（Expedited Forwarding）の値を 10 進数で答えよ。",
+    "answer": "46",
+    "explanation": "EF は **DSCP 46**（2 進数で 101110）。優先キューに入れて、遅延・揺らぎ・損失を小さくする。DSCP は ToS バイトの上位 6 ビットなので、値は 0〜63。",
     "version": 1
   },
   {
@@ -521,7 +521,7 @@
     "difficulty": 2,
     "stem": "Cisco スイッチのポートセキュリティで、1 つのポートに許す MAC アドレス数の既定値を答えよ。",
     "answer": "1",
-    "explanation": "既定では **1 つ**。2 つ目の MAC アドレスを見つけると違反になる（既定の動作は shutdown）。",
+    "explanation": "既定では **1 つ**。2 つ目の MAC アドレスからフレームが届くと違反になる（既定の動作は shutdown で、ポートは err-disabled になる）。",
     "version": 1
   },
   {
@@ -560,7 +560,7 @@
     "difficulty": 2,
     "stem": "TACACS+ が使う TCP のポート番号を答えよ。",
     "answer": "49",
-    "explanation": "TACACS+ は TCP **49** 番。パケットの本体全体を暗号化する点が RADIUS と違う。",
+    "explanation": "TACACS+ は TCP **49** 番。パケットの本体全体を暗号化する点が RADIUS と違う（RADIUS が暗号化するのはパスワードだけ）。",
     "version": 1
   },
   {
@@ -584,9 +584,9 @@
       "http"
     ],
     "difficulty": 1,
-    "stem": "HTTP のステータスコードで「404 Not Found」の数値を答えよ。",
+    "stem": "要求したリソースがサーバー上に見つからないときに返す HTTP ステータスコードを答えよ。",
     "answer": "404",
-    "explanation": "**404** は、要求したリソースが見つからないことを表す。4xx はクライアント側の誤り。",
+    "explanation": "**404 Not Found**。要求したリソースが見つからないことを表す。4xx はクライアント側の誤り。",
     "version": 1
   },
   {
